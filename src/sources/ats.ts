@@ -228,8 +228,10 @@ const workday: Fetcher = async (site, ctx, budget) => {
   const base = `https://${tenant}.${wd}.myworkdayjobs.com/wday/cxs/${tenant}/${siteName}`;
   const headers = { "Content-Type": "application/json", Accept: "application/json" };
   const out: Partial[] = [];
+  let total: number | undefined; // only the first page carries `total` (later pages omit it) – remember it or paging stops at 40
   for (let offset = 0; offset < CONFIG.careersMaxJobsPerCompany; offset += 20) {
     const res = await fetchJson<{ total?: number; jobPostings?: WdPosting[] }>(`${base}/jobs`, { method: "POST", headers, body: JSON.stringify({ appliedFacets: {}, limit: 20, offset, searchText: "" }), tries: 2 });
+    total ??= res.total;
     for (const p of res.jobPostings ?? []) {
       if (!p.externalPath || !p.title) continue;
       const loc = p.locationsText ?? "";
@@ -238,7 +240,7 @@ const workday: Fetcher = async (site, ctx, budget) => {
         locations: /\d+ locations/i.test(loc) ? [] : locList(loc), remote: remoteOf(loc), employment: [], postedAt: workdayDate(p.postedOn), tags: [p.externalPath],
       });
     }
-    if ((res.jobPostings ?? []).length < 20 || offset + 20 >= (res.total ?? 0)) break;
+    if ((res.jobPostings ?? []).length < 20 || offset + 20 >= (total ?? 0)) break;
     await sleep(400);
   }
   for (const j of out) {

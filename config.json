@@ -676,7 +676,8 @@
         "name": "EU Remote Jobs (Worldwide)",
         "url": "https://euremotejobs.com/job-region/remote-jobs-worldwide/feed/",
         "remote": true,
-        "region": "Worldwide"
+        "region": "Worldwide",
+        "enabled": false
       },
       {
         "name": "Real Work From Anywhere",
@@ -707,27 +708,32 @@
       {
         "name": "JobsCollider (all others)",
         "url": "https://jobscollider.com/remote-all-others-jobs.rss",
-        "remote": true
+        "remote": true,
+        "enabled": false
       },
       {
         "name": "RemoteFirstJobs",
         "url": "https://remotefirstjobs.com/rss",
-        "remote": true
+        "remote": true,
+        "enabled": false
       },
       {
         "name": "Remote.co (healthcare)",
         "url": "https://remote.co/remote-jobs/healthcare/feed/",
-        "remote": true
+        "remote": true,
+        "enabled": false
       },
       {
         "name": "Remote.co (human resources)",
         "url": "https://remote.co/remote-jobs/human-resources/feed/",
-        "remote": true
+        "remote": true,
+        "enabled": false
       },
       {
         "name": "Remote.co (writing)",
         "url": "https://remote.co/remote-jobs/writing/feed/",
-        "remote": true
+        "remote": true,
+        "enabled": false
       },
       {
         "name": "Empllo",
@@ -749,15 +755,18 @@
       },
       {
         "name": "APA PsycCareers",
-        "url": "https://www.psyccareers.com/jobs/?display=rss&keywords=remote&resultsPerPage=100"
+        "url": "https://www.psyccareers.com/jobs/?display=rss&keywords=remote&resultsPerPage=100",
+        "enabled": false
       },
       {
         "name": "jobs.ac.uk (behavioural science)",
-        "url": "https://www.jobs.ac.uk/search/rss?keywords=behavioural+science"
+        "url": "https://www.jobs.ac.uk/search/rss?keywords=behavioural+science",
+        "enabled": false
       },
       {
         "name": "jobs.ac.uk (digital mental health)",
-        "url": "https://www.jobs.ac.uk/search/rss?keywords=digital+mental+health"
+        "url": "https://www.jobs.ac.uk/search/rss?keywords=digital+mental+health",
+        "enabled": false
       },
       {
         "name": "THE unijobs (psychology)",
@@ -765,11 +774,13 @@
       },
       {
         "name": "BPS Jobs",
-        "url": "https://jobs.bps.org.uk/jobsrss/?keywords=remote"
+        "url": "https://jobs.bps.org.uk/jobsrss/?keywords=remote",
+        "enabled": false
       },
       {
         "name": "CharityJob (mental health)",
-        "url": "https://www.charityjob.co.uk/jobs/rss?keywords=mental+health"
+        "url": "https://www.charityjob.co.uk/jobs/rss?keywords=mental+health",
+        "enabled": false
       },
       {
         "name": "Guardian Jobs (wellbeing)",
@@ -777,13 +788,14 @@
       },
       {
         "name": "Remotive RSS",
-        "url": "https://remotive.com/remote-jobs/rss-feed",
+        "url": "https://remotive.com/remote-jobs/feed",
         "remote": true
       },
       {
         "name": "SkipTheDrive",
         "url": "https://www.skipthedrive.com/feed/",
-        "remote": true
+        "remote": true,
+        "enabled": false
       }
     ]
   },
@@ -1233,7 +1245,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Leapsome",
@@ -1417,7 +1430,8 @@
       "tags": [
         "games",
         "narrative"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Preply (AI tutoring)",
@@ -1463,7 +1477,8 @@
       "tags": [
         "games",
         "narrative"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Replicant",
@@ -1624,7 +1639,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Synthesia",
@@ -1642,7 +1658,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Talkdesk",
@@ -1697,7 +1714,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "thatgamecompany",
@@ -1779,7 +1797,8 @@
         "ai-safety",
         "trust-and-safety",
         "human-feedback"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "WHOOP",
@@ -1805,7 +1824,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Yubo",
@@ -1873,7 +1893,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Innersloth",
@@ -1909,7 +1930,8 @@
       "tags": [
         "ai-safety",
         "responsible-ai"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Nimble Giant Entertainment",
@@ -1991,7 +2013,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Ada Health",
@@ -2017,7 +2040,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Allen Institute for AI (Ai2)",
@@ -2035,7 +2059,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "AlphaSights",
@@ -2104,7 +2129,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Automattic",
@@ -2158,7 +2184,8 @@
       "slug": "calibratecareers",
       "tags": [
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Calm",
@@ -2184,7 +2211,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Charlie Health",
@@ -2318,7 +2346,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Eleos Health",
@@ -2362,7 +2391,8 @@
       "tags": [
         "games",
         "narrative"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Five9",
@@ -2388,7 +2418,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Galileo",
@@ -2415,7 +2446,8 @@
       "tags": [
         "ai-safety",
         "responsible-ai"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Grow Therapy",
@@ -2424,7 +2456,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Guerrilla Games",
@@ -2517,7 +2550,8 @@
         "ai-safety",
         "trust-and-safety",
         "human-feedback"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Hive (thehive.ai)",
@@ -2636,7 +2670,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Labelbox / Alignerr",
@@ -2689,7 +2724,8 @@
       "slug": "letsgetchecked",
       "tags": [
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "LivePerson",
@@ -2785,7 +2821,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Naughty Dog",
@@ -2822,7 +2859,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Noom",
@@ -2830,7 +2868,8 @@
       "slug": "noom",
       "tags": [
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Nourish",
@@ -3087,7 +3126,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Speechify",
@@ -3231,7 +3271,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Valera Health",
@@ -3249,7 +3290,8 @@
       "tags": [
         "games",
         "narrative"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Wargaming (incl. Belgrade office)",
@@ -3484,7 +3526,8 @@
         "ai-safety",
         "trust-and-safety",
         "human-feedback"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "ControlAI",
@@ -3557,7 +3600,8 @@
       "slug": "gobrightside",
       "tags": [
         "psychology"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Gupshup",
@@ -3566,7 +3610,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Haptik (Jio)",
@@ -3575,7 +3620,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Included Health",
@@ -3646,7 +3692,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Lyra Collective",
@@ -3654,7 +3701,8 @@
       "slug": "lyracollective",
       "tags": [
         "psychology"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Lyra Health",
@@ -3671,7 +3719,8 @@
       "slug": "mahanatherapeutics",
       "tags": [
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Match Group (Tinder, Hinge, OkCupid)",
@@ -3690,7 +3739,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "MERU",
@@ -3731,7 +3781,8 @@
       "tags": [
         "games",
         "narrative"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Neowiz",
@@ -3809,7 +3860,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "RWS TrainAI",
@@ -3943,7 +3995,8 @@
       "tags": [
         "people-science",
         "research"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Selfapy",
@@ -3952,7 +4005,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Sharpist",
@@ -4227,7 +4281,8 @@
       "tags": [
         "conversational-ai",
         "ai-companion"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Paradox Interactive",
@@ -4244,7 +4299,8 @@
       "slug": "palta",
       "tags": [
         "mental-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Acuity Insights",
@@ -4394,7 +4450,8 @@
       "tags": [
         "mental-health",
         "digital-health"
-      ]
+      ],
+      "enabled": false
     },
     {
       "name": "Insight Timer",
