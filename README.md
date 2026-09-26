@@ -27,7 +27,7 @@ You need **Windows 10 or 11** and an internet connection. Everything else is han
    - checks for **Node.js 22.6+** and installs the LTS version through `winget` if it is missing
      (if that fails, install Node.js LTS manually from https://nodejs.org and run `setup.cmd` again);
    - registers two hidden scheduled tasks: **PsychJobsScraper** (every 15 min) and **PsychJobsServer** (starts at logon);
-   - runs the **first scan** right away (last 7 days from every source; with ~460 career pages the first pass takes **20–40 minutes** – the console shows progress per source; later passes are incremental and each source runs on its own rhythm);
+   - runs the **first scan** right away (last 7 days from every source; with ~400 career pages the first pass takes **about 25 minutes** (measured 24 min on 27.09.2026) – the console shows progress per source; later passes are incremental and each source runs on its own rhythm);
    - opens **http://localhost:3008** in the browser.
 3. Bookmark **http://localhost:3008**. That is the whole app.
 
@@ -45,7 +45,7 @@ Other buttons in the folder:
 | `uninstall.cmd` | remove the two scheduled tasks and stop the server (your `data/` stays) |
 
 Optional: get free **Adzuna** API keys at https://developer.adzuna.com and put them into `config.json → adzuna.appId / appKey`
-to add another aggregator (UK, DE, NL, PL, AT, IE searches); it is skipped with a note until configured. The same goes for **ReliefWeb**
+to add another aggregator (UK, DE, NL, PL, AT searches – `ie` is not an Adzuna market); it is skipped with a note until configured. The same goes for **ReliefWeb**
 (UN OCHA humanitarian jobs): request a free pre-approved `appname` via the form at https://apidoc.reliefweb.int/parameters#appname and put it
 into `config.json → reliefweb.appname`. Right after the first scan run
 `npm run check -- --careers` once: it prints which of the ~460 career-page slugs answer from your network (a wrong slug only logs `HTTP 404`).

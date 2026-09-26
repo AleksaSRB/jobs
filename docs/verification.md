@@ -83,6 +83,14 @@ technicians, merchant services, product sourcing rejected; soft −15 for US-emp
 (clients, culture, benefits, workshops, players, wellness, stress, brands, needs…) need their psychology/health context before they build a job family;
 ads in another language detected by stop-word density; "remote areas" is not remote work; "- On-site" in a title counts even when the site's remote filter says otherwise.
 
-## Full pass
+## Full pass (`npm run scrape:force`, 27.09.2026 00:40–01:04, fresh scratch DB)
 
-See the end of this file (filled in from the `npm run scrape:force` timing on 27.09.2026).
+**24 min 23 s** for all 31 sources, 0 errors, ~25 000 listings parsed → **288 cards** (148 excellent / 76 good / 64 possible); 7-day baseline.
+Per-source durations (s): workday 200 · linkedin 166 · himalayas 108 · eures 106 · workablesearch 104 · greenhouse 102 · hiringcafe 91 · themuse 70 · aijobs 69 · ashby 62 ·
+lever 53 · wellfound 47 · smartrecruiters 42 · remotive 39 · workable 33 · arbeitnow 25 · rss 24 · jobicy 24 · remoteok 22 · bamboohr 21 · workingnomads 14 · jobrack 12 ·
+jobspresso 9 · wwr 6 · teamtailor 5 · recruitee 2 · personio 2 · eightyk 1 · hn 1 · adzuna 0 · reliefweb 0.
+Accepted per source: rss 88 · himalayas 63 · linkedin 36 · remotive 21 · arbeitnow 15 · jobicy 11 · wwr 8 · workday 7 · greenhouse 5 · hiringcafe 5 · wellfound 5 ·
+workingnomads 4 · jobrack 4 · eightyk 4 · themuse 2 · remoteok 2 · lever 2 · ashby 2 · workable 1 · aijobs 1 · workablesearch 1 · bamboohr 1 · the rest 0
+(EURES / SmartRecruiters / Recruitee / Personio / Teamtailor / Jobspresso / HN parsed fine but had nothing new and eligible inside the week).
+The scheduled task runs every 15 min with per-source rhythms (`everyMin`), so a normal incremental pass is a few minutes; only the first pass after install
+(or `--force`) takes the full ~25 min. Nothing exceeded the 30-minute budget, so no `everyMin` was lengthened.
