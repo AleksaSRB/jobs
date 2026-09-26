@@ -115,8 +115,8 @@
     <select id="src"><option value="">All sources</option></select>
     <select id="cat"><option value="">All categories</option></select>
     <select id="sort">
+      <option value="posted" selected>Newest first</option>
       <option value="score">Best match</option>
-      <option value="posted">Newest first</option>
       <option value="found">Recently found</option>
       <option value="salary">Salary (high to low)</option>
     </select>
@@ -142,7 +142,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const state = { tab: "new", q: "", src: "", cat: "", sort: "score", elig: false, remote: false, lic: false, junior: false, ft: false, contract: false, pay: false, strong: false, diag: false, data: null, lastVisit: null };
+const state = { tab: "new", q: "", src: "", cat: "", sort: "posted", elig: false, remote: false, lic: false, junior: false, ft: false, contract: false, pay: false, strong: false, diag: false, data: null, lastVisit: null };
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const when = (j) => j.postedAt ?? j.firstSeen;
@@ -194,7 +194,7 @@ function visible() {
   if (state.pay) list = list.filter((j) => j.salaryText);
   if (state.strong) list = list.filter((j) => j.score >= (state.data.thresholds?.good ?? 75));
   if (state.sort === "salary") list.sort((a, b) => (b.salaryEurMonth ?? -1) - (a.salaryEurMonth ?? -1) || b.score - a.score);
-  else if (state.sort === "posted") list.sort((a, b) => when(b).localeCompare(when(a)));
+  else if (state.sort === "posted") list.sort((a, b) => when(b).localeCompare(when(a)) || b.score - a.score); // default: newest posting first, best match breaks ties
   else if (state.sort === "found") list.sort((a, b) => b.firstSeen.localeCompare(a.firstSeen) || b.score - a.score);
   else list.sort((a, b) => b.score - a.score || when(b).localeCompare(when(a)));
   return list;
