@@ -1,0 +1,124 @@
+{
+  "port": 3008,
+  "lookbackDays": 7,
+  "intervalMin": 15,
+  "minScore": 50,
+  "ntfyTopic": "",
+  "sources": {
+    "himalayas": { "enabled": true, "everyMin": 15 },
+    "wwr": { "enabled": true, "everyMin": 30 },
+    "remoteok": { "enabled": true, "everyMin": 60 },
+    "workingnomads": { "enabled": true, "everyMin": 60 },
+    "jobicy": { "enabled": true, "everyMin": 60 },
+    "remotive": { "enabled": true, "everyMin": 360 },
+    "arbeitnow": { "enabled": true, "everyMin": 60 },
+    "themuse": { "enabled": true, "everyMin": 120 },
+    "jobspresso": { "enabled": true, "everyMin": 60 },
+    "aijobs": { "enabled": true, "everyMin": 60 },
+    "eightyk": { "enabled": true, "everyMin": 120 },
+    "adzuna": { "enabled": true, "everyMin": 120 },
+    "hn": { "enabled": true, "everyMin": 360 },
+    "greenhouse": { "enabled": true, "everyMin": 120 },
+    "lever": { "enabled": true, "everyMin": 120 },
+    "ashby": { "enabled": true, "everyMin": 120 },
+    "workable": { "enabled": true, "everyMin": 120 },
+    "smartrecruiters": { "enabled": true, "everyMin": 180 },
+    "recruitee": { "enabled": true, "everyMin": 180 },
+    "personio": { "enabled": true, "everyMin": 180 },
+    "bamboohr": { "enabled": true, "everyMin": 180 },
+    "workday": { "enabled": true, "everyMin": 180 },
+    "jobrack": { "enabled": true, "everyMin": 60 },
+    "linkedin": { "enabled": true, "everyMin": 60 },
+    "wellfound": { "enabled": true, "everyMin": 360 }
+  },
+  "himalayas": {
+    "country": "RS",
+    "maxPages": 2,
+    "queries": [
+      "behavioral scientist", "behavioural scientist", "behavioral science", "behavior change", "behavioral researcher", "behavioral design", "decision scientist",
+      "digital health", "digital mental health", "mental health", "behavioral health", "digital therapeutics", "telehealth", "health coach", "clinical content",
+      "ux researcher", "user researcher", "user research", "design researcher", "human factors", "product researcher", "research scientist", "qualitative researcher", "mixed methods",
+      "product manager health", "product manager mental health", "clinical product", "program manager mental health", "patient experience", "member experience",
+      "ai safety", "trust and safety", "trust & safety", "responsible ai", "ai evaluator", "ai trainer", "llm evaluator", "model evaluation", "red team", "ai policy", "ai ethics", "ai governance", "content policy", "human feedback", "data annotator", "quality rater",
+      "prompt engineer", "prompt designer", "conversation designer", "conversational ai", "conversation design", "dialogue designer", "ai content designer", "ai persona", "chatbot", "voice user interface",
+      "human-centered ai", "human-ai interaction", "hci researcher", "ai researcher psychology",
+      "cyberpsychology", "security awareness", "human risk", "security culture",
+      "mental health coach", "wellbeing coach", "wellness coach", "life coach", "health coach", "coach", "peer support", "care navigator",
+      "counselor", "counsellor", "therapist", "psychologist", "psychotherapist",
+      "employee wellbeing", "corporate wellness", "workplace wellbeing", "psychological safety", "employee experience", "people experience", "employee engagement",
+      "content strategist", "health writer", "mental health writer", "medical writer", "psychoeducation", "instructional designer", "learning designer", "curriculum designer", "learning experience designer", "content designer",
+      "character writer", "dialogue writer", "narrative designer", "game writer", "creative writer", "scriptwriter", "persona designer",
+      "talent assessment", "behavioral interviewer", "assessment specialist", "recruiter", "talent acquisition", "people scientist", "psychometrics", "organizational psychologist", "io psychologist",
+      "consumer insights", "consumer psychologist", "market research", "brand strategist", "customer insights", "research analyst", "insights analyst", "qualitative research",
+      "organizational development", "people strategy", "team effectiveness", "change management", "culture consultant", "learning and development", "leadership development", "facilitator", "people analytics",
+      "psychology", "behavioral", "wellbeing", "health", "research associate", "program manager", "policy analyst", "safety specialist"
+    ]
+  },
+  "wwr": {
+    "feeds": ["remote-product-jobs", "remote-design-jobs", "remote-management-and-finance-jobs", "remote-customer-support-jobs", "remote-sales-and-marketing-jobs", "all-other-remote-jobs"]
+  },
+  "remoteok": {
+    "tags": ["health", "healthcare", "medical", "research", "ux", "content", "writing", "copywriting", "non tech", "ai", "product", "hr", "education", "teaching", "psychology", "design"]
+  },
+  "workingnomads": {
+    "categories": ["Design", "Writing", "Management", "Healthcare", "Education", "Human Resources", "Consulting", "Marketing", "Legal"]
+  },
+  "jobrack": {
+    "categories": ["content-writer", "project-manager", "design", "support"],
+    "maxPages": 2,
+    "listPages": 3,
+    "maxDetails": 30
+  },
+  "linkedin": {
+    "serbia": {
+      "location": "Serbia",
+      "maxPages": 1,
+      "queries": [
+        "behavioral scientist", "behavioural science", "ux researcher", "user researcher", "digital health", "mental health", "digital therapeutics",
+        "ai safety", "trust and safety", "responsible ai", "ai trainer", "ai evaluator", "prompt engineer", "conversation designer", "conversational ai designer",
+        "mental health coach", "wellbeing coach", "health coach", "employee wellbeing", "psychological safety",
+        "content strategist health", "instructional designer", "learning experience designer", "narrative designer", "game writer",
+        "organizational psychologist", "people scientist", "talent assessment", "consumer insights", "market research analyst", "psychologist", "psychology"
+      ]
+    },
+    "europe": {
+      "location": "European Union",
+      "maxPages": 1,
+      "queries": ["behavioral scientist remote", "ux researcher health remote", "digital mental health remote", "ai safety remote", "trust and safety analyst remote", "conversation designer remote", "prompt engineer remote", "mental health coach remote", "wellbeing specialist remote", "instructional designer remote", "narrative designer remote", "organizational psychologist remote"]
+    },
+    "maxDetails": 50
+  },
+  "wellfound": {
+    "maxPages": 2,
+    "paths": ["/role/r/ux-researcher", "/role/r/user-researcher", "/role/r/product-manager", "/role/r/prompt-engineer", "/role/r/content-writer", "/role/r/content-strategist", "/role/r/instructional-designer", "/role/r/narrative-designer", "/role/r/game-writer", "/role/r/health-coach", "/role/r/behavioral-scientist", "/role/r/ai-trainer", "/role/r/conversation-designer", "/role/r/trust-and-safety", "/role/r/research-scientist", "/role/r/market-researcher", "/role/r/psychologist", "/role/l/product-manager/europe"]
+  },
+  "jobicy": {
+    "industries": ["hr", "product", "copywriting", "design-multimedia", "business", "management", "technical-writing", "supporting", "marketing"],
+    "count": 50
+  },
+  "arbeitnow": { "maxPages": 4 },
+  "themuse": {
+    "categories": ["Design and UX", "Product", "Healthcare", "Writing and Editing", "HR", "Social Services", "Data and Analytics", "Project Management", "Education", "Science and Engineering", "Media, PR, and Communications"],
+    "levels": ["entry", "mid"],
+    "maxPages": 3
+  },
+  "jobspresso": { "queries": ["research", "health", "content", "product", "psychology", "coach", "writer", "design", "ai", "policy"] },
+  "aijobs": { "feeds": ["https://aijobs.net/feed/"] },
+  "hn": { "keywords": ["remote"], "maxComments": 800 },
+  "adzuna": {
+    "appId": "", "appKey": "",
+    "countries": ["gb", "de", "nl", "pl", "at", "ie"],
+    "queries": ["behavioural scientist", "ux researcher remote", "mental health content", "trust and safety", "conversation designer", "digital health remote", "psychology remote", "wellbeing coach remote", "organisational psychologist", "prompt engineer", "instructional designer remote", "narrative designer"],
+    "resultsPerPage": 50
+  },
+  "eightyk": { "url": "" },
+  "careersMaxJobsPerCompany": 400,
+  "careersMaxDetails": 60,
+  "careers": [],
+  "blockedCompanies": [],
+  "fx": {
+    "EUR": 1, "USD": 0.88, "GBP": 1.16, "CHF": 1.06, "CAD": 0.63, "AUD": 0.57, "NZD": 0.52, "SGD": 0.67, "RSD": 0.0085,
+    "PLN": 0.235, "SEK": 0.09, "NOK": 0.086, "DKK": 0.134, "CZK": 0.04, "RON": 0.2, "HUF": 0.0025, "BAM": 0.51,
+    "INR": 0.0102, "BRL": 0.16, "MXN": 0.047, "ZAR": 0.049, "JPY": 0.0058
+  }
+}

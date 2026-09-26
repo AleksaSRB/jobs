@@ -1,0 +1,18 @@
+{
+  "name": "psych-healthtech-jobs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local scraper for fully remote psychology / behavioral science / digital mental health / health-tech / AI safety / conversation design / coaching / org-psych jobs applicable from Serbia. 20+ sources (Himalayas, LinkedIn, We Work Remotely, Remote OK, Working Nomads, JobRack, Wellfound, Jobicy, Remotive, Arbeitnow, The Muse, Jobspresso, aijobs.net, Hacker News, Adzuna + company career pages on Greenhouse / Lever / Ashby / Workable / SmartRecruiters / Recruitee / Personio / BambooHR / Workday) with a weighted semantic matcher and a local UI on :3008",
+  "engines": { "node": ">=22.6" },
+  "scripts": {
+    "start": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/server.ts",
+    "serve": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/server.ts",
+    "scrape": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/scrape.ts",
+    "scrape:force": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/scrape.ts --force",
+    "scrape:loop": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/scrape.ts --loop",
+    "score": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/check-score.ts",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/test-score.ts",
+    "check": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/check-sources.ts"
+  }
+}

@@ -1,0 +1,2390 @@
+{
+ "_comment": "All scoring rules for the psychology / health-tech / AI-safety job matcher (see docs/brief.md). Regexes are case-insensitive and run on lower-cased, diacritics-folded text. Title patterns look at the title only; concept/industry/positive/negative patterns look at the description (and title). Levels: 100+ Excellent, 75+ Strong, 50+ Possible; below minScore (config.json) the job is hidden (logged to data/filtered.log). Edit patterns/weights here – no code changes needed.",
+ "thresholds": {
+  "excellent": 100,
+  "good": 75,
+  "possible": 50
+ },
+ "families": [
+  {
+   "id": "behavioral-science",
+   "label": "Behavioral Science",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 35,
+   "badge": "Behavioral Science",
+   "titlePatterns": [
+    "behaviou?ral scien(ce|tist)",
+    "applied behaviou?r",
+    "behaviou?ral (research|researcher|insights?|design|designer|economist|economics|product|intervention|strateg|analyst|consultant|specialist|lead|scientist)",
+    "behaviou?r[- ]change",
+    "behaviou?r(al)? modification",
+    "decision scien(ce|tist)",
+    "applied psycholog",
+    "experimental psycholog",
+    "health behaviou?r",
+    "behaviou?ral health (research|scien)",
+    "\\bnudge",
+    "choice architect",
+    "behaviou?ral (economics|insights) (unit|team|lead|associate)"
+   ],
+   "conceptPatterns": [
+    "behaviou?r[- ]change",
+    "behaviou?ral (science|economics|insights?|design|intervention|theory|model)",
+    "cognitive bias",
+    "habit (formation|loop|building)",
+    "\\bmotivation(al)?\\b",
+    "\\badherence\\b",
+    "intervention (design|development|mapping)",
+    "digital intervention",
+    "health behaviou?r",
+    "psychological (mechanism|theor|principle|driver)",
+    "decision[- ]making",
+    "engagement science",
+    "persuasive (design|technolog)",
+    "\\bnudg(e|es|ing)\\b",
+    "com-b|behaviou?r change wheel|theory of planned behaviou?r|self[- ]determination theory|transtheoretical|fogg|hooked model",
+    "randomi[sz]ed|\\brcts?\\b|a/b test|experiment(s|al design|ation)",
+    "psycholog"
+   ]
+  },
+  {
+   "id": "digital-health",
+   "label": "Digital Health",
+   "priority": "very-high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "Digital Health",
+   "titlePatterns": [
+    "digital (mental )?health",
+    "digital (behaviou?ral|care)",
+    "mental health (product|program|specialist|research|scien|operations|innovation|strateg|associate|analyst|lead|partnerships?)",
+    "behaviou?ral health (product|program|specialist|research|innovation|operations|strateg|associate|analyst|lead)",
+    "health[- ]?tech",
+    "health innovation",
+    "telehealth|teletherapy|telemedicine|virtual care",
+    "digital care",
+    "population health",
+    "patient (engagement|experience|success|education|advocacy)",
+    "member (engagement|experience|success|education|care|services)",
+    "clinical (operations|program|innovation|quality|strategy|partnerships?|excellence|content)",
+    "care (navigator|coordinator|team|coach|guide|partner)"
+   ],
+   "conceptPatterns": [
+    "digital health",
+    "digital mental health",
+    "mental health (platform|app|care|support|service|solution|company|startup)",
+    "behaviou?ral health",
+    "telehealth|telemedicine|teletherapy|virtual care|remote care",
+    "mental wellness",
+    "digital care",
+    "patient engagement",
+    "member engagement",
+    "health outcomes|clinical outcomes|patient outcomes|member outcomes",
+    "preventive|preventative health",
+    "population health",
+    "care (delivery|navigation|pathway|model|team)",
+    "\\bhipaa\\b|\\bnhs\\b|\\bfda\\b|\\bmdr\\b|ce mark|\\bgdpr\\b",
+    "patients?\\b|clinicians?\\b|providers?\\b"
+   ]
+  },
+  {
+   "id": "digital-therapeutics",
+   "label": "Digital Therapeutics",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 35,
+   "badge": "DTx",
+   "titlePatterns": [
+    "digital therapeutic",
+    "\\bdtx\\b",
+    "intervention (design|develop|specialist|scientist)",
+    "(clinical|therapeutic|behaviou?ral|digital|psychological) intervention",
+    "therapeutic (content|program|design|experience|product)",
+    "digital care design",
+    "clinical content (design|develop)",
+    "care (experience )?design",
+    "clinical (product )?design",
+    "program(me)? (design|developer)"
+   ],
+   "conceptPatterns": [
+    "digital therapeutic",
+    "\\bdtx\\b",
+    "\\bcbt\\b|cognitive[- ]behaviou?r(al)? therapy|\\bicbt\\b",
+    "\\bdbt\\b|dialectical",
+    "\\bact\\b(?! as)|acceptance and commitment",
+    "evidence[- ]based (intervention|treatment|program|practice|content|care|approach)",
+    "clinical protocol|therapeutic protocol|treatment protocol|manuali[sz]ed",
+    "treatment pathway|care pathway|stepped care",
+    "psychoeducation",
+    "digital treatment",
+    "intervention modules?|treatment modules?|program modules?",
+    "clinical efficacy|clinically (validated|proven)|clinical trials?|clinical evidence",
+    "prescription digital|\\bpdt\\b|software as a medical device|\\bsamd\\b",
+    "mindfulness|meditation|sleep (program|therapy|coach)|insomnia|\\bcbt-i\\b",
+    "therapeutic (alliance|exercises|content|tools)",
+    "mental health"
+   ]
+  },
+  {
+   "id": "ux-research",
+   "label": "UX Research",
+   "priority": "very-high",
+   "titleWeight": 35,
+   "conceptWeight": 30,
+   "badge": "UX Research",
+   "gated": true,
+   "industries": [
+    "mental-health",
+    "digital-health",
+    "ai-safety",
+    "human-centered-ai",
+    "coaching-wellbeing"
+   ],
+   "titlePatterns": [
+    "\\bux research",
+    "user research",
+    "\\buxr\\b",
+    "product research",
+    "user insights?",
+    "experience research",
+    "human factors",
+    "human[- ]cent(e|re)d (design )?research",
+    "design research",
+    "qualitative research",
+    "mixed[- ]methods",
+    "research(er| scientist| lead| associate| specialist)?,? (member|patient|customer|user|product|experience|design)",
+    "(customer|user|member|patient|design|product|experience) insights? (research|analyst|specialist|lead|manager)",
+    "usability",
+    "research (ops|operations)"
+   ],
+   "conceptPatterns": [
+    "user (testing|interviews?|research|studies|needs)",
+    "usability (test|stud|evaluation)",
+    "qualitative (interview|research|stud|data|methods)",
+    "diary stud",
+    "cognitive (load|walkthrough)",
+    "accessibility|\\bwcag\\b|inclusive design",
+    "psychological safety",
+    "sensitive (users|populations|topics|contexts)|vulnerable (users|populations|people|groups)",
+    "patient (research|interviews|insights)|participant (research|recruit)",
+    "human factors",
+    "human[- ]cent(e|re)d design",
+    "ux research|user experience research",
+    "product research",
+    "research (synthesis|findings|insights|readouts?)|thematic analysis|affinity (map|diagram)",
+    "survey (design|research)|questionnaire",
+    "mixed methods|quantitative research|qualitative research|ethnograph",
+    "research (ops|operations|repository|plan)|dovetail|usertesting|user interviews|\\bmaze\\b|lookback|dscout",
+    "personas?|journey map|jobs to be done|\\bjtbd\\b",
+    "discovery research|generative research|evaluative research|concept testing"
+   ]
+  },
+  {
+   "id": "healthtech-product",
+   "label": "Health-Tech Product",
+   "priority": "very-high",
+   "titleWeight": 30,
+   "conceptWeight": 30,
+   "badge": "Product",
+   "gated": true,
+   "industries": [
+    "mental-health",
+    "digital-health"
+   ],
+   "titlePatterns": [
+    "product (manager|owner|specialist|operations|ops|strateg|program|lead|associate|analyst|coordinator|marketing manager)",
+    "clinical product",
+    "\\bapm\\b|associate product",
+    "technical program manager|program(me)? manager,? (product|clinical|health|care)",
+    "product (development|innovation|discovery|research)"
+   ],
+   "conceptPatterns": [
+    "health[- ]?tech|digital health",
+    "mental health",
+    "clinical (requirements|workflows?|team|advisors?|content|stakeholders|partners|safety)",
+    "patient experience|provider experience|clinician experience|member experience",
+    "behaviou?ral health",
+    "digital therapeutic",
+    "care delivery|care model|care team",
+    "clinical content",
+    "member outcomes|patient outcomes|health outcomes|clinical outcomes",
+    "\\bhipaa\\b|\\bfda\\b|regulated (health|medical)|medical device",
+    "product (roadmap|discovery|strategy|requirements|vision)|prds?\\b|user stories",
+    "telehealth|virtual care|therapists?|coaches|clinicians?"
+   ]
+  },
+  {
+   "id": "ai-safety",
+   "label": "AI Safety / Evaluation",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 35,
+   "badge": "AI Safety",
+   "titlePatterns": [
+    "(ai|llm|model|rlhf|safety|conversation|response|output|quality|content|search|chatbot|assistant|prompt|dialog(ue)?|data) (safety |quality |behaviou?r )?(evaluat|analyst|specialist|review|audit|rater|assess|grader|annotat|labell?er|moderat)",
+    "trust (and|&) safety",
+    "\\bt&s\\b",
+    "responsible ai",
+    "ai (risk|policy|safety|governance|ethics|assurance|oversight|alignment|behaviou?r|welfare) ",
+    "safety (operations|quality|policy|analyst|specialist|researcher|research|associate|program|team|engineer|lead|evaluation)",
+    "content (policy|moderation|safety|integrity|review|quality|standards)",
+    "ai (trainer|tutor|teacher|coach|mentor|educator)",
+    "human (feedback|data|preference) (specialist|associate|analyst|trainer|lead|operations)",
+    "red[- ]team",
+    "annotator|annotation|data (labell?er|labell?ing|quality)|\\brater\\b|rating",
+    "model behaviou?r",
+    "alignment (research|analyst|specialist|associate|scientist)",
+    "harm(ful)? (content|reduction|classification)",
+    "integrity (analyst|specialist|operations|policy)",
+    "policy (enforcement|specialist|analyst|associate|operations|manager|research)",
+    "(subject matter|domain|clinical|psychology|mental health) expert[^\\n]{0,20}(ai|llm|data|training|evaluation)|\\bsme\\b[^\\n]{0,15}(ai|llm)",
+    "expert (contributor|reviewer|rater|evaluator|trainer)",
+    "(psycholog|mental health|behaviou?r|clinical|therapist|counsel)[^\\n]{0,25}(ai|llm|model) (train|evaluat|data|project)",
+    "quality (analyst|assurance|specialist) [-–,]? (ai|conversation|content|support)"
+   ],
+   "conceptPatterns": [
+    "mental health|self[- ]harm|suicid|crisis (response|escalation|support|protocol)",
+    "sensitive (conversations?|topics|content|situations)",
+    "harmful (outputs?|content|behaviou?r|responses)|\\bharms?\\b",
+    "hallucinat|factual(ity| accuracy)",
+    "empath",
+    "safe(ty)? (completion|response|guideline|polic|behaviou?r|classifier)",
+    "model (behaviou?r|outputs?|responses?|performance)",
+    "response quality|conversation quality|output quality|answer quality",
+    "safety evaluation|evaluat(e|ing|ion of) (ai|llm|model|responses|outputs|conversations|chatbot)",
+    "red[- ]team",
+    "policy (evaluation|enforcement|violations?|guidelines)|content polic|community guidelines|usage polic",
+    "trust (and|&) safety",
+    "responsible ai",
+    "ai alignment|\\baligned\\b|alignment research",
+    "human feedback|\\brlhf\\b|preference data|rubrics?|grading|rating (responses|outputs|conversations)|pairwise",
+    "llm evaluation|\\bevals?\\b|benchmarks?|golden (data|set)|ground truth",
+    "conversational ai|chatbot|ai assistant|ai companion|voice assistant",
+    "annotation|labell?ing|\\braters?\\b|quality assurance",
+    "prompt|large language model|\\bllms?\\b|generative ai|gen ?ai|foundation model",
+    "misuse|abuse|fraud|scams?|misinformation|disinformation|extremis|child safety|\\bcsam\\b|\\bcsae\\b|grooming|hate speech|harassment|bullying"
+   ]
+  },
+  {
+   "id": "conversation-design",
+   "label": "Conversation / Prompt Design",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 35,
+   "badge": "Conversation Design",
+   "titlePatterns": [
+    "prompt (engineer|designer|specialist|writer|strateg|architect|lead|analyst|developer|curator|librarian)",
+    "conversation(al)? (design|designer|ux|experience|writer|architect|analyst|strateg|specialist|lead|quality)",
+    "conversational ai (design|writer|specialist|analyst|trainer|product|lead)",
+    "dialog(ue)? (design|designer|writer|system|specialist|manager|author)",
+    "\\bai (content|interaction|experience|behaviou?r|conversation|voice|ux|tone) (design|designer|writer|lead|strateg|specialist|producer)",
+    "chatbot (design|writer|content|specialist|trainer|analyst|product|manager)",
+    "\\bvui\\b|voice (user )?(interface|experience|assistant|product) (design|writer)",
+    "llm (prompt|content|writer|specialist|quality|trainer)",
+    "ai (writer|content writer|copywriter|editor|author)",
+    "linguist(ic)? (engineer|specialist|analyst|lead)|computational linguist|\\blinguist\\b",
+    "bot (builder|designer|writer)|virtual (agent|assistant) (design|writer|content)",
+    "knowledge (engineer|curator|designer)[^\\n]{0,15}(ai|chatbot|assistant)"
+   ],
+   "conceptPatterns": [
+    "prompt (design|engineering|writing|library|iteration|crafting|tuning|templates?)",
+    "system prompts?|meta[- ]prompt",
+    "conversation(al)? (flows?|design|ux|scripts?|paths|turns)",
+    "guardrails?",
+    "safety prompts?|safety (guidelines|layer)",
+    "emotional (input|support|tone|intelligence|state|cues)",
+    "sensitive topics|sensitive (users|situations)",
+    "mental health",
+    "chatbot|ai assistant|virtual assistant|voice assistant|copilot|digital assistant",
+    "therapeutic chatbot|ai therapist|ai coach|ai companion|companion app",
+    "conversational (ux|ai|experience|interface|agent)",
+    "dialog(ue)? (design|flow|management|tree|writing|system)",
+    "persona (design|development|guidelines|voice)|character (voice|bible|guidelines)",
+    "tone of voice|brand voice|voice and tone|tone and voice",
+    "empath",
+    "response (style|quality|guidelines|templates)",
+    "llm (behaviou?r|outputs?|responses?|applications?)|large language model|\\bllms?\\b|gpt|claude|gemini|openai|anthropic",
+    "intents?|utterances?|entities|\\bnlu\\b|\\bnlp\\b|natural language",
+    "few[- ]shot|chain[- ]of[- ]thought|\\brag\\b|fine[- ]tun|retrieval[- ]augmented|agentic|ai agents?",
+    "copywriting|ux writing|microcopy|content design|scriptwriting|screenwriting"
+   ]
+  },
+  {
+   "id": "human-centered-ai",
+   "label": "Human-Centered / Responsible AI",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 35,
+   "badge": "Responsible AI",
+   "titlePatterns": [
+    "human[- ]cent(e|re)d (ai|artificial intelligence|technolog|machine|computing)",
+    "human[- ]?ai (interaction|collaboration|teaming|alignment|experience)",
+    "\\bhai\\b",
+    "responsible (ai|technology|tech|innovation|design|computing|data)",
+    "ai (ethics|ethicist|governance|policy|accountability|assurance|audit|impact|literacy|adoption|transformation|enablement|strategy|program|programme|research|society)",
+    "ethical ai|ethics (research|analyst|specialist|lead|advisor|officer)",
+    "tech(nology)? (ethic|policy|and society|for good)",
+    "algorithmic (fairness|bias|accountability|audit|justice|impact)",
+    "sociotechnical|socio-technical",
+    "digital (well-?being|ethics|rights|safety|policy)",
+    "(ai|technology|data|platform|digital|internet|online safety|trust) polic(y|ies) (analyst|researcher|specialist|associate|manager|lead|advisor|fellow)",
+    "(cognitive|social|behaviou?ral) scientist[^\\n]{0,20}(ai|llm|machine|model)",
+    "(user|ux|product) research(er)?[^\\n]{0,20}(ai|llm|generative|assistant|agent)",
+    "ai (ux|design|product) research",
+    "human (oversight|data|insight|welfare)|model welfare"
+   ],
+   "conceptPatterns": [
+    "human[- ]?ai (interaction|collaboration|teaming)|human[- ]computer interaction|\\bhci\\b",
+    "ai ethics|ethical (ai|considerations|framework|implications|risks|design)",
+    "user well-?being|digital well-?being|\\bwell-?being\\b",
+    "psychological (impact|effects?|harm|safety|needs)",
+    "responsible ai|responsible (technology|innovation|deployment|development|use)",
+    "ai governance|ai (policy|regulation|act|standards|principles)|eu ai act|nist ai|iso 42001",
+    "ai safety",
+    "ethical framework|ethics (board|review|committee)",
+    "\\bbias(es)?\\b|debias",
+    "fairness|equity|inclusion|justice",
+    "human oversight|human[- ]in[- ]the[- ]loop|human (agency|control|autonomy)",
+    "ai accountability|transparency|explainab|interpretab",
+    "societal impact|social impact|misinformation|manipulation|persuasion|dark patterns|addictive design",
+    "cognitive science|social science|psychology|behaviou?ral science|anthropolog|sociolog",
+    "trust(worthy|worthiness)? (ai|in ai|and safety)|user trust|calibrated trust|over-?reliance|automation bias",
+    "large language model|\\bllms?\\b|generative ai|gen ?ai|ai (systems?|models?|assistants?|agents?|products?)"
+   ]
+  },
+  {
+   "id": "human-risk",
+   "label": "Human Risk / Cyberpsychology",
+   "priority": "high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "Human Risk",
+   "titlePatterns": [
+    "human risk",
+    "human factors? (security|cyber|engineer|analyst)",
+    "cyber ?psycholog",
+    "security (behaviou?r|awareness|culture|education|training|champion|communications?|engagement|literacy) ",
+    "behaviou?ral (security|cyber)",
+    "human[- ]cent(e|re)d security",
+    "social engineering (research|analyst|specialist|awareness)",
+    "people (risk|security|centric security)",
+    "human cyber",
+    "insider (risk|threat) (analyst|specialist|program|manager|investigat)",
+    "security (culture|awareness) (program|manager|specialist|lead|analyst|coordinator|consultant)",
+    "phishing (simulation|program|analyst|awareness)",
+    "(cyber|security) (awareness|behaviou?r) (specialist|analyst|manager|lead|consultant)",
+    "usable (security|privacy)|privacy (research|behaviou?r)"
+   ],
+   "conceptPatterns": [
+    "phishing|smishing|vishing",
+    "social engineering|pretexting|impersonation",
+    "security awareness|cyber awareness|awareness (training|campaign|program)",
+    "employee behaviou?r|user behaviou?r|human behaviou?r|behaviou?ral (data|metrics|risk)",
+    "cognitive bias|heuristics",
+    "human error|human factor",
+    "insider (risk|threat)",
+    "remote[- ]work fatigue|burnout|stress|fatigue",
+    "security culture|culture of security|security champions?",
+    "behaviou?ral security|behaviou?r change|nudg",
+    "cyberpsycholog",
+    "human factors",
+    "psycholog",
+    "simulations?|campaigns?|e-?learning|training (content|modules|programs?)",
+    "knowbe4|proofpoint|cybsafe|hoxhunt|sans security awareness|ninjio|living security|outthink"
+   ]
+  },
+  {
+   "id": "coaching",
+   "label": "Coaching / Well-being",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 30,
+   "badge": "Coaching",
+   "titlePatterns": [
+    "(mental health|well-?being|wellness|behaviou?ral health|behaviou?r change|emotional (well-?being|wellness|health|fitness)|resilience|stress( management)?|burnout|life|care|member|health|support|habit|sleep|nutrition|recovery|peer|youth|teen|student|parent(ing)?|relationship|mindset|performance|career|executive|leadership|transformation) coach",
+    "coach(ing)? (specialist|associate|coordinator|lead|manager|program|operations|quality|supervisor|trainer|network|community)",
+    "\\bcoach(es)?\\b",
+    "well-?being practitioner|well-?being (guide|advisor|companion|navigator|associate|advocate|facilitator|specialist)",
+    "mental health (practitioner|associate|advocate|navigator|guide|companion|support|worker|professional|ambassador|facilitator|mentor|educator|first aider)",
+    "wellness (practitioner|specialist|consultant|advisor|guide|coordinator|associate|facilitator|educator)",
+    "peer (support|specialist|counsel|mentor|recovery)",
+    "care (navigator|guide|partner|advocate|companion|advisor|specialist|associate)",
+    "behaviou?ral health (coach|specialist|associate|navigator|technician|support|advocate|educator)",
+    "mindfulness (teacher|instructor|coach|facilitator|guide)|meditation (teacher|guide|instructor|facilitator)|breathwork|yoga (teacher|instructor)",
+    "support (coach|specialist|worker|guide|practitioner|facilitator)",
+    "(health|wellness|well-?being|life) (mentor|guide|educator|facilitator|advisor)",
+    "crisis (counsel|support|responder|text|line|advocate|specialist)|helpline|warmline|listener"
+   ],
+   "conceptPatterns": [
+    "1[- ]on[- ]1|one[- ]on[- ]one|1:1 (support|sessions?|coaching|calls)",
+    "burnout",
+    "stress (management|reduction|resilience)",
+    "life transitions|major life|grief|relationships?|loneliness",
+    "resilience",
+    "well-?being|wellness|flourishing|thriving",
+    "goal[- ]setting|smart goals|action plans?|accountability",
+    "emotional (support|well-?being|regulation|health)",
+    "behaviou?r change|habit (formation|change|building)|lifestyle (change|medicine)",
+    "remote coaching|virtual coaching|telecoaching|coaching sessions?|coaching (platform|app|practice)",
+    "video (sessions?|calls?|visits?)|text[- ]based (coaching|support)|chat[- ]based|messaging|asynchronous",
+    "member (support|sessions?|engagement|journey|outcomes)|clients?",
+    "motivational interviewing|active listening|positive psychology|solution[- ]focused|strengths[- ]based|acceptance",
+    "\\bicf\\b|\\bnbhwc\\b|\\bemcc\\b|certified (health|wellness|life|professional|integrative|executive) coach|coaching (certification|credential|accredit)|\\bacc\\b|\\bpcc\\b|\\bcbt\\b|\\bmhfa\\b",
+    "psychology (degree|background|graduate)|counsel(l)?ing (degree|background|psychology)|social work",
+    "mental health|anxiety|depression|sleep|mindfulness|meditation"
+   ]
+  },
+  {
+   "id": "counselor",
+   "label": "Counselor / Psychological Consultant",
+   "priority": "conditional",
+   "titleWeight": 35,
+   "conceptWeight": 25,
+   "badge": "Counselor",
+   "titlePatterns": [
+    "counsel(l)?or\\b",
+    "counsel(l)?ing (psychologist|specialist|associate|practitioner|professional)",
+    "psychological (counsel|consultant|practitioner|well-?being)",
+    "mental (health|wellness) consultant",
+    "well-?being consultant",
+    "behaviou?ral consultant",
+    "therapist\\b",
+    "psychotherapist",
+    "psychologist\\b",
+    "clinical (psychologist|social worker|therapist|counsel|associate|specialist|supervisor)",
+    "\\blcsw\\b|\\blmft\\b|\\blpc\\b|\\blmhc\\b|\\blicsw\\b",
+    "mental health (clinician|provider|professional|therapist|specialist|practitioner)",
+    "clinician\\b",
+    "(care|behaviou?ral health|remote|online|virtual|tele) (provider|clinician|therapist|counsel)",
+    "social worker",
+    "case manager|care manager"
+   ],
+   "conceptPatterns": [
+    "counsel(l)?ing",
+    "psychotherapy|therapy sessions?|therapeutic",
+    "\\bclients?\\b|client (care|sessions|outcomes)",
+    "\\bcbt\\b|\\bdbt\\b|\\bact\\b(?! as)|\\bemdr\\b|psychodynamic|person[- ]cent(e|re)d|solution[- ]focused",
+    "caseload",
+    "treatment plan|care plan|treatment goals",
+    "assessment|intake|screening|\\bphq-?9\\b|\\bgad-?7\\b",
+    "supervision|supervised (practice|hours)|clinical supervision",
+    "telehealth|teletherapy|online therapy|video therapy|text therapy|messaging therapy",
+    "mental health|anxiety|depression|trauma|\\bptsd\\b|\\bocd\\b|grief|relationships?|couples|families|adolescents|children|adults",
+    "psychological (assessment|support|intervention|first aid|well-?being)",
+    "crisis (intervention|support|response|management|plan)|risk assessment|safety plan|safeguarding",
+    "psycholog|licen[sc]|registration|accredit"
+   ]
+  },
+  {
+   "id": "corporate-wellbeing",
+   "label": "Corporate Well-being / Employee Mental Health",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 30,
+   "badge": "Corporate Well-being",
+   "titlePatterns": [
+    "(corporate|employee|workplace|organi[sz]ational|team|people|staff|workforce|colleague|associate|member|student|campus) (well-?being|wellness|mental health|health|experience|engagement|resilience|happiness|care|success|assistance|listening|relations|support|advocacy)",
+    "well-?being (program|programme|specialist|manager|lead|coordinator|consultant|strateg|partner|champion|advisor|associate|analyst|director|officer|ambassador|educator|facilitator|advocate|practitioner|operations|content)",
+    "wellness (program|programme|specialist|manager|lead|coordinator|consultant|strateg|partner|champion|advisor|associate|director|officer|ambassador|educator|facilitator|operations)",
+    "psychological safety",
+    "mental health (program|programme|lead|champion|strateg|partner|advocate|ambassador|manager|consultant|officer|trainer|educator|coordinator|operations|initiative|first aid)",
+    "burnout (prevention|specialist|consultant|coach|program)",
+    "employee (health|assistance|experience|engagement|listening|success|relations|benefits|programs?|advocacy|communications?|voice)",
+    "\\beap\\b|employee assistance",
+    "benefits (specialist|program|analyst|coordinator|manager|partner|consultant)",
+    "people (experience|programs?|partner|operations|ops|specialist|coordinator|associate|generalist|advisor|team|success|engagement|care|culture|analyst|manager|lead)",
+    "culture (and|&) (engagement|well-?being|people|belonging|inclusion|experience|talent)|engagement (and|&) culture",
+    "engagement (specialist|manager|lead|program|analyst|coordinator|partner|consultant|strateg|officer|associate)",
+    "\\bhr (business partner|generalist|specialist|coordinator|associate|analyst|manager|advisor|partner|operations|lead)\\b|human resources (specialist|generalist|coordinator|business partner|associate|manager|advisor|analyst|partner)|\\bhrbp\\b",
+    "workplace (psycholog|health|culture|experience|consultant|strateg|well-?being|mental health)",
+    "occupational (health|psycholog|well-?being)",
+    "\\bdei\\b|\\bdeib?\\b|diversity[^\\n]{0,20}inclusion|belonging|inclusion (specialist|lead|manager|partner|program)",
+    "(health|wellness|well-?being) (promotion|educator|education|programs?|initiatives?) (specialist|coordinator|manager|lead|officer)",
+    "internal communications?|employee communications?"
+   ],
+   "conceptPatterns": [
+    "employee well-?being|employee wellness|employee mental health|workforce well-?being|workplace well-?being|colleague well-?being",
+    "psychological safety",
+    "burnout (prevention|risk)|burnout",
+    "stress (management|reduction|awareness)|stress",
+    "workplace mental health|mental health at work|mental health in the workplace|mental health (awareness|literacy|training|first aid|champions?)",
+    "workshops?|webinars?|trainings?|facilitat|lunch[- ]and[- ]learn|sessions",
+    "corporate (programs?|wellness|clients|customers)|\\bb2b\\b|hr (leaders|teams|buyers|partners)|employers?\\b|people leaders",
+    "distributed teams|remote workforce|remote teams|hybrid (teams|work|workforce)|remote[- ]first",
+    "resilience",
+    "employee engagement|engagement (surveys?|scores?|drivers)|pulse (surveys?|checks?)|\\benps\\b",
+    "well-?being (program|strategy|initiatives?|champions?|framework|offering|benefits?|platform|days?)",
+    "\\beap\\b|employee assistance",
+    "people (analytics|science|strategy|team|ops|operations|experience|function)",
+    "culture\\b|inclusion|belonging|values|rituals|recognition",
+    "benefits|total rewards|perks|leave polic|flexible work",
+    "onboarding|retention|turnover|attrition|absenteeism|presenteeism|productivity",
+    "manager (training|enablement|effectiveness|development)|leadership (training|development|programs?)",
+    "mental health|well-?being|wellness|mindfulness|meditation|sleep|nutrition|fitness"
+   ]
+  },
+  {
+   "id": "content",
+   "label": "Content / Psychoeducation",
+   "priority": "very-high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "Content",
+   "gated": true,
+   "industries": [
+    "mental-health",
+    "digital-health",
+    "coaching-wellbeing",
+    "ai-safety",
+    "human-centered-ai",
+    "organizational-psychology"
+   ],
+   "titlePatterns": [
+    "(evidence[- ]based|health|mental health|clinical|medical|wellness|well-?being|psycholog(y|ical)|scientific|science|therapeutic|behaviou?ral|psychoeducation(al)?|research|educational|learning) (content|writer|editor|copywriter|journalist|communicat|author|reviewer)",
+    "content (strateg|research|design|writer|editor|lead|specialist|producer|creator|marketing|manager|associate|coordinator|developer|operations|reviewer|analyst|curator|planner|author)",
+    "psychoeducation",
+    "(educational|learning|clinical|curriculum|instructional|course|training|program|programme|academic|teaching) (content )?(design|designer|developer|writer|specialist|lead|strateg|manager|coordinator|producer|author|architect|technologist|consultant)",
+    "curriculum",
+    "learning (experience|design|designer|specialist|program|content|architect|scientist|science|consultant|technologist|manager|coordinator|facilitator)|\\blxd\\b",
+    "instructional design",
+    "\\be-?learning\\b",
+    "(medical|health|science|scientific|clinical|research) (writer|editor|communicat|journalist)",
+    "copywriter|ux writer|content designer|technical writer|writer\\b|editor\\b|editorial|journalist|author\\b|blogger|newsletter",
+    "knowledge (specialist|manager|base|writer)|help cent(e|re) (writer|content)",
+    "community (health|program|manager|lead|specialist|educator|content)",
+    "communications? (specialist|manager|coordinator|associate|lead|officer|strateg)|public health (communicat|educator|specialist|program)"
+   ],
+   "conceptPatterns": [
+    "evidence[- ]based|evidence[- ]informed|research[- ]backed|science[- ]backed|scientifically",
+    "clinical (research|review|guidelines|literature|advisors?|accuracy|team|experts|psychologists)",
+    "psychoeducation(al)?",
+    "mental health",
+    "worksheets?|workbooks?|journal(ing)? prompts|exercises|activities|toolkits?",
+    "course (content|materials|design|creation)|curricul|modules?|lessons?|learning (paths?|journeys?|objectives|outcomes)",
+    "therapeutic (exercises|content|programs?|techniques)",
+    "\\bcbt\\b|\\bdbt\\b|\\bact\\b(?! as)|mindfulness|meditation|positive psychology",
+    "behaviou?r(al)? (exercises|science|change|techniques)|habits?",
+    "scientific literature|peer[- ]reviewed|research (papers|studies|findings|literature)|citations?|pubmed|meta[- ]analys|systematic review",
+    "psychology (content|research|background|degree|expertise|principles)|psychologists?",
+    "well-?being (education|content|programs?|topics)|wellness content|health (content|education|literacy|information)|patient (education|materials)",
+    "instructional design|learning (design|objectives|experience|science)|\\baddie\\b|storyline|articulate|scorm|\\blms\\b|rise 360|captivate",
+    "\\bseo\\b|editorial (calendar|standards|guidelines)|content (strategy|calendar|standards|guidelines|audit|governance)|style guide|tone of voice",
+    "plain language|readability|accessible (language|content)|health literacy|sensitivity read",
+    "scripts? (for )?(video|audio|meditation|sessions?)|audio (content|scripts?)|podcast|video content|guided (meditations?|exercises|sessions?)",
+    "content (for|in) (apps?|digital (products?|programs?)|platform)|in-?app (content|copy|messaging)|push notifications|nudges?"
+   ]
+  },
+  {
+   "id": "ai-persona",
+   "label": "AI Persona / Character Design",
+   "priority": "high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "AI Persona",
+   "titlePatterns": [
+    "(ai |bot |chatbot |companion |virtual |digital )?persona (design|writer|develop|strateg|lead|manager|specialist|architect)",
+    "(ai |virtual |digital |companion )?character (design|writer|develop|artist|creator|lead|producer|author|specialist)",
+    "dialog(ue)? writer|dialog(ue)? author",
+    "conversational (writer|designer|copywriter|author|storyteller)",
+    "ai (content|creative|story|narrative|personality|companion|voice|character|persona|experience|interaction|roleplay) (writer|designer|lead|producer|director|author|creator|specialist)",
+    "personality (design|writer|architect|lead)",
+    "ai (interaction|experience) writer",
+    "narrative ux writer|ux writer|content writer[^\\n]{0,15}(ai|chatbot|companion)",
+    "creative writer|ai creative|companion (design|writer|experience|product|content)|companion ai",
+    "voice (writer|designer|director|talent|actor)|brand voice",
+    "scriptwriter|script writer|screenwriter|showrunner",
+    "(story|fiction|romance|roleplay|rp) (writer|creator|author|editor|designer)",
+    "writer[^\\n]{0,20}(ai|llm|chatbot|companion|character|persona|roleplay|virtual)",
+    "(ai|llm|model|data|training) (writer|author|content creator|creative)|creative (data|writing) (specialist|expert|contributor|annotator)"
+   ],
+   "conceptPatterns": [
+    "personas?",
+    "dialog(ue)?",
+    "empath",
+    "emotional (realism|depth|intelligence|arc|resonance|range|nuance|tone)",
+    "conversational ai|companion ai|ai companion|ai friend|digital human|virtual human|avatar|virtual (being|character|companion)",
+    "chatbot personality|bot personality|character personality|personality (traits|design|framework)",
+    "character (voice|bible|profile|development|design|arc|backstory|sheets?|consistency)",
+    "relationship (dynamics|building|arcs?)|companionship|loneliness|intimacy|romance|flirt",
+    "human[- ]like (conversation|interaction|responses?)|natural conversation|lifelike|believable",
+    "\\btone\\b|voice and tone|tone of voice|writing style",
+    "safety (boundaries|guidelines|guardrails|considerations)|content (guidelines|policy|moderation)|nsfw",
+    "role[- ]?play|interactive (fiction|story|character|drama)|scenarios?|storylines?",
+    "\\bllms?\\b|large language model|generative ai|prompts?|fine[- ]tun|training data|character cards?",
+    "psycholog|emotion(s|al)|attachment|motivations?|needs",
+    "creative writing|fiction|screenwriting|scripts?|storytelling|narrative"
+   ]
+  },
+  {
+   "id": "narrative-design",
+   "label": "Narrative Design",
+   "priority": "high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "Narrative Design",
+   "titlePatterns": [
+    "narrative (design|writer|director|lead|producer|research|system|content|team|artist|architect|consultant)",
+    "game (writer|writing|narrative|scriptwriter|dialogue|story|scenario)",
+    "interactive (narrative|fiction|story|writer|drama|storytell)",
+    "story (design|designer|writer|lead|architect|artist|producer|editor|consultant|director|developer|team)",
+    "quest (design|writer)",
+    "(cinematic|level|mission|world|lore|scenario|episode|chapter|branch|romance) (writer|designer|author)",
+    "fiction writer|novelist|screenwriter|scriptwriter|playwright|ghostwriter|storyteller",
+    "writer\\b[^\\n]{0,40}(games?|studio|interactive|narrative|story|fiction|episode|chapters?|choices|romance|visual novel|series|mobile)",
+    "branching (narrative|story|dialog)|visual novel|otome|interactive (romance|episodes?|series)|episodic (writer|content)",
+    "worldbuild|world[- ]building"
+   ],
+   "conceptPatterns": [
+    "psychologically (authentic|rich|grounded|complex|believable) characters|authentic characters|believable characters|complex characters|character depth",
+    "character (relationships|psychology|development|arcs?|motivations?|voice|bible|design|driven)",
+    "emotional (arcs?|storytelling|beats|journey|impact|resonance|engagement|depth)",
+    "dialog(ue)?",
+    "branching (narrative|dialog|storylines?|paths|choices|structure)|choice[- ]based|player (choice|agency|decisions)|consequences",
+    "interactive (fiction|story|narrative|drama|romance|entertainment)",
+    "player (psychology|experience|motivation|engagement|emotions?|behaviou?r|retention)",
+    "relationship dynamics|romance|intimacy|connection|love interests?",
+    "storytelling|world[- ]?building|\\blore\\b|canon",
+    "\\bink\\b|twine|articy|yarn spinner|inklewriter|ren'?py|unity|unreal|narrative tools",
+    "screenplay|scripts?|scenes?|beats?|outlines?",
+    "characters?\\b",
+    "narrative design|game design|level design|quest design|systems design",
+    "empath|psycholog|human behaviou?r|emotions?",
+    "episodes?|chapters?|seasons?|series|storylines?|plots?|genres?|romance|drama|thriller|fantasy"
+   ]
+  },
+  {
+   "id": "talent-assessment",
+   "label": "Talent / Behavioral Assessment",
+   "priority": "high",
+   "titleWeight": 35,
+   "conceptWeight": 30,
+   "badge": "Talent Assessment",
+   "gated": true,
+   "industries": [
+    "people-science",
+    "organizational-psychology"
+   ],
+   "titlePatterns": [
+    "behaviou?ral interview",
+    "(talent|people|candidate|leadership|executive|psychometric|personality|cognitive|competency|skills?|pre-?employment|hiring|selection|work sample|situational judg(e)?ment) (assess|test|evaluat|measur)",
+    "assessment (specialist|consultant|analyst|designer|developer|psychologist|lead|associate|coordinator|scientist|manager|advisor|content|writer|researcher|expert|reviewer)",
+    "talent (acquisition|partner|specialist|sourcer|scout|coordinator|advisor|associate|analyst|consultant|researcher|intelligence|selection|evaluation|screening|operations|success|assessment|insights?)",
+    "recruit(er|ing|ment)",
+    "interview(er|ing|s)? (specialist|panel|coordinator|lead|expert|analyst|consultant)|technical interviewer|expert interviewer",
+    "selection (specialist|consultant|scientist|psycholog|process|advisor)",
+    "people (research|scien|analyst|analytics|insight|data|measurement)",
+    "(i/?o|industrial[- ]organi[sz]ational|occupational|organi[sz]ational|business|work|personnel) psycholog",
+    "psychometrician|psychometrics|test (develop|design|author|content|writer)|item (writer|developer|author)",
+    "hiring (specialist|coordinator|partner|manager|scientist|success|operations|advisor)",
+    "sourc(er|ing) (specialist|partner|lead|associate)|candidate (experience|success|care|screening|assessment) (specialist|partner|associate|coordinator|lead)",
+    "(hr|people|talent) (scientist|science|research|analytics)|workforce (scien|analytics|planning)"
+   ],
+   "conceptPatterns": [
+    "behaviou?ral interview|structured interview|competency[- ]based interview|situational (judg(e)?ment|interview)|\\bstar\\b (method|format|technique)",
+    "assessment (cent(e|re)|design|tools?|battery|process|data|results|platform|content|methodology)",
+    "candidate (evaluation|assessment|experience|screening|selection|pipeline|journey)",
+    "competenc(y|ies) (framework|model|based|mapping)|competency",
+    "psychometric|psychometrics",
+    "hiring (decisions?|bias|criteria|managers?)|selection (decisions?|criteria|process|methods)|structured hiring|scorecards?",
+    "leadership assessment|executive assessment|\\b360\\b|talent review|succession|high[- ]potential",
+    "personality (assessment|test|inventory|traits|questionnaire)|big five|hogan|\\bmbti\\b|\\bdisc\\b|hexaco|cognitive ability|\\bsjt\\b|game[- ]based assessment",
+    "validity|reliability|adverse impact|job analysis|item (development|analysis|writing)|norming|standardi[sz]ation|test (development|construction|validation)",
+    "psycholog|\\bi/?o\\b|industrial[- ]organi[sz]ational|occupational psycholog",
+    "interview (guides?|questions|training|calibration|scorecards?|process|panels?)",
+    "talent (acquisition|strategy|intelligence|marketplace|assessment|management)|recruit",
+    "skills (assessment|testing|based hiring|taxonomy|data|intelligence)|work samples?|simulations?"
+   ]
+  },
+  {
+   "id": "consumer-psychology",
+   "label": "Consumer Psychology / Insights",
+   "priority": "very-high",
+   "titleWeight": 40,
+   "conceptWeight": 30,
+   "badge": "Consumer Psychology",
+   "titlePatterns": [
+    "consumer (psycholog|insight|research|behaviou?r|science|scientist|intelligence|strateg|understanding|analyst|neuroscien|anthropolog)",
+    "(customer|audience|user|shopper|market|brand|cultural|human|category|patient|member|community|social) insights?",
+    "behaviou?ral (marketing|brand|strateg|planner|planning)",
+    "brand (strateg|research|planner|planning|analyst|insight|experience|consultant|intelligence)",
+    "market(ing)? research",
+    "research (strateg|analyst|executive|consultant|associate|manager|director|lead|planner|moderator|coordinator|assistant|officer|specialist|scientist|fellow|intern)",
+    "(qualitative|quantitative|quant|qual|semiotic|ethnograph|cultural|trend|foresight|social|survey|panel|customer|audience|human) (research|analyst|strateg|moderator|insight|scientist|specialist|consultant)",
+    "insights? (analyst|manager|specialist|lead|associate|consultant|executive|strateg|director|researcher|planner|partner|coordinator|scientist)",
+    "strategist\\b|strategic planner|account planner|planning (executive|associate|director|manager)|comms planner|creative strateg",
+    "customer (experience|voice|understanding|journey|intelligence|success) (research|analyst|specialist|insights?|strateg)|voice of (the )?customer|\\bvoc\\b|\\bcx (research|insights?|analyst|strateg)",
+    "focus group|moderator|panel (manager|specialist|coordinator)|survey (programmer|specialist|analyst|research|scripter|designer)|fieldwork",
+    "(consumer|customer|market|shopper|audience) (analyst|scientist|specialist|strateg|advocate)",
+    "(trend|cultural|semiotic|foresight|futures) (analyst|researcher|strateg|consultant)"
+   ],
+   "conceptPatterns": [
+    "consumer behaviou?r|shopper behaviou?r|buyer behaviou?r|customer behaviou?r|audience behaviou?r|human behaviou?r",
+    "decision[- ]making|purchase (decisions?|intent|journey|drivers)|path to purchase",
+    "cognitive psychology|psychology|psychologists?|neuroscience|behaviou?ral science",
+    "customer psychology|consumer psychology|behaviou?ral psychology|social psychology",
+    "brand (perception|equity|health|tracking|positioning|strategy|purpose|love|awareness|lift)",
+    "motivations?|drivers|needs|attitudes|beliefs|emotions?|values|tensions|barriers",
+    "audience (behaviou?r|insights?|segmentation|understanding|research)|segmentation|personas|target (audience|consumers?|customers?)",
+    "behaviou?ral economics|behaviou?ral science|nudg|heuristics|biases|system 1|framing|choice architecture",
+    "qualitative research|in-?depth interviews|\\bidis?\\b|focus groups?|ethnograph|diary stud|online communities|mobile ethnograph|immersions?",
+    "consumer research|market research|customer research|shopper research|u&a\\b|usage and attitude|concept test|ad test|copy test|pack test|pricing research|conjoint|maxdiff|max-diff|brand tracking|trackers?",
+    "customer insights?|consumer insights?|human insights?|cultural insights?|market insights?|insights? (function|team|agency|report|deck|story)",
+    "surveys?|questionnaires?|panels?|sample|fieldwork|spss|\\br\\b(?=[ ,/)])|python|sql|tableau|power bi|dashboards?|excel|quantitative|statistic",
+    "implicit|neuromarketing|eye[- ]tracking|biometric|emotional (response|measurement)|facial coding|reaction time",
+    "brands?\\b|campaigns?|advertising|creative (development|testing|strategy)|communications? (strategy|planning|testing)|marketing (mix|strategy|effectiveness)|category"
+   ]
+  },
+  {
+   "id": "organizational-psychology",
+   "label": "Organizational Psychology / People Strategy",
+   "priority": "very-high",
+   "titleWeight": 45,
+   "conceptWeight": 30,
+   "badge": "Org Psychology",
+   "titlePatterns": [
+    "organi[sz]ational (psycholog|development|design|designer|effectiveness|behaviou?r|consultant|health|culture|change|transformation|learning|capabilit|strateg|performance|readiness|network|scientist|research)",
+    "\\bod\\b (consultant|specialist|partner|lead|manager|practitioner|advisor)|\\bod\\b",
+    "people (strateg|scien|consultant|partner|analytics|operations|ops|experience|programs?|development|enablement|success|insights?|research|advisor|effectiveness|leader|team)",
+    "team (effectiveness|coach|dynamics|development|performance|health|building|coaching) ",
+    "workplace (consultant|psycholog|strateg|culture|experience|design|research|analyst|specialist|scientist|insights?)",
+    "employee experience (consultant|design|specialist|manager|lead|partner|program|research|analyst|strateg)",
+    "culture (consultant|specialist|manager|lead|partner|strateg|analyst|program|transformation|architect|designer|coach|officer|advisor|research)|culture (and|&) engagement",
+    "change (management|consultant|manager|lead|specialist|practitioner|enablement|analyst|agent|champion|coordinator|communicat|readiness|adoption)",
+    "(leadership|learning|talent|management|people|professional|capability|career|skills?|organi[sz]ational) (development|enablement|growth) (specialist|consultant|partner|manager|lead|program|coordinator|associate|designer|facilitator|advisor|analyst|coach|director)|\\bl&d\\b|learning (and|&) development|talent development|leadership development",
+    "(executive|leadership|team|business|agile|performance|career|transformation) coach",
+    "facilitator\\b|training (specialist|facilitator|consultant|manager|coordinator|lead|designer|developer|delivery)|trainer\\b|workshop (facilitator|lead|designer)",
+    "hr (transformation|strategy|consultant|analytics|business partner|advisor|specialist|generalist|manager|operations|partner|associate|coordinator|analyst|lead|program)|\\bhrbp\\b|human resources",
+    "engagement (consultant|specialist|strateg|manager|lead|analyst|partner|program|coordinator|officer|associate)",
+    "people (and|&) culture|talent (and|&) culture|culture (and|&) people|people (and|&) organi[sz]ation|people (and|&) talent",
+    "(business|management|strategy|hr|people|transformation|leadership|organi[sz]ation|workforce|culture|change|talent) consultant|consulting (analyst|associate|manager|consultant|lead|partner|senior)",
+    "employee (relations|listening|voice|engagement|experience|success|communications?|advocacy|insights?) (specialist|partner|manager|lead|analyst|consultant|coordinator|associate|program|strateg)|listening (program|strategy|lead|specialist)",
+    "(talent|performance|workforce|career|succession|people) (management|planning|strategy|program) (specialist|consultant|partner|manager|lead|analyst|associate|coordinator)",
+    "future of work|ways of working|remote work (specialist|consultant|lead|advisor|strateg|program|experience)|distributed work|hybrid work (lead|specialist|consultant|strateg)",
+    "onboarding (specialist|manager|lead|program|coordinator|designer|experience)|(new hire|employee) (onboarding|orientation)",
+    "(i/?o|industrial[- ]organi[sz]ational|occupational|organi[sz]ational|work|business) psycholog"
+   ],
+   "conceptPatterns": [
+    "team dynamics|group dynamics|team (effectiveness|performance|coaching|development|building|health|norms|rituals)",
+    "organi[sz]ational (behaviou?r|psychology|design|development|effectiveness|health|culture|change|structure|network|design|learning|capability)",
+    "workplace psychology|work psychology|occupational psychology|\\bi/?o psycholog|industrial[- ]organi[sz]ational|business psychology",
+    "communication (processes|patterns|norms|skills|styles)|collaboration|conflict (resolution|management|styles)|feedback (culture|skills|loops)|difficult conversations",
+    "remote teams|distributed teams|hybrid (work|teams|workforce|working)|asynchronous|async|remote[- ]first|future of work|ways of working",
+    "organi[sz]ation(al)? design|operating model|role clarity|spans and layers|org (design|structure|health|effectiveness)|workforce planning|job (design|architecture|families)",
+    "culture (change|transformation|assessment|building|survey|design|strategy|fit|add)|values|rituals|behaviou?rs\\b|norms",
+    "employee engagement|engagement (surveys?|data|scores?|drivers|strategy|results)|\\benps\\b|pulse (surveys?|checks?)|employee (listening|voice|sentiment|feedback|surveys?)",
+    "change management|change (readiness|adoption|communications?|impact|leadership|curve|resistance)|prosci|adkar|kotter|transformation",
+    "psychological safety|trust\\b|belonging|inclusion|inclusive (leadership|culture|teams)|equity|diversity",
+    "leadership (development|assessment|coaching|programs?|effectiveness|behaviou?rs|competenc|training|pipeline)|manager (training|effectiveness|development|enablement|capability)|\\b360\\b|executive coaching",
+    "people analytics|hr analytics|workforce analytics|people data|people science|talent analytics|people insights?|hr (metrics|data|dashboards?)",
+    "facilitat|workshops?|training (design|delivery|programs?|needs)|learning (design|programs?|experience|journeys?|culture|needs)|onboarding|offsites?|team (sessions?|retreats?|workshops?)",
+    "performance management|talent management|succession|competenc|okrs?|goal setting|career (development|paths?|frameworks?|growth)|talent reviews?|calibration|promotion",
+    "employee (experience|journey|lifecycle|well-?being|retention|turnover|attrition|satisfaction|motivation|productivity|burnout)|retention|attrition|turnover|motivation|job satisfaction|burnout|well-?being",
+    "psycholog|behaviou?ral science|social science|research (methods|design)|surveys?|interviews|focus groups|qualitative|quantitative|statistic|evidence[- ]based|\\bhbr\\b|academic"
+   ]
+  }
+ ],
+ "familyRules": {
+  "conceptFull": 3,
+  "conceptPartialFactor": 0.3,
+  "gatedFactor": 0.45,
+  "gatedPenalty": -25,
+  "secondaryMin": 25,
+  "secondaryConceptMin": 4,
+  "secondaryBonus": 5,
+  "secondaryBonusMax": 10,
+  "noFamilyIndustryOnly": -25
+ },
+ "adjacentTitles": {
+  "score": 10,
+  "patterns": [
+   "research (associate|scientist|specialist|consultant|program manager|coordinator|analyst|assistant|fellow|manager|lead|operations|officer|intern|partner|advisor)",
+   "program(me)? (manager|specialist|coordinator|associate|lead|analyst|operations|officer|advisor|consultant)",
+   "clinical program",
+   "innovation (specialist|consultant|manager|lead|associate|analyst|strateg|fellow|partner)",
+   "strategy (consultant|associate|analyst|manager|lead|specialist|partner|advisor)|strategic (initiatives|projects|partnerships) (manager|lead|associate|analyst)",
+   "(health|healthcare|care|clinical|growth|business|product|impact) strategy",
+   "(member|patient|customer|client|user|participant|community|learner|student|caregiver|family|youth) (experience|engagement|success|support|care|services?|operations|advocate|navigator|liaison|specialist|coordinator|manager|associate|lead|partner|program|insights?|education|relations|outreach|onboarding|journey)",
+   "insights? (specialist|analyst|researcher|associate|manager|lead)",
+   "human factors",
+   "learning (experience|designer|specialist|consultant)",
+   "instructional designer",
+   "knowledge (specialist|manager)",
+   "community (program|health|engagement|outreach|partnerships?) (manager|specialist|lead|coordinator|associate|officer)",
+   "content researcher",
+   "(safety|policy|quality|operations|research|program|project|implementation|clinical|care|success|partnerships?|enablement|solutions?|impact|evaluation|outcomes|innovation|strategy|insights?|experience|engagement|education|learning|training|enablement|adoption|transformation) (specialist|analyst|associate|coordinator|manager|lead|consultant|officer|advisor|partner|fellow)",
+   "project (manager|coordinator|lead|specialist|associate|officer)",
+   "operations (associate|specialist|coordinator|analyst|manager|lead|officer|partner)",
+   "implementation (specialist|manager|consultant|lead|associate)",
+   "(policy|public policy|social impact|impact|evaluation|monitoring|m&e|research) (analyst|associate|officer|specialist|manager|lead|advisor|fellow)",
+   "fellow(ship)?\\b|residen(t|cy)\\b|apprentice",
+   "generalist\\b|chief of staff|founder'?s associate|business associate|associate consultant|analyst\\b",
+   "\\b(data|research|applied|social|cognitive|behaviou?ral|people|decision|learning|clinical|health|insights?|staff|member|experience) scientist\\b",
+   "\\bscientist\\b,"
+  ]
+ },
+ "industries": [
+  {
+   "id": "mental-health",
+   "label": "Mental Health",
+   "score": 30,
+   "patterns": [
+    "mental health|mental wellness|mental well-?being|behaviou?ral health|psychotherapy|therapy (platform|app|company|services?|practice)|therapists?|counsel(l)?ing|counsel(l)?ors?|psychiatr|psycholog(y|ical|ist)|emotional (health|well-?being|support|fitness)|anxiety|depression|\\bptsd\\b|\\badhd\\b|trauma|addiction|substance use|recovery|self[- ]harm|suicide prevention|eating disorder|autism|neurodivers|crisis (line|support|text)|peer support|wellbeing app|meditation app|mindfulness app"
+   ]
+  },
+  {
+   "id": "digital-health",
+   "label": "Digital Health",
+   "score": 30,
+   "patterns": [
+    "digital health|health[- ]?tech|healthcare|health care|health system|telehealth|telemedicine|virtual care|digital therapeutic|\\bdtx\\b|medtech|clinical|patients?|providers?|payers?|health plans?|employers and health|\\bnhs\\b|\\bhipaa\\b|\\bfda\\b|chronic (condition|disease|care|illness)|care (delivery|team|model|navigation|management)|women'?s health|femtech|sleep|nutrition|fitness|weight (loss|management)|diabetes|musculoskeletal|\\bmsk\\b|cardio|oncology|pharma|life sciences|biotech|medical device|health (outcomes|equity|coaching|insurance|benefits|plan|app|platform|company|startup)|wellness"
+   ]
+  },
+  {
+   "id": "ai-safety",
+   "label": "AI Safety",
+   "score": 30,
+   "patterns": [
+    "ai safety|trust (and|&) safety|responsible ai|ai alignment|alignment research|ai (risk|governance|policy|ethics|assurance|audit|oversight)|red[- ]team|model (evaluation|behaviou?r|safety|welfare)|safety (evaluation|research|team|polic|classifier)|harmful (content|outputs?)|content moderation|content policy|\\bintegrity\\b|frontier (model|ai|lab)|\\bllms?\\b|large language models?|generative ai|gen ?ai|foundation models?|\\brlhf\\b|human feedback|human data|data (labeling|labelling|annotation)|annotat|\\bevals?\\b|ai lab|ai research (lab|company|organi[sz]ation)|superintelligence|\\bagi\\b|frontier ai|ai company|ai startup|artificial intelligence"
+   ]
+  },
+  {
+   "id": "human-centered-ai",
+   "label": "Human-Centered AI",
+   "score": 30,
+   "patterns": [
+    "human[- ]cent(e|re)d ai|human[- ]?ai (interaction|collaboration|teaming)|conversational ai|ai (companion|assistant|coach|therapist|tutor|agent|friend|character)|chatbots?|voice assistants?|\\bhci\\b|human[- ]computer interaction|ai (ethics|for good|and society|impact)|responsible technology|humane technology|digital well-?being|user well-?being|psychological (impact|safety)|sociotechnical|human factors|companion app|character (ai|app|platform)|virtual (human|being|companion)|digital human"
+   ]
+  },
+  {
+   "id": "coaching-wellbeing",
+   "label": "Coaching / Well-being",
+   "score": 20,
+   "patterns": [
+    "coach(ing|es)?\\b|well-?being (platform|app|company|program|solution|benefit)|wellness (platform|program|app|company|solution|benefit)|employee (well-?being|wellness|assistance|mental health|experience|engagement)|corporate wellness|workplace (well-?being|wellness|mental health|culture)|\\beap\\b|resilience|burnout|stress|mindfulness|meditation|habits?|behaviou?r change|self[- ]improvement|personal (growth|development)|life coaching|health coaching|well-?being"
+   ]
+  },
+  {
+   "id": "psychology",
+   "label": "Psychology / Behavioral Science",
+   "score": 20,
+   "patterns": [
+    "behaviou?ral (science|scientist|economics|insights|design|research)|psycholog(y|ical|ist)|cognitive (science|psychology|behaviou?ral)|social science|neuroscience|human behaviou?r|decision (science|making)|behaviou?r change|\\bnudg|psychometric|research (participants|study|studies)|human factors|social psycholog"
+   ]
+  },
+  {
+   "id": "organizational-psychology",
+   "label": "Organizational Psychology",
+   "score": 15,
+   "patterns": [
+    "organi[sz]ational (psychology|development|design|effectiveness|behaviou?r|culture|health)|people (science|analytics|strategy|operations|team|experience|function)|workplace psychology|\\bi/?o psycholog|hr ?tech|people tech|talent (assessment|management|development|analytics)|employee (engagement|experience|listening|surveys?)|leadership development|team effectiveness|change management|culture (change|transformation)|future of work|remote work|distributed (teams|work|companies)|management consulting|hr (consulting|platform|software)|performance management|learning (and|&) development|\\bl&d\\b"
+   ]
+  },
+  {
+   "id": "consumer-psychology",
+   "label": "Consumer Psychology",
+   "score": 15,
+   "patterns": [
+    "consumer (psychology|insights?|research|behaviou?r|science)|market research|customer insights?|brand strategy|brand (research|health|tracking|consultancy|agency)|shopper|advertising|insights? (agency|team|function|consultancy|platform)|research (agency|consultancy|panel|platform)|qual(itative)? research|quant(itative)? research|surveys?|panels?|behaviou?ral economics|neuromarketing|cultural insights?|semiotics|trends?|foresight|creative agency|strategy consultancy|\\bcpg\\b|\\bfmcg\\b|brands?\\b"
+   ]
+  },
+  {
+   "id": "games-narrative",
+   "label": "Games / Interactive Narrative",
+   "score": 15,
+   "patterns": [
+    "game (studio|development|developer|writer|narrative|design|company)|games? (industry|company|studio)|video games?|mobile games?|interactive (fiction|story|narrative|entertainment|media|drama)|visual novel|narrative (design|team|games?|driven)|storytelling|players?\\b|episodic|romance (games?|stories|app)|otome|\\brpg\\b|indie (studio|games?)|unity|unreal|\\bmmo\\b|gaming|esports|metaverse|virtual worlds?"
+   ]
+  },
+  {
+   "id": "people-science",
+   "label": "People Science / HR Tech",
+   "score": 15,
+   "patterns": [
+    "psychometric|assessment (platform|science|tools?|provider|company)|pre-?employment (assessment|testing)|hiring (science|assessment|platform|software)|talent (assessment|intelligence|marketplace|platform|acquisition|solutions?)|hr ?tech|selection science|\\bi/?o psycholog|industrial[- ]organi[sz]ational|workforce (science|analytics)|skills (assessment|intelligence|taxonomy)|people science|structured (hiring|interview)|competency (framework|model)"
+   ]
+  },
+  {
+   "id": "ux-research-consultancy",
+   "label": "UX / Design Research",
+   "score": 15,
+   "patterns": [
+    "ux (research|design) (agency|consultancy|studio)|research (agency|consultancy|ops|operations|platform|repository)|design (agency|consultancy|studio)|user research (platform|tool|participants|community)|usability (lab|testing platform)|research participants|participant recruitment|service design|design thinking"
+   ]
+  }
+ ],
+ "industryScoreMax": 45,
+ "conceptGroupOrder": [
+  "Psychology",
+  "AI",
+  "Health",
+  "Research",
+  "Content",
+  "Organizational",
+  "Talent",
+  "Consumer",
+  "Product"
+ ],
+ "conceptScore": 2,
+ "conceptScoreMax": 10,
+ "concepts": [
+  {
+   "group": "Psychology",
+   "label": "CBT",
+   "patterns": [
+    "\\bcbt\\b|cognitive[- ]behaviou?r(al)? therapy|\\bicbt\\b|\\bcbt-?i\\b"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "DBT",
+   "patterns": [
+    "\\bdbt\\b|dialectical behaviou?r"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "ACT",
+   "patterns": [
+    "\\bact\\b(?! (as|on|with|now|fast|like|quickly|in|upon))|acceptance and commitment"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Behavioral Science",
+   "patterns": [
+    "behaviou?ral (science|economics|insights?)"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Behavior Change",
+   "patterns": [
+    "behaviou?r[- ]change|habit (formation|change|building)"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Psychology",
+   "patterns": [
+    "psycholog"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Cognitive Psychology",
+   "patterns": [
+    "cognitive (psychology|science|bias|load)"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Motivational Interviewing",
+   "patterns": [
+    "motivational interviewing|\\bmi\\b (skills|techniques|training)"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Psychometrics",
+   "patterns": [
+    "psychometric"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Mindfulness",
+   "patterns": [
+    "mindfulness|meditation|\\bmbsr\\b|\\bmbct\\b"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Trauma-informed",
+   "patterns": [
+    "trauma[- ]informed|trauma[- ]sensitive"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Positive Psychology",
+   "patterns": [
+    "positive psychology|flourishing|strengths[- ]based"
+   ]
+  },
+  {
+   "group": "Psychology",
+   "label": "Neuroscience",
+   "patterns": [
+    "neuroscien|neuro[- ]?psycholog"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "User Interviews",
+   "patterns": [
+    "user interviews?|customer interviews?|in-?depth interviews?|\\bidis?\\b|stakeholder interviews?"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Usability Testing",
+   "patterns": [
+    "usability (test|stud|evaluation)|user testing"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Surveys",
+   "patterns": [
+    "surveys?|questionnaires?|qualtrics|typeform|surveymonkey"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Research Synthesis",
+   "patterns": [
+    "research synthesis|synthesi[sz]e (research|findings|insights)|affinity (map|diagram)|research (readouts?|repositor)"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "A/B Testing",
+   "patterns": [
+    "a/b test|ab test|split test|multivariate|experimentation platform"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Experiments",
+   "patterns": [
+    "experiment(s|al design|ation)?\\b|\\brcts?\\b|randomi[sz]ed|field (trial|stud)"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Thematic Analysis",
+   "patterns": [
+    "thematic analysis|coding (interviews|transcripts|qualitative)|grounded theory|nvivo|atlas\\.ti|dovetail"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Quantitative",
+   "patterns": [
+    "quantitative|statistic|regression|spss|\\bstata\\b|\\br\\b(?=[ ,/)])|python|sql|data analysis"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Qualitative",
+   "patterns": [
+    "qualitative|ethnograph|diary stud|focus groups?|contextual inquiry"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Mixed Methods",
+   "patterns": [
+    "mixed[- ]methods"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Diary Studies",
+   "patterns": [
+    "diary stud"
+   ]
+  },
+  {
+   "group": "Research",
+   "label": "Personas / JTBD",
+   "patterns": [
+    "personas?|jobs[- ]to[- ]be[- ]done|\\bjtbd\\b|journey map"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "LLM",
+   "patterns": [
+    "\\bllms?\\b|large language model|\\bgpt|claude|gemini|foundation model|generative ai|gen ?ai"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Prompt Design",
+   "patterns": [
+    "prompt (design|engineering|writing|crafting|library|templates?|tuning)|system prompts?"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Conversational AI",
+   "patterns": [
+    "conversational (ai|ux|design|agent|interface)|chatbots?|voice assistants?|virtual assistants?|dialog(ue)? (system|design|flow)"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "AI Safety",
+   "patterns": [
+    "ai safety|model safety|safety (evaluation|research|classifier|guidelines)|alignment"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Responsible AI",
+   "patterns": [
+    "responsible ai|ai ethics|ethical ai|ai governance|ai (policy|principles|standards)|eu ai act"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Trust & Safety",
+   "patterns": [
+    "trust (and|&) safety|\\bt&s\\b|content moderation|content policy|integrity|abuse|harmful content"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "RLHF",
+   "patterns": [
+    "\\brlhf\\b|human feedback|preference (data|ranking|labels?)|reward model"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Red Teaming",
+   "patterns": [
+    "red[- ]team|adversarial (testing|prompts|attacks)|jailbreak"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Evaluation",
+   "patterns": [
+    "evaluat|\\bevals?\\b|benchmark|rubrics?|grading|golden (data|set)|quality (review|assurance|rating)"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Annotation",
+   "patterns": [
+    "annotat|labell?ing|\\braters?\\b|rating tasks?|data (quality|collection)"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Guardrails",
+   "patterns": [
+    "guardrails?|safety (prompts?|layer|filters?)|classifier"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "Human-AI Interaction",
+   "patterns": [
+    "human[- ]?ai (interaction|collaboration|teaming)|\\bhci\\b|human[- ]computer interaction|human[- ]in[- ]the[- ]loop|human oversight"
+   ]
+  },
+  {
+   "group": "AI",
+   "label": "AI Agents",
+   "patterns": [
+    "ai agents?|agentic|copilots?|autonomous (agents?|systems?)"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Digital Health",
+   "patterns": [
+    "digital health|health[- ]?tech|telehealth|telemedicine|virtual care"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Mental Health",
+   "patterns": [
+    "mental (health|wellness|well-?being)|anxiety|depression|\\bptsd\\b"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Behavioral Health",
+   "patterns": [
+    "behaviou?ral health"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Digital Therapeutics",
+   "patterns": [
+    "digital therapeutic|\\bdtx\\b|prescription digital|\\bsamd\\b"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Clinical Content",
+   "patterns": [
+    "clinical (content|protocols?|guidelines|review)|treatment (protocol|pathway)|care pathway"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Clinical Research",
+   "patterns": [
+    "clinical (research|trials?|stud|evidence|outcomes|efficacy)|health outcomes"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Patient Experience",
+   "patterns": [
+    "patient (experience|engagement|journey|education|advocacy|reported)"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Member Experience",
+   "patterns": [
+    "member (experience|engagement|journey|outcomes|support)"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Psychoeducation",
+   "patterns": [
+    "psychoeducation"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Coaching",
+   "patterns": [
+    "\\bcoach(ing|es)?\\b|health coaching|life coaching"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Crisis / Safeguarding",
+   "patterns": [
+    "crisis (response|intervention|support|escalation|protocol|line)|safeguarding|safety plan|risk assessment|duty of care"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "HIPAA / GDPR",
+   "patterns": [
+    "\\bhipaa\\b|\\bgdpr\\b|data protection|\\bphi\\b|patient privacy"
+   ]
+  },
+  {
+   "group": "Health",
+   "label": "Well-being",
+   "patterns": [
+    "well-?being|wellness|burnout|stress management|resilience"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Product Management",
+   "patterns": [
+    "product manag|product owner|\\bprds?\\b|user stories|backlog"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Product Strategy",
+   "patterns": [
+    "product (strategy|vision|roadmap)|roadmap|prioriti[sz]"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "UX Research",
+   "patterns": [
+    "ux research|user research|design research|product research|\\buxr\\b"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Human-Centered Design",
+   "patterns": [
+    "human[- ]cent(e|re)d design|design thinking|\\bhcd\\b"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Service Design",
+   "patterns": [
+    "service design|service blueprint"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "User Experience",
+   "patterns": [
+    "user experience|\\bux\\b|usability|accessibility|inclusive design"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Agile",
+   "patterns": [
+    "\\bagile\\b|\\bscrum\\b|\\bjira\\b|sprints?\\b"
+   ]
+  },
+  {
+   "group": "Product",
+   "label": "Figma / Prototyping",
+   "patterns": [
+    "\\bfigma\\b|prototyp|wireframe"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Content Strategy",
+   "patterns": [
+    "content (strategy|strategist|design|planning|calendar|governance)"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Instructional Design",
+   "patterns": [
+    "instructional design|learning (design|experience design)|\\baddie\\b|storyline|articulate|scorm|\\blms\\b|e-?learning"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Curriculum Design",
+   "patterns": [
+    "curricul|course (design|development|creation)|lesson plans?|learning (objectives|outcomes|paths?)"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Narrative Design",
+   "patterns": [
+    "narrative design|game writing|branching (narrative|dialog|story)|interactive (fiction|story|narrative)|worldbuild|world[- ]building"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Dialogue Writing",
+   "patterns": [
+    "dialog(ue)? (writing|design|systems?|trees?)|\\bdialogue\\b"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Persona Design",
+   "patterns": [
+    "persona (design|development|creation|voice)|character (design|bible|voice|development)|personality design"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "UX Writing",
+   "patterns": [
+    "ux writ|microcopy|content design|in-?app (copy|content|messaging)|product copy"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Editing",
+   "patterns": [
+    "\\bediting\\b|editorial|proofread|copy ?edit|style guide|fact[- ]check"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Evidence-based",
+   "patterns": [
+    "evidence[- ]based|peer[- ]reviewed|scientific literature|research[- ]backed|citations?"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "Scriptwriting",
+   "patterns": [
+    "scriptwriting|screenwriting|scripts? (for|writing)|screenplay|audio scripts?"
+   ]
+  },
+  {
+   "group": "Content",
+   "label": "SEO",
+   "patterns": [
+    "\\bseo\\b|search engine optimi[sz]ation|keyword research"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Psychological Safety",
+   "patterns": [
+    "psychological safety"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Employee Engagement",
+   "patterns": [
+    "employee engagement|engagement (surveys?|scores?|drivers)|\\benps\\b|pulse survey"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Organizational Development",
+   "patterns": [
+    "organi[sz]ational (development|design|effectiveness|behaviou?r)|\\bod\\b (consult|practice|intervention)|org design"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Team Effectiveness",
+   "patterns": [
+    "team (effectiveness|dynamics|performance|coaching|building|health)"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Change Management",
+   "patterns": [
+    "change (management|readiness|adoption|enablement)|prosci|adkar|transformation"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Workplace Well-being",
+   "patterns": [
+    "workplace (well-?being|wellness|mental health)|employee (well-?being|wellness|mental health|assistance)|\\beap\\b|corporate wellness"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Leadership Development",
+   "patterns": [
+    "leadership (development|coaching|training|programs?|effectiveness)|manager (training|development|effectiveness|enablement)|executive coaching|\\b360\\b"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "People Analytics",
+   "patterns": [
+    "people (analytics|data|science|insights?)|hr analytics|workforce analytics"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Facilitation",
+   "patterns": [
+    "facilitat|workshops?|training (delivery|sessions?)|webinars?"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Culture",
+   "patterns": [
+    "\\bculture\\b|values|belonging|inclusion|\\bdei\\b"
+   ]
+  },
+  {
+   "group": "Organizational",
+   "label": "Remote Work",
+   "patterns": [
+    "remote (work|teams?|first|culture)|distributed (teams?|work)|hybrid (work|teams?)|async"
+   ]
+  },
+  {
+   "group": "Talent",
+   "label": "Behavioral Interviewing",
+   "patterns": [
+    "behaviou?ral interview|structured interview|competency[- ]based interview|situational (judg(e)?ment|interview)"
+   ]
+  },
+  {
+   "group": "Talent",
+   "label": "Assessment",
+   "patterns": [
+    "assessments?\\b|assessment (cent(e|re)|design|tools?)"
+   ]
+  },
+  {
+   "group": "Talent",
+   "label": "Competency Frameworks",
+   "patterns": [
+    "competenc(y|ies) (framework|model|mapping)|competenc(y|ies)"
+   ]
+  },
+  {
+   "group": "Talent",
+   "label": "Talent Acquisition",
+   "patterns": [
+    "talent acquisition|recruit|sourcing|hiring (process|managers?|decisions?)|candidate (experience|assessment|evaluation)"
+   ]
+  },
+  {
+   "group": "Talent",
+   "label": "Selection Science",
+   "patterns": [
+    "selection (science|methods|decisions?)|validity|reliability|adverse impact|job analysis|item (writing|development)"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Consumer Behavior",
+   "patterns": [
+    "consumer behaviou?r|shopper behaviou?r|buyer behaviou?r|customer behaviou?r"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Brand Strategy",
+   "patterns": [
+    "brand (strategy|positioning|purpose|equity|health|tracking|perception)"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Market Research",
+   "patterns": [
+    "market research|consumer research|customer research|shopper research|concept test|ad test|pack test|u&a\\b"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Customer Insights",
+   "patterns": [
+    "customer insights?|consumer insights?|human insights?|cultural insights?|audience insights?|voice of (the )?customer|\\bvoc\\b"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Behavioral Economics",
+   "patterns": [
+    "behaviou?ral economics|\\bnudg|choice architecture|heuristics|system 1"
+   ]
+  },
+  {
+   "group": "Consumer",
+   "label": "Segmentation",
+   "patterns": [
+    "segmentation|target (audience|segments?)|personas?|conjoint|maxdiff|max-diff"
+   ]
+  }
+ ],
+ "humanAngle": [
+  "psycholog|behaviou?r|mental health|human factors|user research|ux research|trust (and|&) safety|\\bt&s\\b|polic(y|ies)|evaluat|red[- ]team|ethic|safety (analyst|specialist|research|evaluat|quality|operations|policy)|\\bhuman\\b|cognitive|social|well-?being|research|content|linguist|conversation|prompt|persona|dialog|narrative|learning|instructional|clinical|health|people|talent|insight|experience|community|coach|wellness|responsible|alignment|annotation|quality|data (annotation|quality|labell?ing)"
+ ],
+ "technical": {
+  "minHits": 5,
+  "maxConcepts": 1,
+  "score": -80,
+  "patterns": [
+   "\\bpython\\b",
+   "\\bpytorch\\b|tensorflow|\\bjax\\b|keras|scikit|hugging ?face transformers",
+   "\\bkubernetes\\b|\\bk8s\\b|\\bdocker\\b|containers?",
+   "\\bc\\+\\+|\\bc#|\\bjava\\b|\\bgolang\\b|\\bgo\\b (language|services)|\\brust\\b|\\bscala\\b|\\bkotlin\\b|\\bswift\\b",
+   "\\bsql\\b|postgres|mysql|nosql|mongodb|redis|bigquery|snowflake|databricks",
+   "\\bapis?\\b|rest(ful)?\\b|graphql|grpc|microservices|sdk",
+   "ci/cd|jenkins|github actions|gitlab ci",
+   "\\baws\\b|\\bgcp\\b|\\bazure\\b|cloud (infrastructure|platform|services)",
+   "distributed systems|high[- ]availability|scalab|latency|throughput",
+   "model training|training (runs|pipelines|infrastructure)|\\bcuda\\b|\\bgpus?\\b|\\btpus?\\b|inference (engine|optimization|serving)",
+   "typescript|javascript|react\\b|next\\.?js|node\\.?js|vue\\b|angular",
+   "backend|back-end|frontend|front-end|full[- ]stack",
+   "data pipelines?|\\betl\\b|\\belt\\b|airflow|spark|hadoop|kafka|dbt\\b",
+   "terraform|ansible|linux|bash|shell scripting|unix",
+   "software (engineering|development|architecture)|computer science|algorithms? and data structures|object[- ]oriented|design patterns",
+   "unit tests?|integration tests?|test automation|selenium|cypress|playwright",
+   "code reviews?|pull requests?|\\bgit\\b|version control",
+   "infrastructure|devops|\\bsre\\b|observability|monitoring (systems|stacks?)|incident response",
+   "machine learning (engineer|models|pipelines|systems|infrastructure)|deep learning|neural networks?|transformer architecture|embeddings|vector (database|search)|fine[- ]tuning (pipelines|infrastructure|runs)",
+   "penetration test|\\bsiem\\b|\\bsoc\\b|firewall|vulnerabilit|malware|threat (hunting|intelligence|detection)|\\bedr\\b|network security|cryptograph"
+  ]
+ },
+ "license": {
+  "hardReject": false,
+  "requiredScore": -40,
+  "preferredScore": -10,
+  "unclearScore": 0,
+  "credentials": [
+   "\\blcsw\\b|\\blicsw\\b|\\blmft\\b|\\blpc\\b|\\blpcc\\b|\\blcpc\\b|\\blmhc\\b|\\blmsw\\b|\\blcmhc\\b|\\blpc-?s\\b|\\bpsy\\.?d\\b|\\bpsyd\\b|\\bph\\.?d in clinical|\\bbcba\\b|\\brbt\\b|\\bhcpc\\b|\\bbacp\\b|\\bukcp\\b|\\bbabcp\\b|\\bahpra\\b|\\bcrpo\\b|\\bcpso\\b|\\bcap\\b registered|\\bnpi\\b|\\bpsypact\\b|\\bdea (license|registration)",
+   "licen[sc]ed? (clinical |mental health |professional |independent |marriage |master |behaviou?r )?(psychologist|therapist|counsel(l)?or|social worker|clinician|mental health (professional|counselor|clinician)|professional counselor|practitioner|physician|nurse|dietitian|nutritionist|psychotherapist|behaviou?r analyst|provider|prescriber)",
+   "(state|professional|clinical|medical|nursing|independent|active|valid|current|unrestricted|full|unencumbered|multi-?state|compact) licen[sc]e",
+   "licen[sc]ure|licen[sc]ed (in|to practice)|clinical licen[sc]",
+   "board[- ]certified|board certification",
+   "registered (psychologist|psychotherapist|nurse|dietitian|counsel(l)?or|mental health nurse|practitioner|member of)|chartered psychologist|\\bhcpc[- ]registered|\\bbacp[- ]accredited|accredited (member|therapist|counsel(l)?or|practitioner)|professional registration|clinical registration",
+   "\\bcbt accredit|psychotherapy (accreditation|registration|licen[sc]e)|\\bapa[- ]accredited (program|internship)|supervised (clinical )?hours|clinical supervision hours|post[- ]?(graduate|doctoral) (supervised )?hours|(1500|2000|3000)\\+? (supervised |clinical )?hours",
+   "malpractice insurance|professional liability insurance|prescrib(e|ing) (medication|authority)|medical degree|\\bm\\.?d\\.?\\b (or|/) \\bd\\.?o\\.?\\b|doctor of (medicine|osteopath)|nursing (degree|licen[sc]e)"
+  ],
+  "requiredContext": [
+   "\\bmust\\b|\\brequired?\\b|\\brequirements?\\b|\\bneed(s|ed)?\\b|\\bhold(s|ing)?\\b|\\bmaintain\\b|\\bactive\\b|\\bvalid\\b|\\bcurrent\\b|\\bunrestricted\\b|\\beligible\\b|\\bpossess\\b|you (are|will be|should be|'re) (a |an )?(licen[sc]ed|registered|accredited)|licen[sc]ed in|licen[sc]ure in|minimum qualifications|qualifications:|what you('ll)? (need|bring)|who you are|about you|\\bessential\\b|\\bmandatory\\b|must[- ]have|non[- ]negotiable|in good standing"
+  ],
+  "preferredContext": [
+   "\\bpreferred\\b|\\ba plus\\b|\\bplus\\b|\\bbonus\\b|nice[- ]to[- ]have|\\bideally\\b|\\bdesirable\\b|\\badvantage\\b|\\bwelcome\\b|not required|or working toward|in progress|\\bhelpful\\b|\\bbeneficial\\b|\\bencouraged\\b|\\bpreferably\\b|would be (great|nice|a plus|an asset)|an asset|is a (big )?plus|strongly preferred|highly desirable|\\bvalued\\b|appreciated|good to have"
+  ],
+  "notRequired": [
+   "no licen[sc]e (is )?(required|needed|necessary)",
+   "licen[sc]e (is )?not (required|necessary|needed)",
+   "\\bunlicensed\\b|non[- ]licensed|pre[- ]licensed|not (be )?(a )?licensed",
+   "does not require (a |an )?(clinical )?licen[sc]e",
+   "no clinical licen[sc]e",
+   "(coaching|this role|this position|coaches?) (is|are) not (therapy|clinical|a substitute)|non[- ]clinical (role|position)|this is not a clinical role",
+   "licen[sc]ure (is )?not required"
+  ]
+ },
+ "titleRegulated": [
+  "psychiatrist|physician|\\bm\\.?d\\.?\\b|\\bd\\.?o\\.?\\b|nurse|\\brn\\b|nurse practitioner|\\bpmhnp\\b|\\bnp\\b|pharmacist|dietitian|licen[sc]ed (therapist|psychologist|counsel|clinician|clinical|professional|social)|\\blcsw\\b|\\blmft\\b|\\blpc\\b|\\blmhc\\b|\\bbcba\\b|clinical psychologist|psychotherapist|therapist\\b|clinician\\b|social worker|clinical (supervisor|director|lead|associate)"
+ ],
+ "education": {
+  "relevantScore": 10,
+  "unrelatedScore": -30,
+  "relevant": [
+   "(degree|bachelor'?s?|master'?s?|\\bba\\b|\\bbs\\b|\\bbsc\\b|\\bma\\b|\\bmsc\\b|\\bms\\b|\\bphd\\b|doctorate|background|studies|graduate|major|trained|qualification|education)[^.\\n]{0,40}\\b(psycholog|behaviou?ral science|cognitive science|counsel(l)?ing|social science|social work|human[- ]computer interaction|\\bhci\\b|ux research|public health|health science|organi[sz]ational psychology|industrial[- ]organi[sz]ational|neuroscience|sociology|anthropology|education|communications?|human factors|linguistics|philosophy|economics|behaviou?ral economics|design research|health promotion|nursing science|mental health)",
+   "\\b(psycholog|behaviou?ral science|cognitive science|counsel(l)?ing|social science|social work|human[- ]computer interaction|public health|health science|neuroscience|sociology|anthropology|human factors|linguistics)\\b[^.\\n]{0,20}\\b(degree|graduate|background|major|studies|qualification|\\bba\\b|\\bbs\\b|\\bma\\b|\\bmsc\\b|phd)"
+  ],
+  "unrelatedRequired": [
+   "(degree|bachelor'?s?|master'?s?|\\bbs\\b|\\bbsc\\b|\\bms\\b|\\bmsc\\b|\\bphd\\b|doctorate) in (computer science|software engineering|electrical engineering|computer engineering|mathematics|physics|statistics|data science|machine learning|engineering|finance|accounting|law|medicine|nursing|pharmacy|chemistry|biology|biochemistry|mechanical|civil)[^.\\n]{0,30}(required|is required|must|mandatory|essential)",
+   "(required|must have|must hold|mandatory)[^.\\n]{0,20}(degree|bachelor'?s?|master'?s?|\\bphd\\b) in (computer science|software engineering|electrical engineering|mathematics|physics|statistics|data science|machine learning|engineering|finance|accounting|law|medicine|nursing|pharmacy)"
+  ]
+ },
+ "seniority": {
+  "juniorTitleScore": 15,
+  "juniorTextScore": 10,
+  "seniorTitleScore": -45,
+  "executiveTitleScore": -60,
+  "rejectExecutive": true,
+  "siteEntryScore": 10,
+  "siteSeniorScore": -30,
+  "juniorTitle": [
+   "\\bjunior\\b",
+   "\\bjr\\.?\\b",
+   "entry[- ]level",
+   "\\bassociate\\b(?! (director|vice|principal|partner|professor))",
+   "\\bcoordinator\\b",
+   "\\bassistant\\b(?! (director|vice|professor|general))",
+   "\\bgraduate\\b",
+   "early[- ]career",
+   "\\btrainee\\b",
+   "\\bintern(ship)?\\b",
+   "\\bapprentice",
+   "\\bfellow(ship)?\\b",
+   "\\bresident\\b",
+   "\\b(i|1)\\b$",
+   "\\bnew grad"
+  ],
+  "juniorText": [
+   "entry[- ]level",
+   "early[- ]career",
+   "recent graduates?",
+   "new grads?",
+   "fresh graduates?",
+   "no (prior |previous )?experience (required|needed|necessary)",
+   "\\b0[- –]?(1|2|3) years",
+   "\\b1[- –]?(2|3) years",
+   "\\b1\\+? years? of",
+   "\\b(one|two) years? of",
+   "junior[- ]level",
+   "graduate (program|scheme|role|position)",
+   "(minimum|at least|min\\.?) (1|one|2|two) years?",
+   "we('ll| will) (train|teach|coach) you|training (is )?provided"
+  ],
+  "seniorTitle": [
+   "\\bsenior\\b",
+   "\\bsr\\.?\\b",
+   "\\blead\\b(?!er(ship)? (development|coach|program))",
+   "\\bprincipal\\b",
+   "\\bstaff\\b (?!(writer|psychologist|nurse))",
+   "\\bexpert\\b",
+   "\\biii\\b|\\biv\\b|\\bv\\b$",
+   "\\bsupervisor\\b",
+   "\\bsenior manager\\b",
+   "\\bteam lead\\b",
+   "\\bgroup manager\\b",
+   "\\bmanaging\\b(?! editor)",
+   "\\bveteran\\b",
+   "\\bseasoned\\b"
+  ],
+  "executiveTitle": [
+   "\\bdirector\\b(?! of photography)",
+   "\\bvp\\b",
+   "\\bsvp\\b|\\bevp\\b|\\bavp\\b",
+   "vice president",
+   "\\bhead of\\b",
+   "\\bhead\\b,",
+   "\\bchief\\b",
+   "\\bc[a-z]o\\b",
+   "\\bceo\\b|\\bcto\\b|\\bcpo\\b|\\bcmo\\b|\\bcoo\\b|\\bcfo\\b|\\bcro\\b|\\bchro\\b|\\bcso\\b",
+   "\\bexecutive director\\b",
+   "\\bmanaging director\\b",
+   "\\bpartner\\b(?!ship| manager| success| marketing| relations| operations| enablement)",
+   "\\bfounder\\b",
+   "\\bpresident\\b",
+   "\\bgeneral manager\\b",
+   "\\bpractice lead\\b"
+  ],
+  "years": {
+   "zeroToTwoScore": 20,
+   "threeToFourScore": -10,
+   "fiveToSixScore": -40,
+   "sevenPlusScore": -50,
+   "rejectFrom": null
+  }
+ },
+ "remote": {
+  "remoteScore": 25,
+  "hybridScore": -30,
+  "onsiteScore": -30,
+  "unknownScore": -15,
+  "rejectHybrid": true,
+  "rejectOnsite": true,
+  "remoteText": [
+   "\\bremote\\b",
+   "work from (home|anywhere)",
+   "working from home",
+   "\\bwfh\\b",
+   "home[- ]based",
+   "distributed team",
+   "location independent",
+   "\\btelecommut",
+   "\\bremote-first",
+   "\\bfully remote",
+   "\\bvirtual (position|role|team)",
+   "\\banywhere\\b"
+  ],
+  "hybridText": [
+   "\\bhybrid\\b",
+   "\\d ?(days?|x) (a |per |/ ?)?week in (the )?office",
+   "(one|two|three|1|2|3) days (in|at) (the )?office",
+   "office (attendance|presence) (required|expected)",
+   "split (your )?time between (home|remote) and (the )?office",
+   "in[- ]office (days|presence)",
+   "come (in)?to the office",
+   "\\bon[- ]?site (\\d|one|two|three) days"
+  ],
+  "onsiteText": [
+   "\\bon[- ]?site\\b(?! (visits?|events?|interviews?|research|meetings?|days? (are )?(optional|not)))",
+   "\\bin[- ]office\\b",
+   "office[- ]based",
+   "\\bin[- ]person\\b(?! (events?|meetups?|offsites?|gatherings?|interviews?|research|sessions? (are )?(optional|not)))",
+   "relocation (is )?required",
+   "must (be willing to )?relocate",
+   "\\bfrom our office\\b",
+   "\\bat our office\\b",
+   "\\bwork (in|from) (our|the) (hq|headquarters|office)\\b",
+   "\\bbased (in|at) our (office|hq|headquarters)\\b",
+   "\\bthis (role|position) is (based|located) in our\\b"
+  ]
+ },
+ "eligibility": {
+  "serbiaScore": 25,
+  "worldwideScore": 25,
+  "europeScore": 10,
+  "otherRegionScore": -100,
+  "rejectOtherRegion": true,
+  "excludeScore": -100,
+  "unclearScore": -5,
+  "serbia": [
+   "\\bserbia\\b",
+   "\\bsrbija\\b",
+   "\\bbelgrade\\b",
+   "\\bbeograd\\b",
+   "\\bnovi sad\\b",
+   "\\bbalkan",
+   "eastern europe",
+   "\\bcee\\b",
+   "central (and|&) eastern europe",
+   "south[- ]?east(ern)? europe",
+   "\\bsee region\\b",
+   "western balkans",
+   "ex[- ]?yu\\b",
+   "adriatic",
+   "\\bemea\\b[^\\n]{0,15}\\bserbia"
+  ],
+  "worldwide": [
+   "\\bworldwide\\b",
+   "\\banywhere\\b",
+   "\\bglobal(ly)?\\b",
+   "\\binternational\\b",
+   "any (location|country|where|time ?zone)",
+   "all (countries|locations|regions|time ?zones)",
+   "\\bwork from anywhere\\b",
+   "location[- ]independent",
+   "\\bno location restriction",
+   "\\bopen to (all|any) (countries|locations|regions)",
+   "\\bapac, emea\\b",
+   "\\bemea, apac\\b",
+   "americas, europe",
+   "europe, (americas|apac|asia|latam|africa)",
+   "\\bremote[- ]?(global|worldwide|anywhere|international)\\b",
+   "\\bmultiple (countries|regions|time ?zones)"
+  ],
+  "europe": [
+   "\\beurope\\b",
+   "\\beuropean\\b",
+   "\\bemea\\b",
+   "\\beu\\b",
+   "\\bcet\\b",
+   "\\bcest\\b",
+   "european (union|time ?zone|hours)",
+   "\\bcentral europe",
+   "\\beuropean timezone",
+   "\\butc ?\\+ ?[0-3]\\b",
+   "\\bgmt ?\\+ ?[0-3]\\b",
+   "\\bcountries in europe\\b",
+   "\\beea\\b",
+   "\\bremote[- ]?(europe|eu|emea)\\b"
+  ],
+  "otherRegion": [
+   "\\busa?\\b",
+   "united states",
+   "\\bu\\.s\\.",
+   "\\bamerica",
+   "\\bcanada\\b",
+   "\\bcanadian\\b",
+   "\\bmexico\\b",
+   "\\blatam\\b",
+   "latin america",
+   "\\bbrazil\\b",
+   "\\bargentina\\b",
+   "\\bcolombia\\b",
+   "\\buk\\b",
+   "united kingdom",
+   "\\bengland\\b",
+   "\\bscotland\\b",
+   "\\bwales\\b",
+   "\\blondon\\b",
+   "\\bireland\\b",
+   "\\baustralia\\b",
+   "\\bnew zealand\\b",
+   "\\bapac\\b",
+   "\\basia\\b",
+   "\\bindia\\b",
+   "\\bphilippines\\b",
+   "\\bpakistan\\b",
+   "\\bsingapore\\b",
+   "\\bjapan\\b",
+   "\\bafrica\\b",
+   "\\bnigeria\\b",
+   "\\bkenya\\b",
+   "\\bsouth africa\\b",
+   "\\begypt\\b",
+   "\\bmiddle east\\b",
+   "\\buae\\b",
+   "\\bdubai\\b",
+   "\\bsaudi\\b",
+   "\\bgermany\\b",
+   "\\bdeutschland\\b",
+   "\\bfrance\\b",
+   "\\bspain\\b",
+   "\\bportugal\\b",
+   "\\bitaly\\b",
+   "\\bnetherlands\\b",
+   "\\bbelgium\\b",
+   "\\bpoland\\b",
+   "\\bromania\\b",
+   "\\bbulgaria\\b",
+   "\\bhungary\\b",
+   "\\bczech",
+   "\\bslovakia\\b",
+   "\\baustria\\b",
+   "\\bswitzerland\\b",
+   "\\bsweden\\b",
+   "\\bnorway\\b",
+   "\\bdenmark\\b",
+   "\\bfinland\\b",
+   "\\bgreece\\b",
+   "\\bturkey\\b",
+   "\\bukraine\\b",
+   "\\blithuania\\b",
+   "\\blatvia\\b",
+   "\\bestonia\\b",
+   "\\bcroatia\\b",
+   "\\bslovenia\\b",
+   "\\bnicaragua\\b",
+   "\\bguatemala\\b",
+   "\\bcosta rica\\b",
+   "\\bhonduras\\b",
+   "\\bvenezuela\\b",
+   "\\bperu\\b",
+   "\\bchile\\b",
+   "\\bmalaysia\\b",
+   "\\bindonesia\\b",
+   "\\bvietnam\\b",
+   "\\bthailand\\b",
+   "\\bisrael\\b",
+   "\\bnorth(ern)? america\\b",
+   "\\boceania\\b",
+   "\\bgeorgia\\b",
+   "\\barmenia\\b",
+   "\\bazerbaijan\\b",
+   "\\bkazakhstan\\b",
+   "\\bmoldova\\b",
+   "\\bbelarus\\b",
+   "\\bcyprus\\b",
+   "\\bmalta\\b",
+   "\\bnordics?\\b",
+   "\\bdach\\b",
+   "\\bbenelux\\b",
+   "\\b(florida|texas|california|new york|illinois|washington|massachusetts|colorado|arizona|carolina|pennsylvania|ohio|michigan|virginia|jersey|nevada|utah|oregon|minnesota|tennessee|missouri|indiana|maryland|wisconsin|georgia|alabama|kentucky|louisiana|oklahoma|iowa|kansas|nebraska|idaho|montana|maine|vermont|hawaii|alaska|connecticut|delaware|arkansas|mississippi|dakota|wyoming|new mexico|new hampshire|rhode island|puerto rico)\\b",
+   "\\b[a-z .]+, (ga|tx|ca|ny|fl|il|wa|ma|co|az|nc|sc|pa|oh|mi|va|nj|nv|ut|or|mn|tn|mo|in|md|wi|dc|ky|la|ok|ia|ks|ne|id|mt|me|vt|hi|ak|ct|de|ar|ms|nd|sd|wy|nm|nh|ri|al|bc|on|qc|ab)\\b",
+   "\\b(toronto|vancouver|montreal|ottawa|calgary|london|manchester|edinburgh|bristol|dublin|sydney|melbourne|brisbane|berlin|munich|hamburg|paris|madrid|barcelona|amsterdam|rotterdam|lisbon|porto|warsaw|krakow|prague|vienna|zurich|geneva|stockholm|copenhagen|oslo|helsinki|milan|rome|athens|istanbul|dubai|singapore|tokyo|mumbai|bangalore|bengaluru|hyderabad|delhi|manila|mexico city|sao paulo|buenos aires|bogota|lima|santiago|cape town|lagos|nairobi|cairo|tel aviv|boston|new york|san francisco|los angeles|seattle|chicago|austin|denver|atlanta|miami|philadelphia|washington dc|nyc|sf bay area|bay area)\\b"
+  ],
+  "excludeText": [
+   "\\b(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)[- ](based )?(only|residents? only|citizens? only|candidates only|applicants only)\\b",
+   "\\bonly (us|usa|uk|eu|canadian|american|british|australian|european union|european) (residents|citizens|candidates|applicants|based)",
+   "must (be |currently )?(reside|residing|live|living|be located|be based|be physically located|be legally (authorized|eligible)|have the right)[^.\\n]{0,25}\\b(in|within) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b",
+   "(based|located|residing|resident|living) (in|within) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b[^.\\n]{0,30}\\b(required|is required|mandatory|is a must|is essential|only)",
+   "(us|u\\.s\\.|united states|canadian|uk|australian|eu|european union|german|french|dutch|spanish|swiss) (work )?(authori[sz]ation|work permit|citizenship|passport|visa|residency) (is )?(required|mandatory|needed|is a must)",
+   "(authori[sz]ed|eligible|right) to work in (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b[^.\\n]{0,40}(required|mandatory|must|without sponsorship|at the time of)",
+   "\\bopen (only )?to (candidates|applicants|residents|those) (based|located|residing|living) in (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b",
+   "\\b(us|usa|united states|uk|canada|australia|eu|european union)[- ]based (candidates|applicants|only|role|position|remote|employees|team members)\\b",
+   "\\bremote (within|in|from|across) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)( only)?\\b(?![^.\\n]{0,40}(serbia|europe|emea|worldwide|anywhere|international|global))",
+   "\\bnot (able|eligible|currently able) to (hire|employ|consider|sponsor)[^.\\n]{0,40}(outside|other countries|international|abroad)",
+   "\\bwe (can only|only) (hire|employ|consider|accept)[^.\\n]{0,30}\\b(in|from|within) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b",
+   "\\beu (citizenship|passport|work permit|residency) (is )?(required|mandatory|needed)\\b",
+   "\\bmust hold (a |an )?(eu|european union|us|uk) (citizenship|passport|work permit)\\b",
+   "\\b(security clearance|clearance required|us citizenship (is )?required|citizenship (is )?required|public trust)\\b",
+   "\\b(licensed|licensure) in (the state of|one or more us states|multiple states|[a-z]+ state)\\b",
+   "\\bthis (role|position) is (only )?(open|available) to (candidates|applicants|residents|those) (in|based in|located in) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b",
+   "\\b(us|u\\.s\\.|united states|uk|canada|australia)[- ]remote\\b(?![^.\\n]{0,40}(serbia|europe|emea|worldwide|anywhere|international|global))"
+  ]
+ },
+ "employment": {
+  "fullTimeScore": 10,
+  "partTimeScore": 0,
+  "contractScore": 5,
+  "freelanceScore": -5,
+  "internshipScore": -15,
+  "temporaryScore": -10,
+  "unpaidScore": -100,
+  "commissionOnlyScore": -100,
+  "fullTimeText": [
+   "full[- ]?time",
+   "\\bpermanent\\b",
+   "\\b40 hours\\b",
+   "regular employment",
+   "\\bemployee\\b"
+  ],
+  "partTimeText": [
+   "part[- ]?time",
+   "\\b(5|8|10|12|15|20|25|30) hours (a |per |/ ?)week",
+   "\\bhourly (gig|task|micro)",
+   "\\bfreelance gig\\b",
+   "\\bseasonal\\b",
+   "\\btemporary (position|role|contract)\\b",
+   "\\b(3|6)[- ]month (contract|project)\\b",
+   "\\bflexible hours\\b|\\bper[- ]session\\b|\\bper[- ]hour\\b"
+  ],
+  "unpaid": [
+   "\\bunpaid\\b",
+   "\\bvolunteer\\b(?! (management|coordinator|program|experience))",
+   "\\bno (salary|pay|compensation)\\b",
+   "\\bwithout (pay|salary|compensation)\\b",
+   "\\bequity[- ]only\\b",
+   "\\bfor (course )?credit only\\b",
+   "\\bpro bono\\b"
+  ],
+  "commissionOnly": [
+   "commission[- ]only",
+   "\\b100% commission\\b",
+   "\\bcommission[- ]based (only|compensation|pay|role|position)\\b",
+   "\\bno base (salary|pay)\\b",
+   "\\bpaid (only|solely|purely) (on|by) commission\\b",
+   "\\bcommission only\\b"
+  ]
+ },
+ "language": {
+  "score": -100,
+  "foreignLanguages": "german|deutsch|french|francais|italian|italiano|spanish|espanol|castellano|dutch|nederlands|portuguese|portugues|swedish|svenska|norwegian|norsk|danish|dansk|finnish|suomi|polish|polski|czech|slovak|hungarian|romanian|bulgarian|greek|turkish|russian|arabic|chinese|mandarin|cantonese|japanese|korean|hebrew|ukrainian|albanian|flemish|estonian|latvian|lithuanian|vietnamese|thai|indonesian|bahasa|malay|tagalog|filipino|hindi|urdu|farsi|persian|icelandic|afrikaans|swahili",
+  "requiredPatterns": [
+   "\\b(LANG)[a-z]*[- ](speaking|speaker|native|fluent|fluency)\\b",
+   "(fluent|fluency|proficien|native|advanced|excellent|business[- ]level|professional|c1|c2|b2)[^.\\n]{0,20}\\b(in |of )?(LANG)\\b",
+   "\\b(LANG)\\b[^.\\n]{0,15}\\b(is |are )?(required|mandatory|essential|a must|must[- ]have|necessary|needed|obligatory)\\b",
+   "\\b(LANG)\\b( language)?[^.\\n]{0,10}\\((required|mandatory|c1|c2|b2|native|fluent)\\)",
+   "\\b(must|need to|has to|required to|should) (speak|be fluent in|be a native|have (fluent|native|excellent))[^.\\n]{0,10}\\b(LANG)\\b",
+   "\\bnative (level |speaker of |proficiency in )?(LANG)\\b",
+   "\\b(LANG)\\b (as a |as )?(native|mother) (tongue|language)",
+   "\\bbilingual[^.\\n]{0,15}\\b(LANG)\\b"
+  ],
+  "exceptions": [
+   "\\bplus\\b",
+   "\\bbonus\\b",
+   "advantage",
+   "nice[- ]to[- ]have",
+   "preferred",
+   "not required",
+   "optional",
+   "desirable",
+   "welcome",
+   "appreciated",
+   "\\bor\\b [a-z]+ language",
+   "any (other|additional|second) language",
+   "is a (big )?plus",
+   "would be",
+   "\\bor english\\b|english or\\b|english and (LANG)|\\bor\\b (LANG)",
+   "one of the following",
+   "multilingual",
+   "serbian|croatian|bosnian|bcs\\b"
+  ]
+ },
+ "timezone": {
+  "positiveScore": 10,
+  "negativeScore": -20,
+  "positive": [
+   "\\bcet\\b",
+   "\\bcest\\b",
+   "central european (time|summer)",
+   "\\bgmt ?\\+ ?[12]\\b",
+   "\\butc ?\\+ ?[12]\\b",
+   "europe(an)? (time ?zone|hours|business hours|working hours)",
+   "\\bemea (hours|time ?zone|working hours)",
+   "\\bflexible (hours|schedule|working hours)",
+   "\\basync(hronous)?\\b",
+   "work(ing)? hours[^.\\n]{0,20}europe",
+   "overlap with (europe|cet|emea|uk|gmt)"
+  ],
+  "negative": [
+   "\\bpst\\b",
+   "\\bpdt\\b",
+   "pacific (time|standard time|hours|business hours)",
+   "\\b(us|u\\.s\\.|american|north american|us[- ]based) (business |working )?hours\\b",
+   "\\bmst\\b",
+   "mountain time",
+   "\\best\\b (hours|time ?zone|business hours|working hours|overlap)",
+   "eastern (time|standard time)( zone)?[^.\\n]{0,20}(required|hours|overlap|full)",
+   "(9|8)[- ]?(am)? ?(to|-|–) ?(5|6) ?(pm)? ?(pst|est|pt|et|cst|mst)\\b",
+   "\\bnight shift\\b",
+   "\\bovernight (shift|hours)\\b",
+   "\\bgraveyard shift\\b",
+   "\\bus (time|time ?zone)s? (required|only|overlap)",
+   "\\bwork(ing)? (us|american|pacific|eastern) (hours|time)",
+   "\\b(cst|ct) (hours|time ?zone|business hours)\\b",
+   "central (standard )?time"
+  ]
+ },
+ "negatives": {
+  "title": [
+   {
+    "label": "software / engineering role",
+    "score": -100,
+    "patterns": [
+     "(?<!prompt |human factors |conversation |conversational |behaviou?ral |learning |instructional |content |knowledge |linguistic |safety |social |usability |ux |research |human |alignment |ai safety |model behaviou?r )\\b(software|backend|back-end|frontend|front-end|full[- ]stack|devops|platform|infrastructure|cloud|data|ml|machine learning|ai|deep learning|systems?|network|site reliability|qa|test|automation|security|embedded|firmware|mobile|ios|android|web|solutions?|integration|support|implementation|sales|hardware|electrical|mechanical|civil|quality|application|applied ai|forward deployed|founding) engineer",
+     "\\bdeveloper\\b(?! (relations|advocate|community|education|experience))",
+     "\\bsre\\b",
+     "\\bdevops\\b",
+     "(?<!learning |story |narrative |information |content |experience |conversation |conversational |solution |program |curriculum |assessment )\\barchitect\\b",
+     "\\bprogrammer\\b",
+     "\\bswe\\b",
+     "\\bdata scientist\\b",
+     "\\bdata analyst\\b",
+     "\\bdata engineer\\b",
+     "analytics engineer",
+     "machine learning (scientist|researcher)|\\bml (scientist|researcher)\\b",
+     "\\bdatabase administrator\\b|\\bdba\\b",
+     "\\bit (support|specialist|technician|administrator|manager|analyst)\\b",
+     "\\bsystems? administrator\\b|\\bsysadmin\\b",
+     "technical (support|account manager|writer)(?! .*(ai|health))",
+     "\\bblockchain\\b|\\bweb3\\b|\\bsolidity\\b"
+    ]
+   },
+   {
+    "label": "medical / clinical licensed profession (not the target)",
+    "score": -100,
+    "patterns": [
+     "psychiatrist|physician|\\bdoctor\\b(?! of (philosophy|psychology|education))|\\bm\\.?d\\.?\\b|\\bd\\.?o\\.?\\b|\\bnurse\\b|\\brn\\b|nurse practitioner|\\bpmhnp\\b|\\bnp\\b|pharmacist|pharmacy|dentist|surgeon|paramedic|physical therapist|physiotherap|occupational therapist|speech (language )?(pathologist|therapist)|\\bslp\\b|dietitian|nutritionist|medical (director|assistant|coder|coding|biller|billing|scribe|officer|advisor|science liaison)|phlebotom|radiolog|sonograph|veterinar|\\bcna\\b|caregiver|home health aide|\\bems\\b|midwife|anesthesi|optometr|chiropract|acupunctur|massage therapist|behaviou?r technician|\\brbt\\b|\\baba (therapist|technician|tutor)|dental"
+    ]
+   },
+   {
+    "label": "finance / legal / operations / manual work",
+    "score": -100,
+    "patterns": [
+     "accountant|accounting|bookkeep|\\bcontroller\\b|\\bcfo\\b|\\btax\\b|payroll|\\bauditor\\b|actuar|underwrit|(?<!ai |tech |technology |responsible ai |ai policy |ai governance |privacy |data |digital |internet |platform |trust and safety |t&s )(lawyer|attorney|legal counsel|paralegal|solicitor|barrister|legal (assistant|associate|analyst|specialist|operations))",
+     "litigation|treasury|procurement|logistics|supply chain|warehouse|\\bdriver\\b|truck|electrician|plumber|welder|mechanic|construction|real estate (agent|broker)|insurance (agent|broker|adjuster)|loan officer|mortgage|bank teller|cashier|barista|\\bchef\\b|\\bcook\\b|janitor|cleaner|housekeep|security guard|forklift|\\bnanny\\b|babysit|\\btutor\\b(?! (ai|llm|content))|delivery|courier|dispatcher|\\bcrypto\\b|\\bforex\\b|\\btrading\\b|\\btrader\\b|investment (analyst|banking|associate)|private equity|venture (capital|associate)|\\bfp&a\\b|billing specialist|collections specialist|claims (adjuster|specialist|processor)|credentialing specialist|revenue cycle|prior authorization|medical records"
+    ]
+   },
+   {
+    "label": "pure sales role",
+    "score": -100,
+    "patterns": [
+     "account executive|\\bae\\b,|sales (development|representative|executive|manager|director|associate|specialist|engineer|consultant|lead|agent|coordinator|operations|enablement)|\\bsdr\\b|\\bbdr\\b|business development (representative|manager|executive|associate|specialist|lead|director)|inside sales|outbound|cold call|lead generation|\\bquota\\b|appointment setter|telemarket|\\bcloser\\b|door[- ]to[- ]door|enterprise sales|solutions consultant|pre-?sales|channel partner manager|\\bpartner(ships)? (manager|director|lead|executive)\\b(?! .*(mental health|clinical|health|research|university|academic|nonprofit|community))|customer success (manager|executive|director|lead|specialist|associate|representative)(?! .*(health|clinical|coach|well))|account manager|revenue|growth (manager|lead|marketer|hacker)|demand generation"
+    ]
+   },
+   {
+    "label": "generic marketing / creative production role",
+    "score": -50,
+    "patterns": [
+     "(performance|paid|growth|digital|email|seo|sem|ppc|social media|influencer|affiliate|lifecycle|demand generation|field|event|partner|channel|product|brand|b2b|b2c|ecommerce|e-commerce|marketplace|community|content) marketing",
+     "marketing (manager|specialist|coordinator|associate|director|lead|operations|analyst|executive|assistant|intern|generalist|automation)",
+     "\\bseo\\b|\\bppc\\b|\\bsem\\b|social media (manager|specialist|coordinator|executive|strategist|content|intern)|community manager|influencer|\\bpr (manager|specialist|executive|coordinator)\\b|public relations|communications? (manager|specialist|coordinator|director|lead|associate|officer)|copywriter|\\bux designer\\b|\\bui designer\\b|product designer|visual designer|graphic designer|brand designer|web designer|motion (designer|graphics)|3d (artist|animator|modeler)|animator|illustrator|video (editor|producer|creator)|videograph|photograph|art director|creative director|design lead|creative (lead|producer|strategist)|podcast producer|youtube|tiktok|streamer"
+    ]
+   },
+   {
+    "label": "support / admin / ops role (lower priority)",
+    "score": -60,
+    "patterns": [
+     "customer (support|service|care|experience|success) (agent|representative|specialist|associate|advocate|advisor|analyst|coordinator|team|lead|manager|executive|officer|rep)|technical support|help ?desk|service desk|virtual assistant|executive assistant|administrative assistant|admin(istrative)? (assistant|coordinator|officer|specialist|support)|office (manager|coordinator|assistant|administrator)|receptionist|data entry|transcription|transcriber|translator|interpreter|localization|\\bqa tester\\b|game tester|playtest|dispatcher|scheduler|scheduling coordinator|front desk|intake coordinator|patient (coordinator|scheduler|access|services representative|advocate)|medical receptionist|billing|enrollment (specialist|coordinator|advisor)|benefits (administrator|enrollment)|hr (administrator|assistant|coordinator)|people (ops|operations) (coordinator|specialist|associate|admin)|recruiting coordinator|talent coordinator|sourcer|\\bmoderator\\b(?! .*(safety|policy|trust|integrity|content))|chat (agent|support|moderator|host|operator)|community (moderator|host|support)|onboarding (specialist|coordinator|associate)(?! .*(clinician|provider|coach|therapist|program))|operations (assistant|coordinator|associate|specialist|analyst)(?! .*(research|clinical|program|people|learning))|order (management|processing)|fulfil+ment|team assistant|personal assistant|\\bva\\b"
+    ]
+   },
+   {
+    "label": "teaching / academic / tutoring role",
+    "score": -60,
+    "patterns": [
+     "\\bprofessor\\b|\\blecturer\\b|\\bpostdoc|post-?doctoral|tenure|teaching assistant|\\btutor\\b|\\bteacher\\b|\\besl\\b|english (teacher|instructor|tutor)|school (counselor|psychologist|nurse|teacher)|special education|\\bsped\\b|paraprofessional|substitute|\\bfaculty\\b|adjunct|dissertation|\\bprincipal\\b (school|elementary|high school)|superintendent|academic (advisor|coach|coordinator|support|success)|admissions (counselor|advisor|officer|coordinator|specialist)|enrollment (counselor|advisor)|student (success|advisor|services|support) (coach|advisor|specialist|coordinator)|education consultant|language (teacher|instructor|tutor|coach)"
+    ]
+   },
+   {
+    "label": "suspicious / adult / MLM",
+    "score": -100,
+    "patterns": [
+     "\\bmlm\\b|network marketing|affiliate marketer|\\bcasino\\b|gambling|igaming|\\badult\\b|onlyfans|\\bnsfw\\b|\\bsugar\\b|\\bcam (model|girl)|webcam|dating (host|chatter)|chat (host|operator) (dating|adult|flirt)|crypto (trader|analyst|marketing)|nft|ambassador program|brand ambassador|mystery shopper|survey taker|get paid to|earn money|work from home (mom|dad|opportunity)|no experience needed - |make \\$"
+    ]
+   },
+   {
+    "label": "generic / not a concrete position",
+    "score": -100,
+    "patterns": [
+     "\\bopen application\\b|general application|speculative application|talent (pool|community|network) *$|future opportunities|expression of interest|unsolicited application|join our talent|don'?t see (a|the) (role|position)|general interest|pipeline (posting|requisition)|evergreen (posting|requisition|role)|multiple positions available|\\bvarious (roles|positions)\\b|initiativbewerbung"
+    ]
+   },
+   {
+    "label": "ad in another language / other market",
+    "score": -60,
+    "patterns": [
+     "\\((m|w|f|d)/(m|w|f|d)(/(m|w|f|d))?\\)|\\bm/w/d\\b|\\bw/m/d\\b|\\bm/f/d\\b|\\bf/m/d\\b|\\bh/f\\b|\\bm/f/x\\b|\\b\\(all genders\\)",
+     "\\b(mitarbeiter|referent|berater|leiter|sachbearbeiter|psychologe|psychologin|psychotherapeut|werkstudent|praktikant|ausbildung|stellenangebot|teilzeit|vollzeit|bewerbung)\\b",
+     "\\b(chargé|chargée|responsable|stagiaire|alternance|alternant|psychologue|conseiller|conseillère|rédacteur|rédactrice)\\b",
+     "\\b(medewerker|psycholoog|stagiair|vacature)\\b",
+     "\\b(psicólog|psicolog|consultor|redactor|becario|prácticas)\\b",
+     "\\b(psykolog|psykoterapeut|konsulent|medarbejder)\\b",
+     "\\b(pracownik|psycholog|specjalista|stażysta)\\b"
+    ]
+   }
+  ],
+  "text": [
+   {
+    "label": "requires clearance / citizenship",
+    "score": -100,
+    "patterns": [
+     "\\b(secret|top secret|ts/sci|security) clearance\\b",
+     "\\bclearance (is )?required\\b",
+     "\\bmust be (a )?(us|u\\.s\\.|united states|uk|british|australian|canadian) citizen\\b",
+     "\\bcitizenship (is )?required\\b",
+     "\\be-?verify\\b"
+    ]
+   },
+   {
+    "label": "senior in description",
+    "score": -25,
+    "patterns": [
+     "\\b(this is a|this is an|we are looking for a|looking for an?|seeking an?) (senior|seasoned|experienced|veteran|expert)[- ]level\\b",
+     "\\bsenior[- ]level (role|position|candidate)\\b",
+     "\\b(extensive|deep|significant|substantial|proven) (leadership|management) experience\\b",
+     "\\b(manage|lead|build|grow) (a |the |our )?team of\\b",
+     "\\bdirect reports\\b",
+     "\\bpeople management (experience|responsibilit)",
+     "\\bexecutive[- ]level\\b",
+     "\\bc[- ]level (stakeholder|audience|executives)\\b[^.\\n]{0,30}(present|report|manag)",
+     "\\b(10|ten|12|15)\\+? years\\b"
+    ]
+   },
+   {
+    "label": "own vehicle / travel / field work",
+    "score": -30,
+    "patterns": [
+     "\\bvalid driver'?s licen[sc]e\\b",
+     "\\breliable (vehicle|transportation)\\b",
+     "\\bown (car|vehicle)\\b",
+     "\\b(50|60|70|75|80)% travel\\b",
+     "\\bfrequent travel\\b[^.\\n]{0,20}(required|expected)",
+     "\\bhome visits\\b|\\bin[- ]home (visits|sessions|care)\\b|\\bfield[- ]based\\b"
+    ]
+   },
+   {
+    "label": "shift / on-call work",
+    "score": -20,
+    "patterns": [
+     "\\bnight shift\\b",
+     "\\bovernight (shift|hours|coverage)\\b",
+     "\\bon[- ]call (rotation|duty|shifts?)\\b",
+     "\\brotating shifts?\\b",
+     "\\b24/7 (coverage|operations|support)\\b[^.\\n]{0,30}(shift|rota)",
+     "\\bweekend (shifts?|coverage|availability) (required|mandatory)\\b"
+    ]
+   },
+   {
+    "label": "clinical practice with own patients (beyond the target)",
+    "score": -20,
+    "patterns": [
+     "\\bcaseload of \\d+\\b",
+     "\\bbillable hours\\b",
+     "\\bsee (patients|clients) (back[- ]to[- ]back|\\d+ hours)\\b",
+     "\\bpanel of (patients|clients)\\b",
+     "\\bdiagnos(e|ing|tic) (patients|clients|disorders)\\b",
+     "\\bprescri(be|bing)\\b",
+     "\\bmedication management\\b"
+    ]
+   },
+   {
+    "label": "MLM / pay to work",
+    "score": -100,
+    "patterns": [
+     "\\b(registration|training|starter|sign[- ]?up|onboarding|application) fee\\b",
+     "\\bbuy (your own |a )?(starter|product) (kit|package)\\b",
+     "\\bmulti[- ]level marketing\\b",
+     "\\bpyramid\\b",
+     "\\bpay to (apply|start|join)\\b",
+     "\\binvestment required\\b",
+     "\\bmust purchase\\b"
+    ]
+   },
+   {
+    "label": "generic SEO / marketing copy production",
+    "score": -20,
+    "patterns": [
+     "\\bseo (blog|articles?|content|copy|keywords?|optimi[sz]ed)",
+     "keyword research",
+     "\\b\\d+ (articles?|blog posts?|pieces|posts) (a|per|each) (week|day|month)\\b",
+     "landing page copy|ad copy|sales copy|email sequences|product descriptions"
+    ]
+   },
+   {
+    "label": "heavy quantitative / ML modelling requirement",
+    "score": -15,
+    "patterns": [
+     "\\b(strong|advanced|expert|solid|deep) (sql|python|r|statistical|machine learning|ml) (skills|knowledge|experience|background)\\b",
+     "\\bstatistical (modeling|modelling)\\b",
+     "\\beconometric",
+     "\\bcausal inference\\b",
+     "\\bbayesian\\b",
+     "\\btime[- ]series\\b",
+     "\\bpredictive model",
+     "\\bbuild(ing)? (ml|machine learning) models\\b",
+     "\\bproduction (code|systems|models)\\b"
+    ]
+   }
+  ]
+ },
+ "positives": [
+  {
+   "id": "early-career",
+   "label": "early career / entry level / training provided",
+   "score": 10,
+   "badge": "Early career",
+   "patterns": [
+    "\\bentry[- ]level\\b",
+    "\\bearly[- ]career\\b",
+    "\\b(recent|new|fresh) (graduate|grad)s?\\b",
+    "\\bno (prior |previous )?experience (required|needed|necessary)\\b",
+    "\\bwe (will |'ll )?(train|teach|coach|mentor) you\\b",
+    "\\b(full |paid |comprehensive |structured |extensive )?(training|onboarding) (is |will be )?(provided|included|given|offered)\\b",
+    "\\bgraduate (role|position|program|programme|scheme|hire)\\b",
+    "\\bmentorship (program|provided)\\b",
+    "\\bstudents? (welcome|encouraged)\\b",
+    "\\bmaster'?s (degree )?(graduate|student)s?\\b",
+    "\\bcareer (starter|changer)s?\\b|\\bfirst (job|role|step)\\b"
+   ]
+  },
+  {
+   "id": "serbia-named",
+   "label": "Serbia / Balkans explicitly mentioned",
+   "score": 15,
+   "badge": "Serbia mentioned",
+   "patterns": [
+    "\\bserbia\\b",
+    "\\bbelgrade\\b",
+    "\\bbalkans?\\b",
+    "\\bwestern balkans\\b",
+    "\\bsouth[- ]?east(ern)? europe\\b",
+    "\\bcentral (and|&) eastern europe\\b",
+    "\\bcee region\\b",
+    "\\bex[- ]?yu\\b"
+   ]
+  },
+  {
+   "id": "psychology-background",
+   "label": "psychology / behavioural background wanted",
+   "score": 15,
+   "badge": "Psychology background",
+   "patterns": [
+    "\\b(background|degree|training|qualification|education|experience) in (clinical |applied |cognitive |social |health |organi[sz]ational |counsel(l)?ing )?(psychology|behaviou?ral science|counsel(l)?ing|social work|cognitive science|neuroscience|\\bhci\\b|human factors|public health|mental health)",
+    "\\bpsychology (graduate|degree|background|major|students?|training|expertise|knowledge)",
+    "\\b(psychologists?|behaviou?ral scientists?|therapists|counsel(l)?ors|clinicians|coaches) (are )?(encouraged|welcome|preferred|ideal)",
+    "\\b(ba|bs|bsc|ma|msc|ms|phd|psyd|doctorate|master'?s|bachelor'?s)[^.\\n]{0,15}\\b(psychology|behaviou?ral|cognitive|counsel(l)?ing|social work|neuroscience|hci|human factors|public health)",
+    "\\bunderstanding of (human|consumer|user) (behaviou?r|psychology|motivation)\\b",
+    "\\b(psychological|behaviou?ral|cognitive) (principles|theories|frameworks|science|expertise|lens|insights?)\\b"
+   ]
+  },
+  {
+   "id": "sensitive-users",
+   "label": "sensitive / vulnerable users and safety in scope",
+   "score": 10,
+   "badge": "Sensitive users",
+   "patterns": [
+    "\\bvulnerable (users|populations|people|adults|groups|individuals|communities)\\b",
+    "\\bsensitive (users|populations|topics|conversations|content|situations|subject matter)\\b",
+    "\\bat[- ]risk (users|youth|populations|individuals)\\b",
+    "\\bcrisis (response|escalation|support|protocol|situations?)\\b",
+    "\\btrauma[- ]informed\\b",
+    "\\bsafeguarding\\b",
+    "\\bduty of care\\b",
+    "\\bself[- ]harm\\b|\\bsuicid(e|al) (prevention|risk|ideation)\\b",
+    "\\bemotional(ly)? (safety|sensitive|charged|difficult)\\b"
+   ]
+  },
+  {
+   "id": "flexible-async",
+   "label": "flexible / asynchronous work",
+   "score": 5,
+   "badge": "Flexible hours",
+   "patterns": [
+    "\\basync[- ]first\\b|\\basynchronous\\b",
+    "\\bflexible (working|hours|schedule|working hours)\\b",
+    "\\bwork from anywhere\\b",
+    "\\bchoose your own (hours|schedule)\\b",
+    "\\bset your own (hours|schedule)\\b",
+    "\\bflexible (time ?zone|location)\\b",
+    "\\bresults[- ]oriented work\\b|\\browe\\b"
+   ]
+  },
+  {
+   "id": "global-contractors",
+   "label": "hires contractors globally",
+   "score": 10,
+   "badge": "Hires globally",
+   "patterns": [
+    "\\bcontractors? (from|in|across) (any|all|multiple|many|\\d+) (country|countries|location|locations|regions)\\b",
+    "\\bhire (globally|worldwide|anywhere|internationally|from anywhere|in \\d+\\+? countries)\\b",
+    "\\bregardless of (your )?(location|where you (live|are))\\b",
+    "\\blocation[- ]independent\\b",
+    "\\b(deel|remote\\.com|oyster|multiplier|papaya|rippling global)\\b",
+    "\\bteam (spans|across|in) \\d+\\+? (countries|time ?zones)\\b",
+    "\\bindependent contractor\\b[^.\\n]{0,40}(any|global|international|worldwide|country)",
+    "\\bpaid in (usd|eur|your local currency)\\b"
+   ]
+  },
+  {
+   "id": "english-only",
+   "label": "English is the working language",
+   "score": 5,
+   "patterns": [
+    "\\b(fluent|excellent|professional|business|strong|native|c1|c2|b2)[^.\\n]{0,15}english\\b",
+    "\\benglish[^.\\n]{0,15}(fluent|proficien|required|c1|c2|b2|native|excellent|is a must|mandatory|essential)\\b",
+    "\\benglish[- ]speaking\\b",
+    "\\bworking language is english\\b"
+   ]
+  },
+  {
+   "id": "impact-mission",
+   "label": "mission: mental health / well-being impact",
+   "score": 5,
+   "patterns": [
+    "\\bimprove (mental health|well-?being|lives|health outcomes|access to (care|mental health|therapy))\\b",
+    "\\bmake (mental health|therapy|care|support) (more )?(accessible|affordable|available)\\b",
+    "\\bmission[- ]driven\\b|\\bsocial impact\\b|\\bimpact[- ]driven\\b|\\bfor good\\b",
+    "\\bevery(one|body) deserves\\b|\\bdemocrati[sz]e (mental health|access|care)\\b"
+   ]
+  }
+ ]
+}
