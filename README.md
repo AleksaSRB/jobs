@@ -1,6 +1,6 @@
 # Psych & Health-Tech Jobs — remote job scraper (psychology · behavioral science · digital mental health · AI safety)
 
-A small local app that reads **31 source types – 16 job boards / aggregators / APIs, 26 RSS boards, and ~460 company career pages through 10 ATS APIs** –, scores every listing with a
+A small local app that reads **31 source types – 21 job boards / aggregators / APIs (2 optional with a free key), 14 RSS boards, and ~400 company career pages through 10 ATS APIs** (all verified live on 26–27.09.2026, see [SOURCES.md](SOURCES.md)), scores every listing with a
 **weighted semantic matcher** (title + description concepts + industry + seniority + remote + eligibility from Serbia + license),
 merges duplicates and shows the good ones as cards on **http://localhost:3008** with ★ Favorite · ✔ Applied · ✕ Reject.
 
@@ -127,8 +127,8 @@ career pages in **`config.json`**. After editing rules run `npm run score -- --r
 | EURES | EU public employment services search API, 12 keyword sets + details | 3 h |
 | ReliefWeb | official UN OCHA jobs API v2 (optional – needs a free pre-approved `appname`): MHPSS, staff well-being, social & behaviour change roles (many remote consultancies) | 3 h |
 | 80,000 Hours | public Algolia index of the AI-safety / AI-governance / global-health job board (~900 roles) | 2 h |
-| **26 RSS / Atom boards** | one generic adapter (`rss.feeds` in config): NoDesk, EU Remote Jobs, Real Work From Anywhere, JobsCollider ×5, RemoteFirstJobs, Remote.co ×3, Empllo, Authentic Jobs, GameJobs.co, Games-Career, APA PsycCareers, jobs.ac.uk ×2, THE unijobs, BPS Jobs, CharityJob, Guardian Jobs, Remotive RSS, SkipTheDrive | 60 min |
-| **~460 company career pages** | public ATS APIs: **Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Recruitee, Personio, BambooHR, Workday, Teamtailor** – digital mental health, DTx, coaching & corporate well-being, AI labs & safety orgs, human-data / trust-and-safety vendors, conversational-AI & companion apps, people-science & research agencies, narrative game studios; list, verification status and how each slug was found: [docs/careers.md](docs/careers.md) | 2–3 h |
+| **14 RSS / Atom boards** | one generic adapter (`rss.feeds` in config): NoDesk, EU Remote Jobs, Real Work From Anywhere, JobsCollider ×4, Empllo, Authentic Jobs, GameJobs.co, Games-Career, THE unijobs, Guardian Jobs, Remotive RSS (12 more feeds are configured but disabled – removed or blocked by their sites, see [SOURCES.md](SOURCES.md)) | 60 min |
+| **~400 company career pages** | public ATS APIs: **Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Recruitee, Personio, BambooHR, Workday, Teamtailor** – digital mental health, DTx, coaching & corporate well-being, AI labs & safety orgs, human-data / trust-and-safety vendors, conversational-AI & companion apps, people-science & research agencies, narrative game studios; 463 configured, 403 answer (~17 000 open positions per pass), 60 disabled after the live probe; list, verification status and how each slug was found: [docs/careers.md](docs/careers.md) | 2–3 h |
 
 One broken source never stops the others; its error shows in the UI (“last check”) and in `data/scraper.log`.
 Details, what each site gives, and what was tried and does not work (Indeed, Glassdoor, FlexJobs, Jobgether, Otta, Built In, Upwork…): [docs/sources.md](docs/sources.md). The research pass that produced the career-page list (and 168 catalogued boards for future batches): [docs/careers.md](docs/careers.md).

@@ -22,14 +22,14 @@ roles applicable from Serbia, with a semantic (not title-only) matcher and **as 
 - [x] Windows installer/updater/uninstaller, README with a step-by-step install guide
 - [x] Research pass (10 parallel agents) over ~660 companies and 168 boards, cross-checked against public ATS tenant directories → **463 career pages** in `config.json → careers` (348 directory-verified, 31 corrected, 28 discovered, 56 memory-only) + `docs/careers.md`
 
-## Batch 2 — first run on the real machine (needs network; 1–2 h of tuning)
+## Batch 2 — first live runs on a real PC — done (26–27.09.2026)
 
-1. `setup.cmd` → wait for the first pass → open `data/scraper.log` and the “last check” table.
-2. `npm run check -- --careers` → disable or fix any career-page slug that returns 404 (`"enabled": false` in `config.json`); also watch `data/scraper.log` for hiring.cafe / Workable-search rate limits (429 / 1015) and lengthen their `everyMin` if needed.
-3. Read `data/filtered.log` for the first day: anything relevant that was hidden? Add the title variant / concept to `rules.json`, then `npm run score -- --rescore`.
-4. Anything irrelevant that got through? Add a negative pattern or lower a weight; the card’s “Why this score” shows exactly which rule fired.
-5. Decide `license.hardReject` (keep visible with a red chip, or hide) and whether `remote.rejectHybrid` should stay `true`.
-6. Optional keys: Adzuna (`adzuna.appId/appKey`), 80,000 Hours JSON URL (`eightyk.url`), ntfy topic for phone notifications.
+- [x] Every source type exercised live from a Windows PC in Serbia; 20 adapters corrected against real responses (field names, parameters, moved sites: aijobs.net → foorilla, hiring.cafe → hiringcafe.com, ReliefWeb v2, Workable search params, Remotive search proxy, Working Nomads index, Jobicy slugs, WWR GeoLock, Workday paging…) – [SOURCES.md](SOURCES.md), [docs/verification.md](docs/verification.md)
+- [x] `npm run check -- --careers` over 463 career pages → 60 disabled (45 dead/private slugs after probing variants + 15 low-confidence), 403 live, ~17 000 open positions per pass
+- [x] 12 dead RSS feeds disabled with evidence, Remotive feed URL fixed → 14 live feeds
+- [x] `http.ts`: 429/403 on a plain GET (TLS-fingerprint bot detection, LinkedIn) retried through curl.exe; `ats.ts`: wrong slugs no longer trip the circuit breaker
+- [x] Matcher tuned from real listings (12 new fixtures, 57/57): GeoLock/“Anywhere in US” eligibility, AMER + missing countries, paid volunteer time, executive-title false positives, engineering manager / curriculum developer, generic perk words, non-English ads, US-employer boilerplate
+- [ ] Still open: `setup.cmd` on the target PC (registers the tasks – run when the owner confirms); optional keys Adzuna (`adzuna.appId/appKey`) and ReliefWeb (`reliefweb.appname`, free approval form); ntfy topic; decide `license.hardReject` / `remote.rejectHybrid` after a week of real cards.
 
 ## Batch 3 — more sources (ideas, in priority order)
 
