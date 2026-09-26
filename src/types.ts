@@ -195,7 +195,7 @@ export interface JobFamily {
 export interface Rules {
   thresholds: { excellent: number; good: number; possible: number };
   families: JobFamily[];
-  familyRules: { conceptFull: number; conceptPartialFactor: number; gatedFactor: number; gatedPenalty: number; secondaryMin: number; secondaryConceptMin: number; secondaryBonus: number; secondaryBonusMax: number; noFamilyIndustryOnly: number };
+  familyRules: { conceptFull: number; conceptPartialFactor: number; gatedFactor: number; gatedPenalty: number; secondaryMin: number; secondaryConceptMin: number; secondaryBonus: number; secondaryBonusMax: number; noFamilyIndustryOnly: number; conceptOnlyPenalty?: number };
   adjacentTitles: { patterns: string[]; score: number };
   industries: Array<{ id: string; label: string; score: number; patterns: string[] }>;
   industryScoreMax: number;
@@ -223,6 +223,7 @@ export interface Rules {
   eligibility: {
     serbia: string[]; serbiaScore: number;
     worldwide: string[]; worldwideScore: number;
+    worldwideWeak?: string[];   // subset of `worldwide` that yields only when the same location string names no region ("Anywhere in US" = US)
     europe: string[]; europeScore: number;
     otherRegion: string[]; otherRegionScore: number; rejectOtherRegion: boolean;
     excludeText: string[]; excludeScore: number;
@@ -235,7 +236,7 @@ export interface Rules {
     unpaid: string[]; unpaidScore: number;
     commissionOnly: string[]; commissionOnlyScore: number;
   };
-  language: { foreignLanguages: string; requiredPatterns: string[]; exceptions: string[]; score: number };
+  language: { foreignLanguages: string; requiredPatterns: string[]; exceptions: string[]; score: number; foreignTextStopwords?: string; foreignTextMinHits?: number }; // stop-word density = ad not in English
   timezone: { positive: string[]; positiveScore: number; negative: string[]; negativeScore: number };
   negatives: { title: RuleGroup[]; text: RuleGroup[] };
   positives: Array<{ id: string; label: string; score: number; patterns: string[]; badge?: string }>;

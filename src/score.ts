@@ -34,6 +34,8 @@ const HYBRID_TXT = compile(R.hybridText, "remote.hybridText");
 const ONSITE_TXT = compile(R.onsiteText, "remote.onsiteText");
 const EL_SERBIA = compile(EL.serbia, "eligibility.serbia");
 const EL_WORLD = compile(EL.worldwide, "eligibility.worldwide");
+/** "anywhere" / "global" / "international" alone: worldwide only when the same location string names no region ("Anywhere in US" = US). */
+const EL_WORLD_STRONG = EL_WORLD.filter((r) => !(EL.worldwideWeak ?? []).includes(r.source));
 const EL_EUROPE = compile(EL.europe, "eligibility.europe");
 const EL_OTHER = compile(EL.otherRegion, "eligibility.otherRegion");
 const EL_EXCLUDE = EL.excludeText.map((p) => new RegExp(p, "gi"));
@@ -42,6 +44,9 @@ const PART_TXT = compile(E.partTimeText, "employment.partTimeText");
 const UNPAID = compile(E.unpaid, "employment.unpaid");
 const COMMISSION = compile(E.commissionOnly, "employment.commissionOnly");
 const LANG_REQ = L.requiredPatterns.map((p) => new RegExp(p.replace(/LANG/g, L.foreignLanguages), "gi"));
+/** Ad written in another language: stop-word density in the title + first 600 chars (text is diacritics-folded, so the list is too). */
+const FOREIGN_TEXT = L.foreignTextStopwords ? new RegExp(`\\b(${L.foreignTextStopwords})\\b`, "g") : null;
+const ENGLISH_TEXT = /\b(the|and|with|for|you|our|will|are|is|to|of|we|in)\b/g;
 const LANG_EXC = compile(L.exceptions.map((p) => p.replace(/LANG/g, L.foreignLanguages)), "language.exceptions");
 /** A language in the title ("Content Writer (German)") is mandatory. */
 const LANG_TITLE = new RegExp(`\\b(${L.foreignLanguages})\\b`, "i");
@@ -130,9 +135,10 @@ type LocClass = "serbia" | "worldwide" | "europe" | "other" | "generic";
 function classifyLocation(loc: string): LocClass {
   const l = fold(loc);
   if (EL_SERBIA.some((r) => r.test(l))) return "serbia";
-  if (EL_WORLD.some((r) => r.test(l))) return "worldwide";
-  if (EL_EUROPE.some((r) => r.test(l))) return "europe";
-  if (EL_OTHER.some((r) => r.test(l))) return "other";
+  if (EL_WORLD_STRONG.some((r) => r.test(l))) return "worldwide";
+  if (EL_EUROPE.some((r) => r.test(l))) return "europe";   // "Anywhere in Europe"
+  if (EL_OTHER.some((r) => r.test(l))) return "other";     // "Anywhere in US", "Global – UK based"
+  if (EL_WORLD.some((r) => r.test(l))) return "worldwide"; // a bare "Anywhere" / "Global"
   return "generic"; // "Remote", "" and similar
 }
 
@@ -209,7 +215,8 @@ export function scoreJob(job: Job): Scoring {
     if (secondaries.length) add(Math.min(FR.secondaryBonusMax, FR.secondaryBonus * secondaries.length), `also matches: ${secondaries.slice(0, 3).map((x) => x.f.label).join(", ")}`);
     if (!primary.t) {
       if (adj) add(RULES.adjacentTitles.score, `adjacent title ${quote(adj[0])} with matching responsibilities`);
-      else add(-10, "job family found only in the description, not the title");
+      else if (primary.c.n >= FR.conceptFull) add(-10, "job family found only in the description, not the title");
+      else add(FR.conceptOnlyPenalty ?? -10, `job family only weakly present in the description (${primary.c.n} concept${primary.c.n > 1 ? "s" : ""}, title unrelated)`); // 1–2 perk-paragraph hits must not ride the site bonuses over the threshold
     }
   } else if (adj && industries.length) {
     add(RULES.adjacentTitles.score, `adjacent title ${quote(adj[0])} in a relevant industry`);
@@ -273,10 +280,11 @@ export function scoreJob(job: Job): Scoring {
 
   // ---- remote / hybrid / onsite (site field first, then location strings and description)
   let remoteFinal: RemoteType = job.remote;
+  const officeText = `${title}\n${body}`; // "… - Belgrade - On-site" in the title counts too (LinkedIn's remote filter is not reliable)
   const officeHit = (res: RegExp[]) => {
     for (const r of res) {
-      for (const m of body.matchAll(new RegExp(r.source, "gi"))) {
-        const sentence = sentenceAround(body, m.index ?? 0);
+      for (const m of officeText.matchAll(new RegExp(r.source, "gi"))) {
+        const sentence = sentenceAround(officeText, m.index ?? 0);
         if (/\b(no|not|never|without|fully remote|100% remote|remote[- ]first|optional|not required|no need|instead of|rather than|is not|isn't|occasional|once a (quarter|year)|twice a year|if you (prefer|want|wish)|can also|option(al)? to)\b/.test(sentence)) continue;
         return m;
       }
@@ -382,6 +390,11 @@ export function scoreJob(job: Job): Scoring {
       if (LANG_EXC.some((r) => r.test(sentence))) continue;
       langHit = m[0]; break outer2;
     }
+  }
+  if (!langHit && FOREIGN_TEXT) {
+    const head = `${title}\n${body.slice(0, 600)}`;
+    const n = (head.match(FOREIGN_TEXT) ?? []).length, en = (head.match(ENGLISH_TEXT) ?? []).length;
+    if (n >= (L.foreignTextMinHits ?? 6) && n > en) langHit = `text not in English (${n} foreign stop-words)`;
   }
   if (langHit) { add(L.score, `another language mandatory ${quote(langHit)}`); warnings.push("Language"); hardReject(`requires another language: ${quote(langHit)}`); }
 

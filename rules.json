@@ -420,7 +420,7 @@
     "1[- ]on[- ]1|one[- ]on[- ]one|1:1 (support|sessions?|coaching|calls)",
     "burnout",
     "stress (management|reduction|resilience)",
-    "life transitions|major life|grief|relationships?|loneliness",
+    "life transitions|major life|grief|relationship (issues|challenges|difficulties|coaching|counsel)|romantic relationships?|loneliness",
     "resilience",
     "well-?being|wellness|flourishing|thriving",
     "goal[- ]setting|smart goals|action plans?|accountability",
@@ -428,7 +428,7 @@
     "behaviou?r change|habit (formation|change|building)|lifestyle (change|medicine)",
     "remote coaching|virtual coaching|telecoaching|coaching sessions?|coaching (platform|app|practice)",
     "video (sessions?|calls?|visits?)|text[- ]based (coaching|support)|chat[- ]based|messaging|asynchronous",
-    "member (support|sessions?|engagement|journey|outcomes)|clients?",
+    "member (support|sessions?|engagement|journey|outcomes)|coaching clients?|clients? (sessions?|caseload|outcomes|progress|goals)|caseload",
     "motivational interviewing|active listening|positive psychology|solution[- ]focused|strengths[- ]based|acceptance",
     "\\bicf\\b|\\bnbhwc\\b|\\bemcc\\b|certified (health|wellness|life|professional|integrative|executive) coach|coaching (certification|credential|accredit)|\\bacc\\b|\\bpcc\\b|\\bcbt\\b|\\bmhfa\\b",
     "psychology (degree|background|graduate)|counsel(l)?ing (degree|background|psychology)|social work",
@@ -509,17 +509,17 @@
     "burnout (prevention|risk)|burnout",
     "stress (management|reduction|awareness)|stress",
     "workplace mental health|mental health at work|mental health in the workplace|mental health (awareness|literacy|training|first aid|champions?)",
-    "workshops?|webinars?|trainings?|facilitat|lunch[- ]and[- ]learn|sessions",
-    "corporate (programs?|wellness|clients|customers)|\\bb2b\\b|hr (leaders|teams|buyers|partners)|employers?\\b|people leaders",
+    "(well-?being|mental health|resilience|stress|burnout|mindfulness|psychological safety) (workshops?|webinars?|trainings?|sessions?|programs?)|facilitat(e|ing|ion of) (workshops?|sessions?|groups?|circles?)|lunch[- ]and[- ]learn",
+    "corporate (wellness|well-?being|mental health)( programs?| clients| customers)?|hr (leaders|buyers)|employer[- ](sponsored|paid|offered)|sell(ing)? to employers|people leaders",
     "distributed teams|remote workforce|remote teams|hybrid (teams|work|workforce)|remote[- ]first",
     "resilience",
     "employee engagement|engagement (surveys?|scores?|drivers)|pulse (surveys?|checks?)|\\benps\\b",
     "well-?being (program|strategy|initiatives?|champions?|framework|offering|benefits?|platform|days?)",
     "\\beap\\b|employee assistance",
     "people (analytics|science|strategy|team|ops|operations|experience|function)",
-    "culture\\b|inclusion|belonging|values|rituals|recognition",
-    "benefits|total rewards|perks|leave polic|flexible work",
-    "onboarding|retention|turnover|attrition|absenteeism|presenteeism|productivity",
+    "(workplace|company|team|organi[sz]ational|healthy|caring|feedback|speak[- ]up) culture|inclusion and belonging|sense of belonging|psychological (safety|well-?being)",
+    "(well-?being|wellness|mental health|employee) benefits? (program|strategy|design|offering)|total rewards|leave polic",
+    "employee (retention|turnover|engagement)|attrition|absenteeism|presenteeism",
     "manager (training|enablement|effectiveness|development)|leadership (training|development|programs?)",
     "mental health|well-?being|wellness|mindfulness|meditation|sleep|nutrition|fitness"
    ]
@@ -724,15 +724,15 @@
     "cognitive psychology|psychology|psychologists?|neuroscience|behaviou?ral science",
     "customer psychology|consumer psychology|behaviou?ral psychology|social psychology",
     "brand (perception|equity|health|tracking|positioning|strategy|purpose|love|awareness|lift)",
-    "motivations?|drivers|needs|attitudes|beliefs|emotions?|values|tensions|barriers",
+    "(consumer|customer|shopper|human|user|underlying|emotional|purchase) (motivations?|needs|attitudes|beliefs|emotions?|drivers|tensions|barriers)|unmet needs|attitudes and beliefs",
     "audience (behaviou?r|insights?|segmentation|understanding|research)|segmentation|personas|target (audience|consumers?|customers?)",
     "behaviou?ral economics|behaviou?ral science|nudg|heuristics|biases|system 1|framing|choice architecture",
     "qualitative research|in-?depth interviews|\\bidis?\\b|focus groups?|ethnograph|diary stud|online communities|mobile ethnograph|immersions?",
     "consumer research|market research|customer research|shopper research|u&a\\b|usage and attitude|concept test|ad test|copy test|pack test|pricing research|conjoint|maxdiff|max-diff|brand tracking|trackers?",
     "customer insights?|consumer insights?|human insights?|cultural insights?|market insights?|insights? (function|team|agency|report|deck|story)",
-    "surveys?|questionnaires?|panels?|sample|fieldwork|spss|\\br\\b(?=[ ,/)])|python|sql|tableau|power bi|dashboards?|excel|quantitative|statistic",
+    "surveys?|questionnaires?|(online|consumer|research|survey) panels?|fieldwork|spss|quantitative (research|methods|analysis|and qualitative)|statistical (analysis|modell?ing|significance)",
     "implicit|neuromarketing|eye[- ]tracking|biometric|emotional (response|measurement)|facial coding|reaction time",
-    "brands?\\b|campaigns?|advertising|creative (development|testing|strategy)|communications? (strategy|planning|testing)|marketing (mix|strategy|effectiveness)|category"
+    "brand (teams?|managers?|owners?|marketers?|research|studies)|advertising (research|effectiveness|testing|recall)|creative (development|testing|strategy)|communications? (strategy|planning|testing)|marketing (mix|effectiveness)|category (insights?|understanding|entry|dynamics)"
    ]
   },
   {
@@ -793,7 +793,8 @@
   "secondaryConceptMin": 4,
   "secondaryBonus": 5,
   "secondaryBonusMax": 10,
-  "noFamilyIndustryOnly": -25
+  "noFamilyIndustryOnly": -25,
+  "conceptOnlyPenalty": -25
  },
  "adjacentTitles": {
   "score": 10,
@@ -837,7 +838,7 @@
    "label": "Digital Health",
    "score": 30,
    "patterns": [
-    "digital health|health[- ]?tech|healthcare|health care|health system|telehealth|telemedicine|virtual care|digital therapeutic|\\bdtx\\b|medtech|clinical|patients?|providers?|payers?|health plans?|employers and health|\\bnhs\\b|\\bhipaa\\b|\\bfda\\b|chronic (condition|disease|care|illness)|care (delivery|team|model|navigation|management)|women'?s health|femtech|sleep|nutrition|fitness|weight (loss|management)|diabetes|musculoskeletal|\\bmsk\\b|cardio|oncology|pharma|life sciences|biotech|medical device|health (outcomes|equity|coaching|insurance|benefits|plan|app|platform|company|startup)|wellness"
+    "digital health|health[- ]?tech|healthcare|health care|health system|telehealth|telemedicine|virtual care|digital therapeutic|\\bdtx\\b|medtech|clinical|patients?|(healthcare|health|care|clinical|medical) providers?|payers?|health plans?|employers and health|\\bnhs\\b|\\bhipaa\\b|\\bfda\\b|chronic (condition|disease|care|illness)|care (delivery|team|model|navigation|management)|women'?s health|femtech|sleep (health|apnea|coaching|disorders?|science|medicine)|nutrition(al)? (coaching|counsel|programs?|science)|fitness (app|platform|coaching|programs?|tracker)|weight (loss|management)|diabetes|musculoskeletal|\\bmsk\\b|cardio|oncology|pharma|life sciences|biotech|medical device|health (outcomes|equity|coaching|insurance|benefits|plan|app|platform|company|startup)|wellness (app|platform|program|company|solution|benefit|coach)"
    ]
   },
   {
@@ -861,7 +862,7 @@
    "label": "Coaching / Well-being",
    "score": 20,
    "patterns": [
-    "coach(ing|es)?\\b|well-?being (platform|app|company|program|solution|benefit)|wellness (platform|program|app|company|solution|benefit)|employee (well-?being|wellness|assistance|mental health|experience|engagement)|corporate wellness|workplace (well-?being|wellness|mental health|culture)|\\beap\\b|resilience|burnout|stress|mindfulness|meditation|habits?|behaviou?r change|self[- ]improvement|personal (growth|development)|life coaching|health coaching|well-?being"
+    "coach(ing|es)?\\b|well-?being (platform|app|company|program|solution|benefit)|wellness (platform|program|app|company|solution|benefit)|employee (well-?being|wellness|assistance|mental health|experience|engagement)|corporate wellness|workplace (well-?being|wellness|mental health|culture)|\\beap\\b|resilience (training|program|coaching|building)|burnout (prevention|recovery|risk)|stress (management|reduction|resilience)|mindfulness|meditation|healthy habits?|habit (formation|change|building)|behaviou?r change|self[- ]improvement|personal (growth|development)|life coaching|health coaching|well-?being (coach|science|program|platform)"
    ]
   },
   {
@@ -893,7 +894,7 @@
    "label": "Games / Interactive Narrative",
    "score": 15,
    "patterns": [
-    "game (studio|development|developer|writer|narrative|design|company)|games? (industry|company|studio)|video games?|mobile games?|interactive (fiction|story|narrative|entertainment|media|drama)|visual novel|narrative (design|team|games?|driven)|storytelling|players?\\b|episodic|romance (games?|stories|app)|otome|\\brpg\\b|indie (studio|games?)|unity|unreal|\\bmmo\\b|gaming|esports|metaverse|virtual worlds?"
+    "game (studio|development|developer|writer|narrative|design|company)|games? (industry|company|studio)|video games?|mobile games?|interactive (fiction|story|narrative|entertainment|media|drama)|visual novel|narrative (design|team|games?|driven)|storytelling|players? (experience|engagement|retention|community|behaviou?r|psychology|base|feedback|motivation)|playtest|episodic|romance (games?|stories|app)|otome|\\brpg\\b|indie (studio|games?)|unity|unreal|\\bmmo\\b|gaming|esports|metaverse|virtual worlds?"
    ]
   },
   {
@@ -1715,10 +1716,10 @@
    "\\bhead\\b,",
    "\\bchief\\b",
    "\\bc[a-z]o\\b",
-   "\\bceo\\b|\\bcto\\b|\\bcpo\\b|\\bcmo\\b|\\bcoo\\b|\\bcfo\\b|\\bcro\\b|\\bchro\\b|\\bcso\\b",
+   "(?<!(assistant|ea|pa|support|secretary|advisor|adviser) to (the |our )?)\\b(ceo|cto|cpo|cmo|coo|cfo|cro|chro|cso)\\b",
    "\\bexecutive director\\b",
    "\\bmanaging director\\b",
-   "\\bpartner\\b(?!ship| manager| success| marketing| relations| operations| enablement)",
+   "(?<!(business|people|hr|hrbp|talent|employee relations|client|customer|account|delivery|implementation|research|learning|content|design|product|marketing|finance|recruiting|solutions?|strategic|channel|thought|success|alliances?|technology|creative|insights?|clinical|care) )\\bpartner\\b(?!ship| manager| success| marketing| relations| operations| enablement| development)",
    "\\bfounder\\b",
    "\\bpresident\\b",
    "\\bgeneral manager\\b",
@@ -1740,7 +1741,7 @@
   "rejectHybrid": true,
   "rejectOnsite": true,
   "remoteText": [
-   "\\bremote\\b",
+   "\\bremote\\b(?!\\s+(area|location|communit|field|clinic|site|region|village|district|rural|sensing|monitoring|control))",
    "work from (home|anywhere)",
    "working from home",
    "\\bwfh\\b",
@@ -1929,7 +1930,42 @@
    "\\bbenelux\\b",
    "\\b(florida|texas|california|new york|illinois|washington|massachusetts|colorado|arizona|carolina|pennsylvania|ohio|michigan|virginia|jersey|nevada|utah|oregon|minnesota|tennessee|missouri|indiana|maryland|wisconsin|georgia|alabama|kentucky|louisiana|oklahoma|iowa|kansas|nebraska|idaho|montana|maine|vermont|hawaii|alaska|connecticut|delaware|arkansas|mississippi|dakota|wyoming|new mexico|new hampshire|rhode island|puerto rico)\\b",
    "\\b[a-z .]+, (ga|tx|ca|ny|fl|il|wa|ma|co|az|nc|sc|pa|oh|mi|va|nj|nv|ut|or|mn|tn|mo|in|md|wi|dc|ky|la|ok|ia|ks|ne|id|mt|me|vt|hi|ak|ct|de|ar|ms|nd|sd|wy|nm|nh|ri|al|bc|on|qc|ab)\\b",
-   "\\b(toronto|vancouver|montreal|ottawa|calgary|london|manchester|edinburgh|bristol|dublin|sydney|melbourne|brisbane|berlin|munich|hamburg|paris|madrid|barcelona|amsterdam|rotterdam|lisbon|porto|warsaw|krakow|prague|vienna|zurich|geneva|stockholm|copenhagen|oslo|helsinki|milan|rome|athens|istanbul|dubai|singapore|tokyo|mumbai|bangalore|bengaluru|hyderabad|delhi|manila|mexico city|sao paulo|buenos aires|bogota|lima|santiago|cape town|lagos|nairobi|cairo|tel aviv|boston|new york|san francisco|los angeles|seattle|chicago|austin|denver|atlanta|miami|philadelphia|washington dc|nyc|sf bay area|bay area)\\b"
+   "\\b(toronto|vancouver|montreal|ottawa|calgary|london|manchester|edinburgh|bristol|dublin|sydney|melbourne|brisbane|berlin|munich|hamburg|paris|madrid|barcelona|amsterdam|rotterdam|lisbon|porto|warsaw|krakow|prague|vienna|zurich|geneva|stockholm|copenhagen|oslo|helsinki|milan|rome|athens|istanbul|dubai|singapore|tokyo|mumbai|bangalore|bengaluru|hyderabad|delhi|manila|mexico city|sao paulo|buenos aires|bogota|lima|santiago|cape town|lagos|nairobi|cairo|tel aviv|boston|new york|san francisco|los angeles|seattle|chicago|austin|denver|atlanta|miami|philadelphia|washington dc|nyc|sf bay area|bay area)\\b",
+   "\\bamer\\b",
+   "\\bamericas\\b",
+   "\\bdominican republic\\b",
+   "\\becuador\\b",
+   "\\bpanama\\b",
+   "\\bel salvador\\b",
+   "\\bbolivia\\b",
+   "\\bparaguay\\b",
+   "\\buruguay\\b",
+   "\\bcuba\\b",
+   "\\bminsk\\b",
+   "\\bbangladesh\\b",
+   "\\bsri lanka\\b",
+   "\\bnepal\\b",
+   "\\bkorea\\b",
+   "\\btaiwan\\b",
+   "\\bhong kong\\b",
+   "\\bchina\\b",
+   "\\bmorocco\\b",
+   "\\btunisia\\b",
+   "\\bghana\\b",
+   "\\bethiopia\\b",
+   "\\buganda\\b",
+   "\\brwanda\\b",
+   "\\btanzania\\b",
+   "\\bjordan\\b",
+   "\\blebanon\\b",
+   "\\bqatar\\b",
+   "\\bkuwait\\b",
+   "\\bbahrain\\b",
+   "\\boman\\b",
+   "\\biceland\\b",
+   "\\bluxembourg\\b",
+   "\\bliechtenstein\\b",
+   "\b(al|ak|az|ar|ca|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy) d{5}(-d{4})?\b"
   ],
   "excludeText": [
    "\\b(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)[- ](based )?(only|residents? only|citizens? only|candidates only|applicants only)\\b",
@@ -1949,6 +1985,11 @@
    "\\b(licensed|licensure) in (the state of|one or more us states|multiple states|[a-z]+ state)\\b",
    "\\bthis (role|position) is (only )?(open|available) to (candidates|applicants|residents|those) (in|based in|located in) (the )?(us|usa|u\\.s\\.|united states|canada|uk|u\\.k\\.|united kingdom|australia|eu|european union|schengen|germany|france|netherlands|spain|portugal|poland|italy|ireland|mexico|india|philippines|latam|latin america|north america|nordics|dach|benelux|new zealand|singapore|japan|brazil|argentina|colombia|south africa|israel|switzerland|austria|sweden|denmark|norway|finland|belgium|czech republic|romania|hungary|greece|turkey)\\b",
    "\\b(us|u\\.s\\.|united states|uk|canada|australia)[- ]remote\\b(?![^.\\n]{0,40}(serbia|europe|emea|worldwide|anywhere|international|global))"
+  ],
+  "worldwideWeak": [
+   "\\banywhere\\b",
+   "\\bglobal(ly)?\\b",
+   "\\binternational\\b"
   ]
  },
  "employment": {
@@ -1979,7 +2020,7 @@
   ],
   "unpaid": [
    "\\bunpaid\\b",
-   "\\bvolunteer\\b(?! (management|coordinator|program|experience))",
+   "(?<!paid )\\bvolunteer(ing)?\\b(?! (management|coordinator|program|experience|time|days?|hours|leave|pto|opportunit|polic))",
    "\\bno (salary|pay|compensation)\\b",
    "\\bwithout (pay|salary|compensation)\\b",
    "\\bequity[- ]only\\b",
@@ -2027,7 +2068,9 @@
    "one of the following",
    "multilingual",
    "serbian|croatian|bosnian|bcs\\b"
-  ]
+  ],
+  "foreignTextStopwords": "para|con|una|los|las|del|por|que|como|nuestro|nuestra|equipo|empresa|buscamos|und|der|nicht|mit|fur|wir|sie|eine|einen|bei|unser|unsere|suchen|aufgaben|kenntnisse|pour|avec|nous|vous|dans|des|les|sont|notre|equipe|poste|recherchons|nao|uma|voce|nos|nossa|dos|das|della|nostro|nostra|cerchiamo|siamo|wij|jij|een|het|voor|onze|zoeken|oraz|dla|nie|jest|nasz|nasza|szukamy",
+  "foreignTextMinHits": 6
  },
  "timezone": {
   "positiveScore": 10,
@@ -2061,7 +2104,8 @@
    "\\bus (time|time ?zone)s? (required|only|overlap)",
    "\\bwork(ing)? (us|american|pacific|eastern) (hours|time)",
    "\\b(cst|ct) (hours|time ?zone|business hours)\\b",
-   "central (standard )?time"
+   "central (standard )?time",
+   "\\bamer\\b"
   ]
  },
  "negatives": {
@@ -2071,7 +2115,7 @@
     "score": -100,
     "patterns": [
      "(?<!prompt |human factors |conversation |conversational |behaviou?ral |learning |instructional |content |knowledge |linguistic |safety |social |usability |ux |research |human |alignment |ai safety |model behaviou?r )\\b(software|backend|back-end|frontend|front-end|full[- ]stack|devops|platform|infrastructure|cloud|data|ml|machine learning|ai|deep learning|systems?|network|site reliability|qa|test|automation|security|embedded|firmware|mobile|ios|android|web|solutions?|integration|support|implementation|sales|hardware|electrical|mechanical|civil|quality|application|applied ai|forward deployed|founding) engineer",
-     "\\bdeveloper\\b(?! (relations|advocate|community|education|experience))",
+     "(?<!(curriculum|content|course|learning|instructional|training|program|programme|business|partnership|community|talent|people|leadership|organi[sz]ational|workforce|narrative|story|research|assessment|test) )\\bdeveloper\\b(?! (relations|advocate|community|education|experience))",
      "\\bsre\\b",
      "\\bdevops\\b",
      "(?<!learning |story |narrative |information |content |experience |conversation |conversational |solution |program |curriculum |assessment )\\barchitect\\b",
@@ -2086,7 +2130,8 @@
      "\\bit (support|specialist|technician|administrator|manager|analyst)\\b",
      "\\bsystems? administrator\\b|\\bsysadmin\\b",
      "technical (support|account manager|writer)(?! .*(ai|health))",
-     "\\bblockchain\\b|\\bweb3\\b|\\bsolidity\\b"
+     "\\bblockchain\\b|\\bweb3\\b|\\bsolidity\\b",
+     "(?<!(prompt|conversation|conversational|content|knowledge|learning|social|instructional|curriculum|behaviou?ral|research|clinical) )\\bengineering (manager|lead|team lead|director|supervisor|management)\\b"
     ]
    },
    {
@@ -2101,7 +2146,8 @@
     "score": -100,
     "patterns": [
      "accountant|accounting|bookkeep|\\bcontroller\\b|\\bcfo\\b|\\btax\\b|payroll|\\bauditor\\b|actuar|underwrit|(?<!ai |tech |technology |responsible ai |ai policy |ai governance |privacy |data |digital |internet |platform |trust and safety |t&s )(lawyer|attorney|legal counsel|paralegal|solicitor|barrister|legal (assistant|associate|analyst|specialist|operations))",
-     "litigation|treasury|procurement|logistics|supply chain|warehouse|\\bdriver\\b|truck|electrician|plumber|welder|mechanic|construction|real estate (agent|broker)|insurance (agent|broker|adjuster)|loan officer|mortgage|bank teller|cashier|barista|\\bchef\\b|\\bcook\\b|janitor|cleaner|housekeep|security guard|forklift|\\bnanny\\b|babysit|\\btutor\\b(?! (ai|llm|content))|delivery|courier|dispatcher|\\bcrypto\\b|\\bforex\\b|\\btrading\\b|\\btrader\\b|investment (analyst|banking|associate)|private equity|venture (capital|associate)|\\bfp&a\\b|billing specialist|collections specialist|claims (adjuster|specialist|processor)|credentialing specialist|revenue cycle|prior authorization|medical records"
+     "litigation|treasury|procurement|logistics|supply chain|warehouse|\\bdriver\\b|truck|electrician|plumber|welder|mechanic|construction|real estate (agent|broker)|insurance (agent|broker|adjuster)|loan officer|mortgage|bank teller|cashier|barista|\\bchef\\b|\\bcook\\b|janitor|cleaner|housekeep|security guard|forklift|\\bnanny\\b|babysit|\\btutor\\b(?! (ai|llm|content))|delivery|courier|dispatcher|\\bcrypto\\b|\\bforex\\b|\\btrading\\b|\\btrader\\b|investment (analyst|banking|associate)|private equity|venture (capital|associate)|\\bfp&a\\b|billing specialist|collections specialist|claims (adjuster|specialist|processor)|credentialing specialist|revenue cycle|prior authorization|medical records",
+     "(field|equipment|hvac|maintenance|elevator|appliance) (service )?(engineer|technician)|\\bservice technician\\b|merchant services|payments? advisor|solution center (analyst|specialist)|\\bsourcing specialist\\b(?! .*(talent|recruit|candidate))|product sourcing|supplier (sourcing|quality)"
     ]
    },
    {
@@ -2262,6 +2308,16 @@
      "\\bpredictive model",
      "\\bbuild(ing)? (ml|machine learning) models\\b",
      "\\bproduction (code|systems|models)\\b"
+    ]
+   },
+   {
+    "label": "US employer boilerplate (401(k) / E-Verify / veteran status)",
+    "score": -15,
+    "patterns": [
+     "401\\(k\\)|\\b401k\\b",
+     "\\be-?verify\\b",
+     "\\bveteran status\\b|\\bprotected veterans?\\b",
+     "americans with disabilities act|\\bada accommodation"
     ]
    }
   ]

@@ -67,6 +67,19 @@ const CASES: Array<[string, Job, Expect]> = [
   ["7+ years", j("Behavioral Scientist", WW + "Behavior change, nudges, experiments. 7+ years of experience required."), { warn: ["7+ years"] }],
   ["junior signal", j("Behavioral Science Associate", WW + "Behavior change, nudges, experiments. Entry level, we will train you."), { badge: ["Junior-friendly"], min: 100 }],
   ["adjacent title + industry only", j("Program Coordinator", WW + "Coordinate our digital mental health program for members; support clinicians and coaches; track member outcomes."), { shown: true }],
+  // ---- regressions from the first live runs (26./27.09.2026)
+  ["paid volunteer time is a perk, not an unpaid role", j("Campaign Marketing Intern", WW + "Psychoeducation content for our mental health app; behavior change campaigns. As a paid intern you also get 8 hours of paid volunteer time."), { reject: false }],
+  ["volunteering role type is unpaid", j("Community Ambassador", WW + "Support our AI safety community events.", { tags: ["Volunteering"] }), { reject: true }],
+  ["anywhere in US is US only", j("Behavioral Scientist", "Behavior change, nudges, experiments, adherence.", { locations: ["Anywhere in US"], remote: "remote" }), { eligibility: "excluded", reject: true }],
+  ["anywhere in Europe is Europe", j("Behavioral Scientist", "Behavior change, nudges, experiments, adherence.", { locations: ["Anywhere in Europe"], remote: "remote" }), { eligibility: "europe", shown: true }],
+  ["hr business partner is not an executive", j("HR Business Partner", WW + "Psychological safety, employee engagement surveys, burnout prevention programs and workplace mental health workshops for distributed teams."), { reject: false, shown: true }],
+  ["engineering manager is a software role", j("Engineering Manager - Data Platform", WW + "Lead a team of backend engineers. We offer great benefits, a caring culture, productivity tools and B2B customers."), { reject: true }],
+  ["curriculum developer is not a software developer", j("Music Curriculum Developer", WW + "Write evidence-based psychoeducation and course modules for children's well-being programs; work with psychologists."), { reject: false, shown: true }],
+  ["field service engineer", j("Field Service Engineer", WW + "Install and repair medical imaging equipment at hospital sites; travel to customer locations."), { reject: true }],
+  ["payment advisor with employer boilerplate", j("Merchant Services Virtual Payment Advisor", WW + "Sell payment processing to merchants. Who we are: we value culture, belonging, benefits, wellness and our clients. 401(k), veteran status, E-Verify."), { shown: false }],
+  ["ad in spanish", j("Psicólogo/a para plataforma de salud mental", "Buscamos un psicólogo para nuestro equipo. Trabajo remoto con pacientes de la plataforma. Experiencia en terapia cognitivo conductual y salud mental. Ofrecemos contrato para el puesto y formación continua con nuestro equipo."), { reject: true }],
+  ["remote areas is not remote work", j("Field Coordinator, remote areas of Turkana", "Mental health and psychosocial support (MHPSS) programs serving hard-to-reach and remote areas of the county.", { locations: ["Kenya"] }), { remote: "unknown" }],
+  ["weak concept-only family is not a good match", j("Risk Operations Analyst", "Analyse fraud patterns and payment risk. We offer wellness stipends and mindfulness sessions.", { locations: ["Worldwide"], remote: "remote", locationVerified: true }), { max: 74 }],
 ];
 
 let fail = 0;
