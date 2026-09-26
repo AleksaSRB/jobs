@@ -43,7 +43,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         };
         if (!out.has(job.id)) { out.set(job.id, job); n++; }
       }
-      ctx.log(`[wwr] ${feed}: ${items.length} stavki, ${n} novih u listi`); br.ok();
+      ctx.log(`[wwr] ${feed}: ${items.length} items, ${n} new in list`); br.ok();
     } catch (e) {
       ctx.log(`[wwr] ${feed}: ${(e as Error).message}`);
       br.fail(e); if (++failed === CONFIG.wwr.feeds.length) throw e;

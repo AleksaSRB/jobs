@@ -49,7 +49,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         });
         n++;
       }
-      ctx.log(`[remoteok] ${url.replace("https://remoteok.com", "")}: ${rows.length - 1} oglasa, ${n} novih u listi`); br.ok();
+      ctx.log(`[remoteok] ${url.replace("https://remoteok.com", "")}: ${rows.length - 1} jobs, ${n} new in list`); br.ok();
     } catch (e) {
       ctx.log(`[remoteok] ${url}: ${(e as Error).message}`);
       br.fail(e); if (++failed === urls.length) throw e;

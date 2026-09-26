@@ -49,7 +49,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         });
         n++;
       }
-      ctx.log(`[jobicy] industry=${industry}: ${(res.jobs ?? []).length} oglasa, ${n} novih u listi`); br.ok();
+      ctx.log(`[jobicy] industry=${industry}: ${(res.jobs ?? []).length} jobs, ${n} new in list`); br.ok();
     } catch (e) {
       ctx.log(`[jobicy] ${industry}: ${(e as Error).message}`);
       br.fail(e); if (++failed === CONFIG.jobicy.industries.length) throw e;

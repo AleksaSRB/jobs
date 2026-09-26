@@ -69,7 +69,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
   const { categories, maxPages, listPages, maxDetails } = CONFIG.jobrack;
   const found = new Map<string, Job>();
   const plan: Array<{ url: string; pages: number; label: string }> = [
-    { url: `${BASE}/jobs`, pages: listPages, label: "svi" },
+    { url: `${BASE}/jobs`, pages: listPages, label: "all" },
     ...categories.map((c) => ({ url: `${BASE}/jobs/category/${c}`, pages: maxPages, label: c })),
   ];
   let failed = 0;
@@ -94,9 +94,9 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
     if (ctx.isSeen(j.id) || details >= maxDetails || !worthDetail(j.title)) continue;
     if (j.postedAt !== null && new Date(j.postedAt) < ctx.since) continue;
     details++;
-    try { await enrich(j); } catch (e) { ctx.log(`[jobrack] detalj ${j.id}: ${(e as Error).message}`); }
+    try { await enrich(j); } catch (e) { ctx.log(`[jobrack] detail ${j.id}: ${(e as Error).message}`); }
     await sleep(500);
   }
-  ctx.log(`[jobrack] ukupno ${found.size} oglasa, ${details} detalja skinuto`);
+  ctx.log(`[jobrack] total ${found.size} jobs, ${details} details fetched`);
   return [...found.values()];
 }

@@ -78,7 +78,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         try { jobs = parseList(await fetchText(url, { tries: 2 }), set.verified); }
         catch (e) {
           const msg = (e as Error).message;
-          if (/429/.test(msg)) { rateLimited = true; ctx.log(`[linkedin] rate limit (429) – prekidam ovaj prolaz`); break; }
+          if (/429/.test(msg)) { rateLimited = true; ctx.log(`[linkedin] rate limit (429) – stopping this pass`); break; }
           if (!/HTTP 400/.test(msg)) ctx.log(`[linkedin] ${set.label} q="${q}" page=${page}: ${msg}`);
           break; // 400 = nema (više) rezultata
         }
@@ -97,10 +97,10 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
     if (j.postedAt !== null && new Date(j.postedAt) < ctx.since) continue;
     details++;
     try { await enrich(j); }
-    catch (e) { const msg = (e as Error).message; ctx.log(`[linkedin] detalj ${j.id}: ${msg}`); if (/429/.test(msg)) rateLimited = true; }
+    catch (e) { const msg = (e as Error).message; ctx.log(`[linkedin] detail ${j.id}: ${msg}`); if (/429/.test(msg)) rateLimited = true; }
     await sleep(1_500);
   }
-  ctx.log(`[linkedin] ukupno ${found.size} oglasa, ${details} detalja skinuto${rateLimited ? " (prekinuto: 429)" : ""}`);
+  ctx.log(`[linkedin] total ${found.size} jobs, ${details} details fetched${rateLimited ? " (stopped: 429)" : ""}`);
   if (found.size === 0 && rateLimited) throw new Error("HTTP 429 (rate limit)");
   return [...found.values()];
 }

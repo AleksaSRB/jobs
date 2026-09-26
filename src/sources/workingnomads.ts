@@ -35,7 +35,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
       tags: [r.category_name ?? "", ...(r.tags ?? "").split(",")].map((s) => s.trim()).filter(Boolean),
     };
   });
-  ctx.log(`[workingnomads] ${rows.length} oglasa u feed-u, ${jobs.length} u ciljanim kategorijama`);
+  ctx.log(`[workingnomads] ${rows.length} jobs in feed, ${jobs.length} in target categories`);
 
   const want = jobs.filter((j) => worthDetail(j.title) && !ctx.isSeen(j.id) && numericId(j));
   if (want.length) {

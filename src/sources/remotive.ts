@@ -34,6 +34,6 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
       tags: [r.category ?? "", ...(r.tags ?? [])].filter(Boolean),
     });
   }
-  ctx.log(`[remotive] ${out.size} oglasa u API uzorku`);
+  ctx.log(`[remotive] ${out.size} jobs in the API sample`);
   return [...out.values()];
 }
