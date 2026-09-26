@@ -3,7 +3,8 @@
  * ostatak je iza plaćenog naloga; RSS po kategoriji (feed/marketing) ima 1 stavku. Čitamo samo API – jeftino, slab prinos.
  * Njihova napomena: oglasi kasne 24 h, maksimalno ~4 poziva dnevno -> everyMin 360 u config.json.
  */
-import { fetchJson, htmlToText, toIso, truncate } from "../http.ts";
+import { CONFIG } from "../config.ts";
+import { fetchJson, htmlToText, sleep, toIso, truncate } from "../http.ts";
 import { parseSalaryText, salaryFromDescription } from "../salary.ts";
 import type { Job, SearchCtx } from "../types.ts";
 import { employmentOf, splitLocations } from "./common.ts";
@@ -15,8 +16,14 @@ interface ApiJob {
 
 export async function search(ctx: SearchCtx): Promise<Job[]> {
   const out = new Map<string, Job>();
-  const api = await fetchJson<{ jobs?: ApiJob[] }>("https://remotive.com/api/remote-jobs?limit=100");
-  for (const r of api.jobs ?? []) {
+  const urls = ["https://remotive.com/api/remote-jobs?limit=100", ...(CONFIG.remotive?.queries ?? []).map((q) => `https://remotive.com/api/remote-jobs?limit=100&search=${encodeURIComponent(q)}`)];
+  const rows: ApiJob[] = [];
+  let failed = 0;
+  for (const u of urls) {
+    try { rows.push(...((await fetchJson<{ jobs?: ApiJob[] }>(u)).jobs ?? [])); } catch (e) { ctx.log(`[remotive] ${u}: ${(e as Error).message}`); if (++failed === urls.length) throw e; }
+    await sleep(800);
+  }
+  for (const r of rows) {
     const text = htmlToText(r.description ?? "");
     out.set(`remotive:${r.id}`, {
       source: "remotive",
@@ -34,6 +41,6 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
       tags: [r.category ?? "", ...(r.tags ?? [])].filter(Boolean),
     });
   }
-  ctx.log(`[remotive] ${out.size} jobs in the API sample`);
+  ctx.log(`[remotive] ${out.size} jobs (sample + ${urls.length - 1} searches)`);
   return [...out.values()];
 }

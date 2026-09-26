@@ -21,8 +21,9 @@ export const UA =
 
 /** Every source the scraper knows, in scan order (cheap JSON/RSS sources first, rate-limited HTML sources last). */
 export const ALL_SOURCES: Source[] = [
-  "himalayas", "wwr", "remoteok", "workingnomads", "jobicy", "remotive", "arbeitnow", "themuse", "jobspresso", "aijobs", "eightyk", "adzuna", "hn",
-  "greenhouse", "lever", "ashby", "workable", "smartrecruiters", "recruitee", "personio", "bamboohr", "workday",
+  "himalayas", "wwr", "remoteok", "workingnomads", "jobicy", "remotive", "arbeitnow", "themuse", "jobspresso", "aijobs", "rss", "eightyk", "reliefweb", "adzuna", "hn",
+  "workablesearch", "hiringcafe", "eures",
+  "greenhouse", "lever", "ashby", "workable", "smartrecruiters", "recruitee", "personio", "bamboohr", "workday", "teamtailor",
   "jobrack", "linkedin", "wellfound",
 ];
 
@@ -42,14 +43,20 @@ const DEFAULTS: Config = {
   jobrack: { categories: ["content-writer", "project-manager"], maxPages: 1, listPages: 2, maxDetails: 20 },
   linkedin: { serbia: { location: "Serbia", maxPages: 1, queries: ["ux researcher"] }, europe: { location: "European Union", maxPages: 1, queries: [] }, maxDetails: 40 },
   wellfound: { maxPages: 2, paths: ["/role/r/ux-researcher"] },
-  jobicy: { industries: ["hr", "product"], count: 50 },
+  jobicy: { industries: ["hr", "product"], tags: ["psychology", "mental-health"], count: 50 },
+  remotive: { queries: ["psychology", "mental health", "researcher"] },
   arbeitnow: { maxPages: 3 },
   themuse: { categories: ["Data and Analytics", "Product Management", "UX & Design", "Healthcare", "Writing and Editing", "HR & Recruiting", "Science and Engineering"], levels: ["entry", "mid"], maxPages: 3 },
   jobspresso: { queries: ["research", "health", "content", "product"] },
   aijobs: { feeds: ["https://aijobs.net/feed/"] },
   hn: { keywords: ["remote"], maxComments: 600 },
   adzuna: { appId: "", appKey: "", countries: ["gb", "de", "nl", "pl", "at"], queries: ["behavioural scientist", "ux researcher remote"], resultsPerPage: 50 },
-  eightyk: { url: "" },
+  eightyk: { url: "", algoliaAppId: "W6KM1UDIB3", algoliaApiKey: "d1d7f2c8696e7b36837d5ed337c4a319", index: "jobs_prod" },
+  rss: { feeds: [] },
+  workablesearch: { queries: ["behavioural scientist", "ux researcher", "mental health"], maxPages: 2 },
+  hiringcafe: { queries: ["behavioral scientist", "conversation designer", "ux researcher mental health"], pageSize: 40, maxPages: 2 },
+  eures: { keywords: ["psychologist remote", "behavioural scientist"], maxPages: 2, maxDetails: 30 },
+  reliefweb: { query: "psychosocial OR \"mental health\" OR \"behaviour change\" OR \"staff well-being\"", limit: 100 },
   careers: [],
   careersMaxJobsPerCompany: 400,
   careersMaxDetails: 60,
@@ -67,6 +74,7 @@ function loadConfig(): Config {
     sources: merge("sources"), himalayas: merge("himalayas"), wwr: merge("wwr"), remoteok: merge("remoteok"), workingnomads: merge("workingnomads"),
     jobrack: merge("jobrack"), linkedin: merge("linkedin"), wellfound: merge("wellfound"), jobicy: merge("jobicy"), arbeitnow: merge("arbeitnow"),
     themuse: merge("themuse"), jobspresso: merge("jobspresso"), aijobs: merge("aijobs"), hn: merge("hn"), adzuna: merge("adzuna"), eightyk: merge("eightyk"),
+    remotive: merge("remotive"), rss: merge("rss"), workablesearch: merge("workablesearch"), hiringcafe: merge("hiringcafe"), eures: merge("eures"), reliefweb: merge("reliefweb"),
     careers: (user.careers ?? DEFAULTS.careers).filter((c) => c && c.name && c.ats && c.slug),
     fx: merge("fx"),
   };

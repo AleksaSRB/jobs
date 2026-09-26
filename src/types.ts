@@ -1,8 +1,9 @@
 /** Job boards / aggregators (each has its own adapter in src/sources) + ATS kinds used for company career pages. */
 export type BoardSource =
   | "himalayas" | "wwr" | "remoteok" | "workingnomads" | "jobrack" | "linkedin" | "wellfound" | "jobicy" | "remotive"
-  | "arbeitnow" | "themuse" | "jobspresso" | "aijobs" | "hn" | "adzuna" | "eightyk";
-export type AtsKind = "greenhouse" | "lever" | "ashby" | "workable" | "smartrecruiters" | "recruitee" | "personio" | "bamboohr" | "workday";
+  | "arbeitnow" | "themuse" | "jobspresso" | "aijobs" | "hn" | "adzuna" | "eightyk"
+  | "rss" | "workablesearch" | "hiringcafe" | "eures" | "reliefweb";
+export type AtsKind = "greenhouse" | "lever" | "ashby" | "workable" | "smartrecruiters" | "recruitee" | "personio" | "bamboohr" | "workday" | "teamtailor";
 export type Source = BoardSource | AtsKind;
 export type Status = "new" | "favorite" | "applied" | "rejected";
 export type SalaryPeriod = "year" | "month" | "week" | "day" | "hour";
@@ -26,6 +27,7 @@ export interface Salary {
 /** A listing as returned by a source adapter (normalized, not yet scored). */
 export interface Job {
   source: Source;
+  sourceLabel?: string;         // display name when one adapter serves many boards ("rss" -> "NoDesk", "EU Remote Jobs"…)
   id: string;                   // "<source>:<site id>"
   url: string;                  // best link for "Open" (employer page when known, otherwise the listing on the source)
   sourceUrl?: string;           // listing on the source site when it differs from url
@@ -131,6 +133,16 @@ export interface CareerSite {
   enabled?: boolean;            // default true
 }
 
+/** One RSS/Atom feed read by the generic `rss` source. */
+export interface RssFeed {
+  name: string;                 // board name shown on the card
+  url: string;
+  remote?: boolean;             // the board lists remote jobs only (default false -> text decides)
+  region?: string;              // region the whole feed applies to ("Worldwide", "Europe") when items carry none
+  titleSplit?: "company: title" | "title at company" | "none"; // how <title> encodes the company (default: auto)
+  enabled?: boolean;
+}
+
 export interface Config {
   port: number;
   lookbackDays: number;
@@ -145,14 +157,20 @@ export interface Config {
   jobrack: { categories: string[]; maxPages: number; listPages: number; maxDetails: number };
   linkedin: { serbia: { location: string; maxPages: number; queries: string[] }; europe: { location: string; maxPages: number; queries: string[] }; maxDetails: number };
   wellfound: { maxPages: number; paths: string[] };
-  jobicy: { industries: string[]; count: number };
+  jobicy: { industries: string[]; tags?: string[]; count: number };
+  remotive: { queries: string[] };
   arbeitnow: { maxPages: number };
   themuse: { categories: string[]; levels: string[]; maxPages: number };
   jobspresso: { queries: string[] };
   aijobs: { feeds: string[] };
   hn: { keywords: string[]; maxComments: number };
   adzuna: { appId: string; appKey: string; countries: string[]; queries: string[]; resultsPerPage: number };
-  eightyk: { url: string };
+  eightyk: { url: string; algoliaAppId: string; algoliaApiKey: string; index: string };
+  rss: { feeds: RssFeed[] };
+  workablesearch: { queries: string[]; maxPages: number };
+  hiringcafe: { queries: string[]; pageSize: number; maxPages: number };
+  eures: { keywords: string[]; maxPages: number; maxDetails: number };
+  reliefweb: { query: string; limit: number };
   careers: CareerSite[];
   careersMaxJobsPerCompany: number;
   careersMaxDetails: number;    // per source kind that needs a detail request (SmartRecruiters, BambooHR, Workday)

@@ -20,9 +20,10 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
   const out = new Map<string, Job>();
   let failed = 0;
   const br = new Breaker(3, "jobicy");
-  for (const industry of CONFIG.jobicy.industries) {
+  const plan = [...CONFIG.jobicy.industries.map((i) => ({ label: `industry=${i}`, qs: `industry=${encodeURIComponent(i)}` })), ...(CONFIG.jobicy.tags ?? []).map((t) => ({ label: `tag=${t}`, qs: `tag=${encodeURIComponent(t)}` }))];
+  for (const { label: industry, qs } of plan) {
     try {
-      const res = await fetchJson<{ jobs?: ApiJob[] }>(`https://jobicy.com/api/v2/remote-jobs?count=${CONFIG.jobicy.count}&industry=${encodeURIComponent(industry)}`);
+      const res = await fetchJson<{ jobs?: ApiJob[] }>(`https://jobicy.com/api/v2/remote-jobs?count=${CONFIG.jobicy.count}&${qs}`);
       let n = 0;
       for (const r of res.jobs ?? []) {
         if (!r.id || !r.jobTitle || !r.url) continue;
@@ -49,10 +50,10 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         });
         n++;
       }
-      ctx.log(`[jobicy] industry=${industry}: ${(res.jobs ?? []).length} jobs, ${n} new in list`); br.ok();
+      ctx.log(`[jobicy] ${industry}: ${(res.jobs ?? []).length} jobs, ${n} new in list`); br.ok();
     } catch (e) {
       ctx.log(`[jobicy] ${industry}: ${(e as Error).message}`);
-      br.fail(e); if (++failed === CONFIG.jobicy.industries.length) throw e;
+      br.fail(e); if (++failed === plan.length) throw e;
     }
     await sleep(1_000);
   }

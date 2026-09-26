@@ -11,6 +11,7 @@
  *   personio         GET https://<sub>.jobs.personio.de/xml
  *   bamboohr         GET https://<sub>.bamboohr.com/careers/list                                        (+ detail /careers/<id>/detail)
  *   workday          POST https://<tenant>.wd<n>.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs         (+ detail GET …/wday/cxs/<tenant>/<site><externalPath>); slug = "tenant|wd5|site"
+ *   teamtailor       GET https://<sub>.teamtailor.com/jobs.json   (JSON Feed 1.1: items[].{id,url,title,content_html,date_published,_teamtailor?}; slug may also be a full custom career-site host)
  * All of these return every open position of the company – the matcher (rules.json) decides what is relevant.
  */
 import { CONFIG } from "../config.ts";
@@ -53,7 +54,12 @@ const greenhouse: Fetcher = async (site) => {
 interface LvJob { id: string; text: string; categories?: { team?: string; department?: string; location?: string; commitment?: string; allLocations?: string[] }; workplaceType?: string; descriptionPlain?: string; description?: string; lists?: Array<{ text?: string; content?: string }>; additionalPlain?: string; hostedUrl: string; applyUrl?: string; createdAt?: number; salaryRange?: { min?: number; max?: number; currency?: string; interval?: string } }
 const LV_PERIOD: Record<string, SalaryPeriod> = { "per-year-salary": "year", "per-month-salary": "month", "per-hour-wage": "hour", "per-week-salary": "week", "per-day-salary": "day" };
 const lever: Fetcher = async (site) => {
-  const rows = await fetchJson<LvJob[]>(`https://api.lever.co/v0/postings/${encodeURIComponent(site.slug)}?mode=json`);
+  let rows: LvJob[];
+  try { rows = await fetchJson<LvJob[]>(`https://api.lever.co/v0/postings/${encodeURIComponent(site.slug)}?mode=json`, { tries: 2 }); }
+  catch (e) { // EU tenants live on a separate host (api.lever.co answers 404 for them)
+    if (!/HTTP 404/.test((e as Error).message)) throw e;
+    rows = await fetchJson<LvJob[]>(`https://api.eu.lever.co/v0/postings/${encodeURIComponent(site.slug)}?mode=json`, { tries: 1 });
+  }
   return rows.slice(0, CONFIG.careersMaxJobsPerCompany).map((j) => {
     const text = [j.descriptionPlain ?? toText(j.description), ...(j.lists ?? []).map((l) => `${l.text ?? ""}\n${toText(l.content)}`), j.additionalPlain ?? ""].join("\n").trim();
     const wt = (j.workplaceType ?? "").toLowerCase();
@@ -156,7 +162,9 @@ const recruitee: Fetcher = async (site) => {
 
 // ---------------------------------------------------------------- personio (XML feed)
 const personio: Fetcher = async (site) => {
-  const xml = await fetchText(`https://${encodeURIComponent(site.slug)}.jobs.personio.de/xml`);
+  let xml: string;
+  try { xml = await fetchText(`https://${encodeURIComponent(site.slug)}.jobs.personio.de/xml`, { tries: 2 }); }
+  catch (e) { if (!/HTTP 404|ENOTFOUND|getaddrinfo/.test((e as Error).message)) throw e; xml = await fetchText(`https://${encodeURIComponent(site.slug)}.jobs.personio.com/xml`, { tries: 1 }); }
   const tag = (block: string, name: string) => { const m = block.match(new RegExp(`<${name}>([\\s\\S]*?)</${name}>`)); return m ? decodeEntities(m[1].replace(/^\s*<!\[CDATA\[([\s\S]*?)\]\]>\s*$/, "$1")).trim() : ""; };
   const out: Partial[] = [];
   for (const block of xml.split(/<position>/).slice(1)) {
@@ -254,7 +262,26 @@ const workday: Fetcher = async (site, ctx, budget) => {
   return out;
 };
 
-const FETCHERS: Record<AtsKind, Fetcher> = { greenhouse, lever, ashby, workable, smartrecruiters, recruitee, personio, bamboohr, workday };
+// ---------------------------------------------------------------- teamtailor (JSON Feed)
+interface TtItem { id: string | number; url: string; title: string; content_html?: string; content_text?: string; date_published?: string; summary?: string; _teamtailor?: Record<string, any> }
+const teamtailor: Fetcher = async (site) => {
+  const host = /\./.test(site.slug) ? site.slug : `${site.slug}.teamtailor.com`;
+  const res = await fetchJson<{ items?: TtItem[] }>(`https://${host}/jobs.json`);
+  return (res.items ?? []).slice(0, CONFIG.careersMaxJobsPerCompany).map((it) => {
+    const ex = it._teamtailor ?? {};
+    const text = it.content_text ?? toText(it.content_html);
+    const loc = [ex.location, ex.locations, ex.city, ex.country].map((v) => (Array.isArray(v) ? v.join(", ") : v)).filter(Boolean).join(", ") as string;
+    const remoteStatus = String(ex.remote_status ?? ex.remoteStatus ?? "").toLowerCase();
+    return {
+      id: `teamtailor:${site.slug}/${it.id}`, url: it.url, title: it.title.trim(),
+      locations: locList(loc), remote: remoteStatus === "fully" || remoteStatus === "fully_remote" ? "remote" : remoteStatus === "hybrid" ? "hybrid" : remoteStatus === "none" ? "onsite" : remoteOf(`${it.title} ${loc}`),
+      employment: employmentOf(String(ex.employment_type ?? ex.employmentType ?? "")), postedAt: toIso(it.date_published),
+      salary: salaryFromDescription(text) ?? undefined, description: truncate(text), tags: [ex.department, ex.role].map(String).filter((x) => x && x !== "undefined"),
+    };
+  });
+};
+
+const FETCHERS: Record<AtsKind, Fetcher> = { greenhouse, lever, ashby, workable, smartrecruiters, recruitee, personio, bamboohr, workday, teamtailor };
 
 /** Build the scraper source for one ATS kind: reads every configured company of that kind. */
 export function makeSearch(kind: AtsKind): (ctx: SearchCtx) => Promise<Job[]> {

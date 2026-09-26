@@ -1,6 +1,6 @@
 # Psych & Health-Tech Jobs — remote job scraper (psychology · behavioral science · digital mental health · AI safety)
 
-A small local app that reads **25 job sources** (job boards, aggregators and company career pages), scores every listing with a
+A small local app that reads **31 source types – 16 job boards / aggregators / APIs, 26 RSS boards, and ~460 company career pages through 10 ATS APIs** –, scores every listing with a
 **weighted semantic matcher** (title + description concepts + industry + seniority + remote + eligibility from Serbia + license),
 merges duplicates and shows the good ones as cards on **http://localhost:3008** with ★ Favorite · ✔ Applied · ✕ Reject.
 
@@ -27,7 +27,7 @@ You need **Windows 10 or 11** and an internet connection. Everything else is han
    - checks for **Node.js 22.6+** and installs the LTS version through `winget` if it is missing
      (if that fails, install Node.js LTS manually from https://nodejs.org and run `setup.cmd` again);
    - registers two hidden scheduled tasks: **PsychJobsScraper** (every 15 min) and **PsychJobsServer** (starts at logon);
-   - runs the **first scan** right away (last 7 days from every source, **10–20 minutes** – the console shows progress per source);
+   - runs the **first scan** right away (last 7 days from every source; with ~460 career pages the first pass takes **20–40 minutes** – the console shows progress per source; later passes are incremental and each source runs on its own rhythm);
    - opens **http://localhost:3008** in the browser.
 3. Bookmark **http://localhost:3008**. That is the whole app.
 
@@ -40,19 +40,20 @@ Other buttons in the folder:
 |------|--------------|
 | `setup.cmd` | install (safe to run again – it re-registers the tasks and re-scans) |
 | `open.cmd` | start the server if needed and open the UI |
+| `npm run check -- --careers` (in a terminal) | test every source and career page from this machine |
 | `update.cmd` | `git pull` the newest version and restart the server (your `data/` stays) |
 | `uninstall.cmd` | remove the two scheduled tasks and stop the server (your `data/` stays) |
 
 Optional: get free **Adzuna** API keys at https://developer.adzuna.com and put them into `config.json → adzuna.appId / appKey`
-to add another aggregator (UK, DE, NL, PL, AT, IE searches). The 80,000 Hours board needs its JSON endpoint in `config.json → eightyk.url`
-(see docs/sources.md). Both are skipped with a note until configured.
+to add another aggregator (UK, DE, NL, PL, AT, IE searches); it is skipped with a note until configured. Right after the first scan run
+`npm run check -- --careers` once: it prints which of the ~460 career-page slugs answer from your network (a wrong slug only logs `HTTP 404`).
 
 ### Running it by hand (any OS)
 
 ```
 npm run scrape:force        # scan every source now
 npm run serve               # UI on http://localhost:3008
-npm run scrape -- --only himalayas,linkedin,greenhouse
+npm run scrape -- --only himalayas,linkedin,greenhouse,rss
 npm run check               # ping every source from this machine (add -- --careers to test every career page)
 npm test                    # offline matcher regression tests (45 fixtures)
 npm run score -- --all      # table of everything in the database by current rules
@@ -120,10 +121,16 @@ career pages in **`config.json`**. After editing rules run `npm run score -- --r
 | Wellfound | SSR `__NEXT_DATA__` role pages (ux-researcher, product-manager, prompt-engineer, content, instructional/narrative designer, coach…) | 6 h |
 | Adzuna | official API with free keys (optional) | 2 h |
 | 80,000 Hours | JSON endpoint when configured (optional) | 2 h |
-| **Company career pages** | public ATS APIs: **Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Recruitee, Personio, BambooHR, Workday** – the list of companies (digital mental health, DTx, coaching, AI labs, T&S vendors, conversational AI, HR-tech, research agencies, game studios) is in `config.json → careers` | 2–3 h |
+| Workable global search | keyless search API over every public Workable employer (`jobs.workable.com/api/v1/jobs?query=…&location=Remote`), 25 domain queries | 2 h |
+| hiring.cafe | unofficial multi-ATS aggregator API, remote filter, 29 domain queries (may be blocked from datacenter IPs; fine from a home PC) | 2 h |
+| EURES | EU public employment services search API, 12 keyword sets + details | 3 h |
+| ReliefWeb | UN OCHA jobs API: MHPSS, staff well-being, social & behaviour change roles (many remote consultancies) | 3 h |
+| 80,000 Hours | public Algolia index of the AI-safety / AI-governance / global-health job board (~900 roles) | 2 h |
+| **26 RSS / Atom boards** | one generic adapter (`rss.feeds` in config): NoDesk, EU Remote Jobs, Real Work From Anywhere, JobsCollider ×5, RemoteFirstJobs, Remote.co ×3, Empllo, Authentic Jobs, GameJobs.co, Games-Career, APA PsycCareers, jobs.ac.uk ×2, THE unijobs, BPS Jobs, CharityJob, Guardian Jobs, Remotive RSS, SkipTheDrive | 60 min |
+| **~460 company career pages** | public ATS APIs: **Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Recruitee, Personio, BambooHR, Workday, Teamtailor** – digital mental health, DTx, coaching & corporate well-being, AI labs & safety orgs, human-data / trust-and-safety vendors, conversational-AI & companion apps, people-science & research agencies, narrative game studios; list, verification status and how each slug was found: [docs/careers.md](docs/careers.md) | 2–3 h |
 
 One broken source never stops the others; its error shows in the UI (“last check”) and in `data/scraper.log`.
-Details, what each site gives, and what was tried and does not work (Indeed, Glassdoor, FlexJobs, Jobgether, Otta, Built In, Upwork…): [docs/sources.md](docs/sources.md).
+Details, what each site gives, and what was tried and does not work (Indeed, Glassdoor, FlexJobs, Jobgether, Otta, Built In, Upwork…): [docs/sources.md](docs/sources.md). The research pass that produced the career-page list (and 168 catalogued boards for future batches): [docs/careers.md](docs/careers.md).
 
 ## Dedup, statuses, notifications
 

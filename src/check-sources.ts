@@ -22,6 +22,7 @@ const atsUrl = (ats: AtsKind, slug: string): { url: string; opts?: Parameters<ty
     case "personio": return { url: `https://${slug}.jobs.personio.de/xml` };
     case "bamboohr": return { url: `https://${slug}.bamboohr.com/careers/list`, opts: { headers: { Accept: "application/json" } } };
     case "workday": return { url: `https://${tenant}.${wd}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`, opts: { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ appliedFacets: {}, limit: 1, offset: 0, searchText: "" }) } };
+    case "teamtailor": return { url: `https://${/\./.test(slug) ? slug : `${slug}.teamtailor.com`}/jobs.json` };
   }
 };
 
@@ -38,7 +39,10 @@ const BOARDS: Array<[string, string]> = [
   ["aijobs", CONFIG.aijobs.feeds[0]],
   ["hn", "https://hn.algolia.com/api/v1/search_by_date?tags=story,author_whoishiring&query=%22who%20is%20hiring%22&hitsPerPage=1"],
   ["adzuna", CONFIG.adzuna.appId ? `https://api.adzuna.com/v1/api/jobs/${CONFIG.adzuna.countries[0]}/search/1?app_id=${CONFIG.adzuna.appId}&app_key=${CONFIG.adzuna.appKey}&what=psychology&results_per_page=1` : ""],
-  ["eightyk", CONFIG.eightyk.url],
+  ["eightyk", CONFIG.eightyk.url || (CONFIG.eightyk.algoliaAppId ? `https://${CONFIG.eightyk.algoliaAppId}-dsn.algolia.net/1/indexes/${CONFIG.eightyk.index}/query?x-algolia-application-id=${CONFIG.eightyk.algoliaAppId}&x-algolia-api-key=${CONFIG.eightyk.algoliaApiKey}&query=&hitsPerPage=1` : "")],
+  ["rss", CONFIG.rss.feeds[0]?.url ?? ""],
+  ["workablesearch", `https://jobs.workable.com/api/v1/jobs?query=${encodeURIComponent(CONFIG.workablesearch.queries[0] ?? "psychology")}&location=Remote&limit=1`],
+  ["reliefweb", `https://api.reliefweb.int/v1/jobs?appname=psych-healthtech-jobs&limit=1&query[value]=${encodeURIComponent("mental health")}`],
   ["jobrack", "https://jobrack.eu/jobs?page=1"],
   ["linkedin", `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=${encodeURIComponent(CONFIG.linkedin.serbia.queries[0] ?? "psychology")}&location=Serbia&f_WT=2&start=0`],
   ["wellfound", `https://wellfound.com${CONFIG.wellfound.paths[0]}`],
@@ -55,10 +59,11 @@ async function probe(name: string, url: string, opts?: Parameters<typeof fetchTe
 }
 
 for (const [name, url] of BOARDS) if (CONFIG.sources[name as keyof typeof CONFIG.sources]?.enabled !== false) await probe(name, url);
-const kinds: AtsKind[] = ["greenhouse", "lever", "ashby", "workable", "smartrecruiters", "recruitee", "personio", "bamboohr", "workday"];
+const kinds: AtsKind[] = ["greenhouse", "lever", "ashby", "workable", "smartrecruiters", "recruitee", "personio", "bamboohr", "workday", "teamtailor"];
 for (const k of kinds) {
   const sites = CONFIG.careers.filter((c) => c.ats === k && c.enabled !== false);
   if (!sites.length) { console.log(`skip  ${k.padEnd(22)} no companies configured`); continue; }
   for (const s of all ? sites : sites.slice(0, 1)) { const { url, opts } = atsUrl(k, s.slug); await probe(`${k}:${s.name}`.slice(0, 22), url, opts); }
 }
+console.log("note: hiring.cafe and EURES need POST bodies – run the scraper with --only hiringcafe,eures to test them.");
 console.log(`\n${CONFIG.careers.length} career pages configured (use --careers to test all).`);

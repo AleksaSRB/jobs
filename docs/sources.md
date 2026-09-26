@@ -29,6 +29,21 @@ site's public API contract (26.09.2026) — run `npm run check` on the scraping 
 | 15 | **Adzuna** | 🆕🔑 | `api.adzuna.com/v1/api/jobs/<gb|de|nl|pl|at|ie>/search/1?what=<q>&max_days_old=…` | Free developer key (developer.adzuna.com). Skipped with a note until `adzuna.appId/appKey` are set. |
 | 16 | **80,000 Hours job board** | 🆕🔑 | JSON endpoint from `config.json → eightyk.url` | The board is a Next.js/Airtable app whose data URL changes; adapter accepts the Airtable `records[].fields` shape and plain arrays. Set the URL after inspecting the network tab of jobs.80000hours.org (or leave empty). |
 
+## New keyless APIs found by the research pass (26.09.2026)
+
+| # | Source | Status | How it is read | Notes |
+|---|--------|:------:|----------------|-------|
+| 17 | **Workable global search** | 🆕 | `GET jobs.workable.com/api/v1/jobs?query=<q>&location=Remote&limit=20[&pageToken=…]` | Searches every public Workable employer at once (thousands of SMBs; UK/EU health, coaching, L&D, research agencies). Cloudflare 1015 on bursts → 3 s spacing. 25 domain queries. |
+| 18 | **hiring.cafe** | 🆕 | `POST hiring.cafe/api/search-jobs` `{size, page, searchState:{searchQuery, workplaceTypes:["Remote"]}}` | Unofficial API (used by RSSHub and several 2025-26 scrapers); indexes company ATS postings worldwide with structured remote filters – best place for unusual titles. May 429/403 datacenter IPs; 2.5 s spacing, breaker. |
+| 19 | **EURES** | 🆕 | `POST europa.eu/eures/api/jv-searchengine/public/jv-search/search` + detail `GET …/jv/id/<id>` | All EU/EEA public employment services; keyless; no remote flag → keywords include "remote". Mostly on-site → matcher rejects by location. |
+| 20 | **ReliefWeb Jobs** | 🆕 | `GET api.reliefweb.int/v1/jobs?appname=…&profile=full&query[value]=<lucene>` | Official UN OCHA API; MHPSS advisers, psychologists, staff well-being, social & behaviour change specialists, research consultancies; many remote consultancies. |
+| 21 | **80,000 Hours** | 🆕 | `POST <appId>-dsn.algolia.net/1/indexes/jobs_prod/query` with the site's search-only key (in `config.json → eightyk`) | Whole board (~900 roles) in one call; `url_external` = employer link. If the key rotates, update `eightyk.algoliaApiKey` or set `eightyk.url`. |
+| 22 | **26 RSS / Atom boards** | 🆕 | generic adapter `src/sources/rss.ts`, feeds in `config.json → rss.feeds` | NoDesk, EU Remote Jobs (+ worldwide region feed), Real Work From Anywhere (no-country-restriction roles only – ideal for Serbia), JobsCollider (writing / PM / HR / design / other), RemoteFirstJobs, Remote.co (healthcare / HR / writing), Empllo, Authentic Jobs, GameJobs.co (Atom), Games-Career, APA PsycCareers, jobs.ac.uk ×2, THE unijobs, BPS Jobs, CharityJob, Guardian Jobs, Remotive RSS, SkipTheDrive. Each feed fails independently; the card shows the board name. |
+| 23 | **Teamtailor career sites** | 🆕 | `GET <sub>.teamtailor.com/jobs.json` (JSON Feed) – 10th ATS kind | Nordic/UK/EU employers (Askable, Paradox Interactive, Zing Coach…). Lever EU tenants (`api.eu.lever.co`) and Personio `.com` hosts are handled as fallbacks. |
+| — | Jobicy `tag=` / Remotive `search=` | 🆕 | extra query parameters on the existing adapters | Jobicy tags psychology, mental-health, ux-research, coaching…; Remotive keyword searches on top of the free sample. |
+
+Catalogued but **not wired** (needs a key, a referer trick, or is low relevance): Welcome to the Jungle (Algolia with referer allow-list), Reed (UK key), Jooble (key + Cloudflare), Careerjet (affiliate id), Landing.jobs, The Hub, Torre, Braintrust, Built In API, Reddit hiring threads, Getro/Consider VC boards, Inside Higher Ed / Chronicle / HERC / HigherEdJobs (US on-site academia). Full table with endpoints: [careers.md](careers.md#job-boards-catalogued-during-the-research-168).
+
 ## Company career pages (ATS public APIs)
 
 The biggest recall win for this niche: the companies that hire psychologists, behavioral scientists, coaches, T&S analysts and conversation
@@ -45,10 +60,12 @@ designers are known, and their career pages expose key-less JSON:
 | Personio | `<sub>.jobs.personio.de/xml` | XML feed; `schedule`, `employmentType`, `seniority`, `yearsOfExperience` |
 | BambooHR | `<sub>.bamboohr.com/careers/list` + `/careers/<id>/detail` | `isRemote`, `employmentStatusLabel`; detail per new relevant posting |
 | Workday | `POST <tenant>.wd<n>.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs` + detail GET | slug = `tenant|wd5|Site`; `locationsText`, `postedOn` (“Posted 3 Days Ago”), `timeType`, `remoteType` |
+| Teamtailor | `<sub>.teamtailor.com/jobs.json` (JSON Feed 1.1) | `_teamtailor.remote_status`, `employment_type`; slug may be a full custom career-site host |
 
 Companies are listed in `config.json → careers` as `{ "name", "ats", "slug", "tags": ["mental-health"] }` (tags are added to every job of that
-company so industry signals fire even for terse listings). Wrong slugs only log `HTTP 404` for that company. The list is documented in
-[careers.md](careers.md) (how each slug was found and its verification status).
+company so industry signals fire even for terse listings). ~460 companies: 348 slugs found verbatim in public ATS tenant directories, 31 corrected from
+those directories, 28 discovered there by domain keyword, 56 from research memory only (low-confidence ones disabled). Wrong slugs only log `HTTP 404`
+for that company. Full list with status and notes: [careers.md](careers.md).
 
 ## Tried and not usable without a browser / login
 

@@ -5,66 +5,322 @@
   "minScore": 50,
   "ntfyTopic": "",
   "sources": {
-    "himalayas": { "enabled": true, "everyMin": 15 },
-    "wwr": { "enabled": true, "everyMin": 30 },
-    "remoteok": { "enabled": true, "everyMin": 60 },
-    "workingnomads": { "enabled": true, "everyMin": 60 },
-    "jobicy": { "enabled": true, "everyMin": 60 },
-    "remotive": { "enabled": true, "everyMin": 360 },
-    "arbeitnow": { "enabled": true, "everyMin": 60 },
-    "themuse": { "enabled": true, "everyMin": 120 },
-    "jobspresso": { "enabled": true, "everyMin": 60 },
-    "aijobs": { "enabled": true, "everyMin": 60 },
-    "eightyk": { "enabled": true, "everyMin": 120 },
-    "adzuna": { "enabled": true, "everyMin": 120 },
-    "hn": { "enabled": true, "everyMin": 360 },
-    "greenhouse": { "enabled": true, "everyMin": 120 },
-    "lever": { "enabled": true, "everyMin": 120 },
-    "ashby": { "enabled": true, "everyMin": 120 },
-    "workable": { "enabled": true, "everyMin": 120 },
-    "smartrecruiters": { "enabled": true, "everyMin": 180 },
-    "recruitee": { "enabled": true, "everyMin": 180 },
-    "personio": { "enabled": true, "everyMin": 180 },
-    "bamboohr": { "enabled": true, "everyMin": 180 },
-    "workday": { "enabled": true, "everyMin": 180 },
-    "jobrack": { "enabled": true, "everyMin": 60 },
-    "linkedin": { "enabled": true, "everyMin": 60 },
-    "wellfound": { "enabled": true, "everyMin": 360 }
+    "himalayas": {
+      "enabled": true,
+      "everyMin": 15
+    },
+    "wwr": {
+      "enabled": true,
+      "everyMin": 30
+    },
+    "remoteok": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "workingnomads": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "jobicy": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "remotive": {
+      "enabled": true,
+      "everyMin": 360
+    },
+    "arbeitnow": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "themuse": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "jobspresso": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "aijobs": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "eightyk": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "adzuna": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "hn": {
+      "enabled": true,
+      "everyMin": 360
+    },
+    "greenhouse": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "lever": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "ashby": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "workable": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "smartrecruiters": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "recruitee": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "personio": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "bamboohr": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "workday": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "jobrack": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "linkedin": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "wellfound": {
+      "enabled": true,
+      "everyMin": 360
+    },
+    "rss": {
+      "enabled": true,
+      "everyMin": 60
+    },
+    "workablesearch": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "hiringcafe": {
+      "enabled": true,
+      "everyMin": 120
+    },
+    "eures": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "reliefweb": {
+      "enabled": true,
+      "everyMin": 180
+    },
+    "teamtailor": {
+      "enabled": true,
+      "everyMin": 180
+    }
   },
   "himalayas": {
     "country": "RS",
     "maxPages": 2,
     "queries": [
-      "behavioral scientist", "behavioural scientist", "behavioral science", "behavior change", "behavioral researcher", "behavioral design", "decision scientist",
-      "digital health", "digital mental health", "mental health", "behavioral health", "digital therapeutics", "telehealth", "health coach", "clinical content",
-      "ux researcher", "user researcher", "user research", "design researcher", "human factors", "product researcher", "research scientist", "qualitative researcher", "mixed methods",
-      "product manager health", "product manager mental health", "clinical product", "program manager mental health", "patient experience", "member experience",
-      "ai safety", "trust and safety", "trust & safety", "responsible ai", "ai evaluator", "ai trainer", "llm evaluator", "model evaluation", "red team", "ai policy", "ai ethics", "ai governance", "content policy", "human feedback", "data annotator", "quality rater",
-      "prompt engineer", "prompt designer", "conversation designer", "conversational ai", "conversation design", "dialogue designer", "ai content designer", "ai persona", "chatbot", "voice user interface",
-      "human-centered ai", "human-ai interaction", "hci researcher", "ai researcher psychology",
-      "cyberpsychology", "security awareness", "human risk", "security culture",
-      "mental health coach", "wellbeing coach", "wellness coach", "life coach", "health coach", "coach", "peer support", "care navigator",
-      "counselor", "counsellor", "therapist", "psychologist", "psychotherapist",
-      "employee wellbeing", "corporate wellness", "workplace wellbeing", "psychological safety", "employee experience", "people experience", "employee engagement",
-      "content strategist", "health writer", "mental health writer", "medical writer", "psychoeducation", "instructional designer", "learning designer", "curriculum designer", "learning experience designer", "content designer",
-      "character writer", "dialogue writer", "narrative designer", "game writer", "creative writer", "scriptwriter", "persona designer",
-      "talent assessment", "behavioral interviewer", "assessment specialist", "recruiter", "talent acquisition", "people scientist", "psychometrics", "organizational psychologist", "io psychologist",
-      "consumer insights", "consumer psychologist", "market research", "brand strategist", "customer insights", "research analyst", "insights analyst", "qualitative research",
-      "organizational development", "people strategy", "team effectiveness", "change management", "culture consultant", "learning and development", "leadership development", "facilitator", "people analytics",
-      "psychology", "behavioral", "wellbeing", "health", "research associate", "program manager", "policy analyst", "safety specialist"
+      "behavioral scientist",
+      "behavioural scientist",
+      "behavioral science",
+      "behavior change",
+      "behavioral researcher",
+      "behavioral design",
+      "decision scientist",
+      "digital health",
+      "digital mental health",
+      "mental health",
+      "behavioral health",
+      "digital therapeutics",
+      "telehealth",
+      "health coach",
+      "clinical content",
+      "ux researcher",
+      "user researcher",
+      "user research",
+      "design researcher",
+      "human factors",
+      "product researcher",
+      "research scientist",
+      "qualitative researcher",
+      "mixed methods",
+      "product manager health",
+      "product manager mental health",
+      "clinical product",
+      "program manager mental health",
+      "patient experience",
+      "member experience",
+      "ai safety",
+      "trust and safety",
+      "trust & safety",
+      "responsible ai",
+      "ai evaluator",
+      "ai trainer",
+      "llm evaluator",
+      "model evaluation",
+      "red team",
+      "ai policy",
+      "ai ethics",
+      "ai governance",
+      "content policy",
+      "human feedback",
+      "data annotator",
+      "quality rater",
+      "prompt engineer",
+      "prompt designer",
+      "conversation designer",
+      "conversational ai",
+      "conversation design",
+      "dialogue designer",
+      "ai content designer",
+      "ai persona",
+      "chatbot",
+      "voice user interface",
+      "human-centered ai",
+      "human-ai interaction",
+      "hci researcher",
+      "ai researcher psychology",
+      "cyberpsychology",
+      "security awareness",
+      "human risk",
+      "security culture",
+      "mental health coach",
+      "wellbeing coach",
+      "wellness coach",
+      "life coach",
+      "health coach",
+      "coach",
+      "peer support",
+      "care navigator",
+      "counselor",
+      "counsellor",
+      "therapist",
+      "psychologist",
+      "psychotherapist",
+      "employee wellbeing",
+      "corporate wellness",
+      "workplace wellbeing",
+      "psychological safety",
+      "employee experience",
+      "people experience",
+      "employee engagement",
+      "content strategist",
+      "health writer",
+      "mental health writer",
+      "medical writer",
+      "psychoeducation",
+      "instructional designer",
+      "learning designer",
+      "curriculum designer",
+      "learning experience designer",
+      "content designer",
+      "character writer",
+      "dialogue writer",
+      "narrative designer",
+      "game writer",
+      "creative writer",
+      "scriptwriter",
+      "persona designer",
+      "talent assessment",
+      "behavioral interviewer",
+      "assessment specialist",
+      "recruiter",
+      "talent acquisition",
+      "people scientist",
+      "psychometrics",
+      "organizational psychologist",
+      "io psychologist",
+      "consumer insights",
+      "consumer psychologist",
+      "market research",
+      "brand strategist",
+      "customer insights",
+      "research analyst",
+      "insights analyst",
+      "qualitative research",
+      "organizational development",
+      "people strategy",
+      "team effectiveness",
+      "change management",
+      "culture consultant",
+      "learning and development",
+      "leadership development",
+      "facilitator",
+      "people analytics",
+      "psychology",
+      "behavioral",
+      "wellbeing",
+      "health",
+      "research associate",
+      "program manager",
+      "policy analyst",
+      "safety specialist"
     ]
   },
   "wwr": {
-    "feeds": ["remote-product-jobs", "remote-design-jobs", "remote-management-and-finance-jobs", "remote-customer-support-jobs", "remote-sales-and-marketing-jobs", "all-other-remote-jobs"]
+    "feeds": [
+      "remote-product-jobs",
+      "remote-design-jobs",
+      "remote-management-and-finance-jobs",
+      "remote-customer-support-jobs",
+      "remote-sales-and-marketing-jobs",
+      "all-other-remote-jobs"
+    ]
   },
   "remoteok": {
-    "tags": ["health", "healthcare", "medical", "research", "ux", "content", "writing", "copywriting", "non tech", "ai", "product", "hr", "education", "teaching", "psychology", "design"]
+    "tags": [
+      "health",
+      "healthcare",
+      "medical",
+      "research",
+      "ux",
+      "content",
+      "writing",
+      "copywriting",
+      "non tech",
+      "ai",
+      "product",
+      "hr",
+      "education",
+      "teaching",
+      "psychology",
+      "design"
+    ]
   },
   "workingnomads": {
-    "categories": ["Design", "Writing", "Management", "Healthcare", "Education", "Human Resources", "Consulting", "Marketing", "Legal"]
+    "categories": [
+      "Design",
+      "Writing",
+      "Management",
+      "Healthcare",
+      "Education",
+      "Human Resources",
+      "Consulting",
+      "Marketing",
+      "Legal"
+    ]
   },
   "jobrack": {
-    "categories": ["content-writer", "project-manager", "design", "support"],
+    "categories": [
+      "content-writer",
+      "project-manager",
+      "design",
+      "support"
+    ],
     "maxPages": 2,
     "listPages": 3,
     "maxDetails": 30
@@ -74,51 +330,4585 @@
       "location": "Serbia",
       "maxPages": 1,
       "queries": [
-        "behavioral scientist", "behavioural science", "ux researcher", "user researcher", "digital health", "mental health", "digital therapeutics",
-        "ai safety", "trust and safety", "responsible ai", "ai trainer", "ai evaluator", "prompt engineer", "conversation designer", "conversational ai designer",
-        "mental health coach", "wellbeing coach", "health coach", "employee wellbeing", "psychological safety",
-        "content strategist health", "instructional designer", "learning experience designer", "narrative designer", "game writer",
-        "organizational psychologist", "people scientist", "talent assessment", "consumer insights", "market research analyst", "psychologist", "psychology"
+        "behavioral scientist",
+        "behavioural science",
+        "ux researcher",
+        "user researcher",
+        "digital health",
+        "mental health",
+        "digital therapeutics",
+        "ai safety",
+        "trust and safety",
+        "responsible ai",
+        "ai trainer",
+        "ai evaluator",
+        "prompt engineer",
+        "conversation designer",
+        "conversational ai designer",
+        "mental health coach",
+        "wellbeing coach",
+        "health coach",
+        "employee wellbeing",
+        "psychological safety",
+        "content strategist health",
+        "instructional designer",
+        "learning experience designer",
+        "narrative designer",
+        "game writer",
+        "organizational psychologist",
+        "people scientist",
+        "talent assessment",
+        "consumer insights",
+        "market research analyst",
+        "psychologist",
+        "psychology"
       ]
     },
     "europe": {
       "location": "European Union",
       "maxPages": 1,
-      "queries": ["behavioral scientist remote", "ux researcher health remote", "digital mental health remote", "ai safety remote", "trust and safety analyst remote", "conversation designer remote", "prompt engineer remote", "mental health coach remote", "wellbeing specialist remote", "instructional designer remote", "narrative designer remote", "organizational psychologist remote"]
+      "queries": [
+        "behavioral scientist remote",
+        "ux researcher health remote",
+        "digital mental health remote",
+        "ai safety remote",
+        "trust and safety analyst remote",
+        "conversation designer remote",
+        "prompt engineer remote",
+        "mental health coach remote",
+        "wellbeing specialist remote",
+        "instructional designer remote",
+        "narrative designer remote",
+        "organizational psychologist remote"
+      ]
     },
     "maxDetails": 50
   },
   "wellfound": {
     "maxPages": 2,
-    "paths": ["/role/r/ux-researcher", "/role/r/user-researcher", "/role/r/product-manager", "/role/r/prompt-engineer", "/role/r/content-writer", "/role/r/content-strategist", "/role/r/instructional-designer", "/role/r/narrative-designer", "/role/r/game-writer", "/role/r/health-coach", "/role/r/behavioral-scientist", "/role/r/ai-trainer", "/role/r/conversation-designer", "/role/r/trust-and-safety", "/role/r/research-scientist", "/role/r/market-researcher", "/role/r/psychologist", "/role/l/product-manager/europe"]
+    "paths": [
+      "/role/r/ux-researcher",
+      "/role/r/user-researcher",
+      "/role/r/product-manager",
+      "/role/r/prompt-engineer",
+      "/role/r/content-writer",
+      "/role/r/content-strategist",
+      "/role/r/instructional-designer",
+      "/role/r/narrative-designer",
+      "/role/r/game-writer",
+      "/role/r/health-coach",
+      "/role/r/behavioral-scientist",
+      "/role/r/ai-trainer",
+      "/role/r/conversation-designer",
+      "/role/r/trust-and-safety",
+      "/role/r/research-scientist",
+      "/role/r/market-researcher",
+      "/role/r/psychologist",
+      "/role/l/product-manager/europe"
+    ]
   },
   "jobicy": {
-    "industries": ["hr", "product", "copywriting", "design-multimedia", "business", "management", "technical-writing", "supporting", "marketing"],
-    "count": 50
+    "industries": [
+      "hr",
+      "product",
+      "copywriting",
+      "design-multimedia",
+      "business",
+      "management",
+      "technical-writing",
+      "supporting",
+      "marketing"
+    ],
+    "count": 50,
+    "tags": [
+      "psychology",
+      "mental-health",
+      "ux-research",
+      "coaching",
+      "research",
+      "healthcare",
+      "education",
+      "content",
+      "policy"
+    ]
   },
-  "arbeitnow": { "maxPages": 4 },
+  "arbeitnow": {
+    "maxPages": 4
+  },
   "themuse": {
-    "categories": ["Design and UX", "Product", "Healthcare", "Writing and Editing", "HR", "Social Services", "Data and Analytics", "Project Management", "Education", "Science and Engineering", "Media, PR, and Communications"],
-    "levels": ["entry", "mid"],
+    "categories": [
+      "Design and UX",
+      "Product",
+      "Healthcare",
+      "Writing and Editing",
+      "HR",
+      "Social Services",
+      "Data and Analytics",
+      "Project Management",
+      "Education",
+      "Science and Engineering",
+      "Media, PR, and Communications"
+    ],
+    "levels": [
+      "entry",
+      "mid"
+    ],
     "maxPages": 3
   },
-  "jobspresso": { "queries": ["research", "health", "content", "product", "psychology", "coach", "writer", "design", "ai", "policy"] },
-  "aijobs": { "feeds": ["https://aijobs.net/feed/"] },
-  "hn": { "keywords": ["remote"], "maxComments": 800 },
+  "jobspresso": {
+    "queries": [
+      "research",
+      "health",
+      "content",
+      "product",
+      "psychology",
+      "coach",
+      "writer",
+      "design",
+      "ai",
+      "policy"
+    ]
+  },
+  "aijobs": {
+    "feeds": [
+      "https://aijobs.net/feed/"
+    ]
+  },
+  "hn": {
+    "keywords": [
+      "remote"
+    ],
+    "maxComments": 800
+  },
   "adzuna": {
-    "appId": "", "appKey": "",
-    "countries": ["gb", "de", "nl", "pl", "at", "ie"],
-    "queries": ["behavioural scientist", "ux researcher remote", "mental health content", "trust and safety", "conversation designer", "digital health remote", "psychology remote", "wellbeing coach remote", "organisational psychologist", "prompt engineer", "instructional designer remote", "narrative designer"],
+    "appId": "",
+    "appKey": "",
+    "countries": [
+      "gb",
+      "de",
+      "nl",
+      "pl",
+      "at",
+      "ie"
+    ],
+    "queries": [
+      "behavioural scientist",
+      "ux researcher remote",
+      "mental health content",
+      "trust and safety",
+      "conversation designer",
+      "digital health remote",
+      "psychology remote",
+      "wellbeing coach remote",
+      "organisational psychologist",
+      "prompt engineer",
+      "instructional designer remote",
+      "narrative designer"
+    ],
     "resultsPerPage": 50
   },
-  "eightyk": { "url": "" },
+  "eightyk": {
+    "url": "",
+    "algoliaAppId": "W6KM1UDIB3",
+    "algoliaApiKey": "d1d7f2c8696e7b36837d5ed337c4a319",
+    "index": "jobs_prod"
+  },
   "careersMaxJobsPerCompany": 400,
   "careersMaxDetails": 60,
-  "careers": [],
   "blockedCompanies": [],
   "fx": {
-    "EUR": 1, "USD": 0.88, "GBP": 1.16, "CHF": 1.06, "CAD": 0.63, "AUD": 0.57, "NZD": 0.52, "SGD": 0.67, "RSD": 0.0085,
-    "PLN": 0.235, "SEK": 0.09, "NOK": 0.086, "DKK": 0.134, "CZK": 0.04, "RON": 0.2, "HUF": 0.0025, "BAM": 0.51,
-    "INR": 0.0102, "BRL": 0.16, "MXN": 0.047, "ZAR": 0.049, "JPY": 0.0058
-  }
+    "EUR": 1,
+    "USD": 0.88,
+    "GBP": 1.16,
+    "CHF": 1.06,
+    "CAD": 0.63,
+    "AUD": 0.57,
+    "NZD": 0.52,
+    "SGD": 0.67,
+    "RSD": 0.0085,
+    "PLN": 0.235,
+    "SEK": 0.09,
+    "NOK": 0.086,
+    "DKK": 0.134,
+    "CZK": 0.04,
+    "RON": 0.2,
+    "HUF": 0.0025,
+    "BAM": 0.51,
+    "INR": 0.0102,
+    "BRL": 0.16,
+    "MXN": 0.047,
+    "ZAR": 0.049,
+    "JPY": 0.0058
+  },
+  "remotive": {
+    "queries": [
+      "psychology",
+      "mental health",
+      "behavioral",
+      "researcher",
+      "coach",
+      "wellbeing",
+      "content",
+      "policy",
+      "trust and safety"
+    ]
+  },
+  "workablesearch": {
+    "queries": [
+      "behavioural scientist",
+      "behavioral scientist",
+      "ux researcher",
+      "user researcher",
+      "mental health",
+      "digital health",
+      "psychologist",
+      "wellbeing",
+      "well-being coach",
+      "health coach",
+      "counsellor",
+      "trust and safety",
+      "conversation designer",
+      "prompt engineer",
+      "instructional designer",
+      "content strategist health",
+      "organisational psychologist",
+      "people scientist",
+      "research executive",
+      "insights analyst",
+      "learning designer",
+      "narrative designer",
+      "clinical content",
+      "psychoeducation",
+      "behaviour change"
+    ],
+    "maxPages": 2
+  },
+  "hiringcafe": {
+    "queries": [
+      "behavioral scientist",
+      "behavioural science",
+      "behavior change",
+      "digital mental health",
+      "digital therapeutics",
+      "ux researcher mental health",
+      "user researcher health",
+      "conversation designer",
+      "prompt engineer",
+      "ai safety evaluator",
+      "trust and safety analyst",
+      "responsible ai",
+      "human-centered ai",
+      "mental health coach",
+      "wellbeing coach",
+      "employee wellbeing",
+      "psychological safety",
+      "clinical content writer",
+      "psychoeducation",
+      "instructional designer mental health",
+      "ai persona",
+      "narrative designer",
+      "talent assessment",
+      "consumer insights psychology",
+      "organizational psychologist",
+      "people scientist",
+      "cyberpsychology",
+      "human risk",
+      "psychology"
+    ],
+    "pageSize": 40,
+    "maxPages": 2
+  },
+  "eures": {
+    "keywords": [
+      "psychologist remote",
+      "behavioural scientist",
+      "ux researcher remote",
+      "mental health remote",
+      "wellbeing coach remote",
+      "organisational psychologist",
+      "conversation designer",
+      "trust and safety",
+      "research psychologist",
+      "health coach remote",
+      "instructional designer remote",
+      "people analytics remote"
+    ],
+    "maxPages": 2,
+    "maxDetails": 30
+  },
+  "reliefweb": {
+    "query": "psychosocial OR \"mental health\" OR MHPSS OR \"behaviour change\" OR \"behavior change\" OR \"staff well-being\" OR \"staff wellbeing\" OR psychologist OR \"social and behavior change\" OR \"social and behaviour change\" OR counsellor OR \"user research\" OR \"trust and safety\"",
+    "limit": 100
+  },
+  "rss": {
+    "feeds": [
+      {
+        "name": "NoDesk",
+        "url": "https://nodesk.co/remote-jobs/index.xml",
+        "remote": true
+      },
+      {
+        "name": "EU Remote Jobs",
+        "url": "https://euremotejobs.com/?feed=job_feed&posts_per_page=50",
+        "remote": true
+      },
+      {
+        "name": "EU Remote Jobs (Worldwide)",
+        "url": "https://euremotejobs.com/job-region/remote-jobs-worldwide/feed/",
+        "remote": true,
+        "region": "Worldwide"
+      },
+      {
+        "name": "Real Work From Anywhere",
+        "url": "https://www.realworkfromanywhere.com/rss.xml",
+        "remote": true,
+        "region": "Worldwide"
+      },
+      {
+        "name": "JobsCollider (writing)",
+        "url": "https://jobscollider.com/remote-writing-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "JobsCollider (project management)",
+        "url": "https://jobscollider.com/remote-project-management-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "JobsCollider (human resources)",
+        "url": "https://jobscollider.com/remote-human-resources-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "JobsCollider (design)",
+        "url": "https://jobscollider.com/remote-design-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "JobsCollider (all others)",
+        "url": "https://jobscollider.com/remote-all-others-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "RemoteFirstJobs",
+        "url": "https://remotefirstjobs.com/rss",
+        "remote": true
+      },
+      {
+        "name": "Remote.co (healthcare)",
+        "url": "https://remote.co/remote-jobs/healthcare/feed/",
+        "remote": true
+      },
+      {
+        "name": "Remote.co (human resources)",
+        "url": "https://remote.co/remote-jobs/human-resources/feed/",
+        "remote": true
+      },
+      {
+        "name": "Remote.co (writing)",
+        "url": "https://remote.co/remote-jobs/writing/feed/",
+        "remote": true
+      },
+      {
+        "name": "Empllo",
+        "url": "https://empllo.com/feeds/remote-jobs.rss",
+        "remote": true
+      },
+      {
+        "name": "Authentic Jobs",
+        "url": "https://authenticjobs.com/?feed=job_feed"
+      },
+      {
+        "name": "GameJobs.co",
+        "url": "https://gamejobs.co/?format=atom",
+        "titleSplit": "title at company"
+      },
+      {
+        "name": "Games-Career",
+        "url": "https://www.games-career.com/rss/Joboffer"
+      },
+      {
+        "name": "APA PsycCareers",
+        "url": "https://www.psyccareers.com/jobs/?display=rss&keywords=remote&resultsPerPage=100"
+      },
+      {
+        "name": "jobs.ac.uk (behavioural science)",
+        "url": "https://www.jobs.ac.uk/search/rss?keywords=behavioural+science"
+      },
+      {
+        "name": "jobs.ac.uk (digital mental health)",
+        "url": "https://www.jobs.ac.uk/search/rss?keywords=digital+mental+health"
+      },
+      {
+        "name": "THE unijobs (psychology)",
+        "url": "https://www.timeshighereducation.com/unijobs/jobsrss/?keywords=psychology&page=1"
+      },
+      {
+        "name": "BPS Jobs",
+        "url": "https://jobs.bps.org.uk/jobsrss/?keywords=remote"
+      },
+      {
+        "name": "CharityJob (mental health)",
+        "url": "https://www.charityjob.co.uk/jobs/rss?keywords=mental+health"
+      },
+      {
+        "name": "Guardian Jobs (wellbeing)",
+        "url": "https://jobs.theguardian.com/jobsrss/?keywords=wellbeing"
+      },
+      {
+        "name": "Remotive RSS",
+        "url": "https://remotive.com/remote-jobs/rss-feed",
+        "remote": true
+      },
+      {
+        "name": "SkipTheDrive",
+        "url": "https://www.skipthedrive.com/feed/",
+        "remote": true
+      }
+    ]
+  },
+  "careers": [
+    {
+      "name": "80,000 Hours",
+      "ats": "ashby",
+      "slug": "80000hours",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "9amHealth",
+      "ats": "ashby",
+      "slug": "join9am",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Alan",
+      "ats": "ashby",
+      "slug": "alan",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Aleph Alpha",
+      "ats": "ashby",
+      "slug": "alephalpha",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Babbel",
+      "ats": "ashby",
+      "slug": "babbel",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Beamery",
+      "ats": "ashby",
+      "slug": "beamery",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "BetterUp",
+      "ats": "ashby",
+      "slug": "betterup",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Bland AI",
+      "ats": "ashby",
+      "slug": "bland",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "BlueDot Impact",
+      "ats": "ashby",
+      "slug": "bluedot",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Braintrust",
+      "ats": "ashby",
+      "slug": "braintrust",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Brightline",
+      "ats": "ashby",
+      "slug": "hellobrightline",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Bumble",
+      "ats": "ashby",
+      "slug": "bumble",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Cambly",
+      "ats": "ashby",
+      "slug": "Cambly",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Cambridge Boston Alignment Initiative",
+      "ats": "ashby",
+      "slug": "cbai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Cartesia",
+      "ats": "ashby",
+      "slug": "cartesia",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Centre for Effective Altruism",
+      "ats": "ashby",
+      "slug": "centreforeffectivealtruism",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Character.AI",
+      "ats": "ashby",
+      "slug": "character",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "ChartHop",
+      "ats": "ashby",
+      "slug": "charthop",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Cinder",
+      "ats": "ashby",
+      "slug": "cinder",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "CoachHub",
+      "ats": "ashby",
+      "slug": "coachhub",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Coefficient Giving (formerly Open Philanthropy)",
+      "ats": "ashby",
+      "slug": "coefficientgiving",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Cohere",
+      "ats": "ashby",
+      "slug": "cohere",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Credo AI",
+      "ats": "ashby",
+      "slug": "credo.ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Decagon",
+      "ats": "ashby",
+      "slug": "decagon",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Deel",
+      "ats": "ashby",
+      "slug": "Deel",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Deepgram",
+      "ats": "ashby",
+      "slug": "deepgram",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Delphi (digital clones)",
+      "ats": "ashby",
+      "slug": "delphi",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Docplanner",
+      "ats": "ashby",
+      "slug": "docplanner"
+    },
+    {
+      "name": "Dovetail",
+      "ats": "ashby",
+      "slug": "dovetail",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Eight Sleep",
+      "ats": "ashby",
+      "slug": "eightsleep",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "ElevenLabs",
+      "ats": "ashby",
+      "slug": "elevenlabs",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Elicit",
+      "ats": "ashby",
+      "slug": "elicit",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Equip",
+      "ats": "ashby",
+      "slug": "equip",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Faculty",
+      "ats": "ashby",
+      "slug": "faculty",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "FAR.AI",
+      "ats": "ashby",
+      "slug": "far.ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Fiddler AI",
+      "ats": "ashby",
+      "slug": "fiddler-ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Focus Entertainment",
+      "ats": "ashby",
+      "slug": "focus",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Gardens Interactive",
+      "ats": "ashby",
+      "slug": "gardens",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Genies",
+      "ats": "ashby",
+      "slug": "genies",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Great Question",
+      "ats": "ashby",
+      "slug": "greatquestion",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Handshake AI",
+      "ats": "ashby",
+      "slug": "handshake",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Headway",
+      "ats": "ashby",
+      "slug": "headway",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Hims & Hers",
+      "ats": "ashby",
+      "slug": "hims-and-hers",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Hinge Health",
+      "ats": "ashby",
+      "slug": "hinge-health",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Hyperbound (AI sales roleplay)",
+      "ats": "ashby",
+      "slug": "Hyperbound",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "HyperHug",
+      "ats": "ashby",
+      "slug": "hyperhug",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Inworld AI",
+      "ats": "ashby",
+      "slug": "inworld-ai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Lakera",
+      "ats": "ashby",
+      "slug": "lakera.ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Lark Health",
+      "ats": "ashby",
+      "slug": "lark",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Latitude (AI Dungeon)",
+      "ats": "ashby",
+      "slug": "latitude",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Leapsome",
+      "ats": "ashby",
+      "slug": "leapsome",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Legion Health",
+      "ats": "ashby",
+      "slug": "legionhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Limbic",
+      "ats": "ashby",
+      "slug": "limbic",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Listen Labs",
+      "ats": "ashby",
+      "slug": "listenlabs",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "LiveKit",
+      "ats": "ashby",
+      "slug": "livekit",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Machine Intelligence Research Institute (MIRI)",
+      "ats": "ashby",
+      "slug": "miri",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Marvin Behavioral Health",
+      "ats": "ashby",
+      "slug": "meetmarvin",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Maze",
+      "ats": "ashby",
+      "slug": "mazedesign",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Mercor",
+      "ats": "ashby",
+      "slug": "mercor",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Mistral AI",
+      "ats": "ashby",
+      "slug": "mistral.ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Morning Consult",
+      "ats": "ashby",
+      "slug": "morningconsult",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Nous Research",
+      "ats": "ashby",
+      "slug": "nousresearch",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "OpenAI",
+      "ats": "ashby",
+      "slug": "openai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Outset",
+      "ats": "ashby",
+      "slug": "outset",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Oyster",
+      "ats": "ashby",
+      "slug": "oyster",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Pareto.AI",
+      "ats": "ashby",
+      "slug": "pareto-ai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Patreon",
+      "ats": "ashby",
+      "slug": "patreon",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Pave",
+      "ats": "ashby",
+      "slug": "pave",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Perplexity",
+      "ats": "ashby",
+      "slug": "perplexity",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Playgig",
+      "ats": "ashby",
+      "slug": "playgig",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Preply (AI tutoring)",
+      "ats": "ashby",
+      "slug": "preply",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Quora (Poe)",
+      "ats": "ashby",
+      "slug": "quora",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Rasa",
+      "ats": "ashby",
+      "slug": "rasa",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Reality Defender",
+      "ats": "ashby",
+      "slug": "realitydefender",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Regression Games",
+      "ats": "ashby",
+      "slug": "regressiongg",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Replicant",
+      "ats": "ashby",
+      "slug": "Replicant",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Retell AI",
+      "ats": "ashby",
+      "slug": "retell-ai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Rula (formerly Path Mental Health)",
+      "ats": "ashby",
+      "slug": "rula",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Runway",
+      "ats": "ashby",
+      "slug": "runway-ml",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Sailor Health",
+      "ats": "ashby",
+      "slug": "sailorhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Sesame (Maya/Miles voice companion)",
+      "ats": "ashby",
+      "slug": "sesame",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Sidekick Health",
+      "ats": "ashby",
+      "slug": "sidekick",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Sierra",
+      "ats": "ashby",
+      "slug": "sierra",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Slingshot AI (Ash)",
+      "ats": "ashby",
+      "slug": "slingshotai",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Smallest.ai",
+      "ats": "ashby",
+      "slug": "smallest",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "SonderMind",
+      "ats": "ashby",
+      "slug": "sondermind",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Speak (AI language tutor)",
+      "ats": "ashby",
+      "slug": "speak",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Sprig",
+      "ats": "ashby",
+      "slug": "sprig",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Strava",
+      "ats": "ashby",
+      "slug": "strava",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Supercell",
+      "ats": "ashby",
+      "slug": "supercell",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Surge AI",
+      "ats": "ashby",
+      "slug": "surge-ai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "SurveyMonkey",
+      "ats": "ashby",
+      "slug": "surveymonkey",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Suzy",
+      "ats": "ashby",
+      "slug": "suzy",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Synthesia",
+      "ats": "ashby",
+      "slug": "synthesia",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Synthflow AI",
+      "ats": "ashby",
+      "slug": "synthflow",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Talkdesk",
+      "ats": "ashby",
+      "slug": "talkdesk",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "TapBlaze",
+      "ats": "ashby",
+      "slug": "tapblaze",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Tavus",
+      "ats": "ashby",
+      "slug": "tavus",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "TELUS Digital (TELUS International AI)",
+      "ats": "ashby",
+      "slug": "telus-digital",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "TestGorilla",
+      "ats": "ashby",
+      "slug": "testgorilla",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Textio",
+      "ats": "ashby",
+      "slug": "textio",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "thatgamecompany",
+      "ats": "ashby",
+      "slug": "thatgamecompany",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Tolan (Portola)",
+      "ats": "ashby",
+      "slug": "tolan",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Unmind",
+      "ats": "ashby",
+      "slug": "unmind",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Valence",
+      "ats": "ashby",
+      "slug": "valence",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Vapi",
+      "ats": "ashby",
+      "slug": "vapi",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Virta Health",
+      "ats": "ashby",
+      "slug": "virtahealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Voicemod",
+      "ats": "ashby",
+      "slug": "voicemod",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Voodoo",
+      "ats": "ashby",
+      "slug": "voodoo",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Whatnot",
+      "ats": "ashby",
+      "slug": "whatnot",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "WHOOP",
+      "ats": "ashby",
+      "slug": "whoop",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Wispr Flow",
+      "ats": "ashby",
+      "slug": "wispr-flow",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Woebot Health",
+      "ats": "ashby",
+      "slug": "woebot-health",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Yubo",
+      "ats": "ashby",
+      "slug": "yubo",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "ZOE",
+      "ats": "ashby",
+      "slug": "zoe",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Alida",
+      "ats": "bamboohr",
+      "slug": "alida",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Brightside Health",
+      "ats": "bamboohr",
+      "slug": "brightside"
+    },
+    {
+      "name": "Cognigy (NICE)",
+      "ats": "bamboohr",
+      "slug": "cognigy",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Conjecture",
+      "ats": "bamboohr",
+      "slug": "conjecture",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Criteria Corp",
+      "ats": "bamboohr",
+      "slug": "criteriacorp",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "InMoment",
+      "ats": "bamboohr",
+      "slug": "inmoment",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Innersloth",
+      "ats": "bamboohr",
+      "slug": "innersloth",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Krisp",
+      "ats": "bamboohr",
+      "slug": "krisp",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Little Otter",
+      "ats": "bamboohr",
+      "slug": "littleotter",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Logically",
+      "ats": "bamboohr",
+      "slug": "logically",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Nimble Giant Entertainment",
+      "ats": "bamboohr",
+      "slug": "nimble",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Offworld Industries",
+      "ats": "bamboohr",
+      "slug": "owi",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Ogilvy (incl. Ogilvy Consulting Behavioural Science)",
+      "ats": "bamboohr",
+      "slug": "ogilvy",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Optimal Workshop",
+      "ats": "bamboohr",
+      "slug": "optimalworkshop",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Savanta",
+      "ats": "bamboohr",
+      "slug": "savanta",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "TELUS Health (LifeWorks)",
+      "ats": "bamboohr",
+      "slug": "telushealth",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Voiceflow",
+      "ats": "bamboohr",
+      "slug": "voiceflow",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "2K",
+      "ats": "greenhouse",
+      "slug": "2k",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Ada (ada.cx)",
+      "ats": "greenhouse",
+      "slug": "ada",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Ada Health",
+      "ats": "greenhouse",
+      "slug": "adahealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "AI Alignment Foundation (AIAF)",
+      "ats": "greenhouse",
+      "slug": "aiaf",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Aisera",
+      "ats": "greenhouse",
+      "slug": "aiserajobs",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Allen Institute for AI (Ai2)",
+      "ats": "greenhouse",
+      "slug": "thealleninstitute",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Alma",
+      "ats": "greenhouse",
+      "slug": "alma",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "AlphaSights",
+      "ats": "greenhouse",
+      "slug": "alphasights",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Amae Health",
+      "ats": "greenhouse",
+      "slug": "amaehealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Amplitude Studios",
+      "ats": "greenhouse",
+      "slug": "amplitude",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Amwell",
+      "ats": "greenhouse",
+      "slug": "amwell"
+    },
+    {
+      "name": "Anthropic",
+      "ats": "greenhouse",
+      "slug": "anthropic",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Arize AI",
+      "ats": "greenhouse",
+      "slug": "arizeai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "AssemblyAI",
+      "ats": "greenhouse",
+      "slug": "assemblyai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Attest",
+      "ats": "greenhouse",
+      "slug": "attest",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Automattic",
+      "ats": "greenhouse",
+      "slug": "automatticcareers",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Bandai Namco",
+      "ats": "greenhouse",
+      "slug": "bandainamco",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "BetterHelp",
+      "ats": "greenhouse",
+      "slug": "betterhelpcom",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Boulder Care",
+      "ats": "greenhouse",
+      "slug": "bouldercare",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Bungie",
+      "ats": "greenhouse",
+      "slug": "bungie",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Calibrate",
+      "ats": "greenhouse",
+      "slug": "calibratecareers",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Calm",
+      "ats": "greenhouse",
+      "slug": "calm",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Carrot Fertility",
+      "ats": "greenhouse",
+      "slug": "carrotfertility",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Cerebral",
+      "ats": "greenhouse",
+      "slug": "cerebral",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Charlie Health",
+      "ats": "greenhouse",
+      "slug": "charliehealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Click Therapeutics",
+      "ats": "greenhouse",
+      "slug": "clicktherapeutics",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Clover Health",
+      "ats": "greenhouse",
+      "slug": "cloverhealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Cresta",
+      "ats": "greenhouse",
+      "slug": "cresta",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Culture Amp",
+      "ats": "greenhouse",
+      "slug": "cultureamp",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Data & Society Research Institute",
+      "ats": "greenhouse",
+      "slug": "datasocietyresearchinstitute",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Daybreak Health",
+      "ats": "greenhouse",
+      "slug": "daybreakhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Dialpad",
+      "ats": "greenhouse",
+      "slug": "dialpad",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Digital Extremes",
+      "ats": "greenhouse",
+      "slug": "digitalextremes",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Discord",
+      "ats": "greenhouse",
+      "slug": "discord",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Doctolib",
+      "ats": "greenhouse",
+      "slug": "doctolib",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Dreem Health",
+      "ats": "greenhouse",
+      "slug": "dreemhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "dscout",
+      "ats": "greenhouse",
+      "slug": "dscout",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Duolingo",
+      "ats": "greenhouse",
+      "slug": "duolingo",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Eleanor Health",
+      "ats": "greenhouse",
+      "slug": "eleanorhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Eleos Health",
+      "ats": "greenhouse",
+      "slug": "eleoshealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Epic Games (incl. 3Lateral Novi Sad)",
+      "ats": "greenhouse",
+      "slug": "epicgames",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Eucalyptus (Juniper/Pilot/Kin)",
+      "ats": "greenhouse",
+      "slug": "eucalyptus",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Ezra",
+      "ats": "greenhouse",
+      "slug": "ezra",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Fantastic Pixel Castle",
+      "ats": "greenhouse",
+      "slug": "fantasticpixelcastle",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Five9",
+      "ats": "greenhouse",
+      "slug": "five9",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Flo Health",
+      "ats": "greenhouse",
+      "slug": "flohealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Forethought",
+      "ats": "greenhouse",
+      "slug": "forethought",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Galileo",
+      "ats": "greenhouse",
+      "slug": "galileo",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Goodfire",
+      "ats": "greenhouse",
+      "slug": "goodfire",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Google DeepMind",
+      "ats": "greenhouse",
+      "slug": "deepmind",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Grow Therapy",
+      "ats": "greenhouse",
+      "slug": "growtherapy",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Guerrilla Games",
+      "ats": "greenhouse",
+      "slug": "guerrilla-games",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Haize Labs",
+      "ats": "greenhouse",
+      "slug": "haizelabs",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Hazel Health",
+      "ats": "greenhouse",
+      "slug": "hazel",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Headspace",
+      "ats": "greenhouse",
+      "slug": "hs",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Headspace Providers",
+      "ats": "greenhouse",
+      "slug": "headspaceproviders",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Headspace Sourcing (Coaches)",
+      "ats": "greenhouse",
+      "slug": "headspacesourcing",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "HiBob",
+      "ats": "greenhouse",
+      "slug": "hibob",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "HiddenLayer",
+      "ats": "greenhouse",
+      "slug": "hiddenlayer",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Highdive",
+      "ats": "greenhouse",
+      "slug": "highdive",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Hinge",
+      "ats": "greenhouse",
+      "slug": "hinge",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Hive (thehive.ai)",
+      "ats": "greenhouse",
+      "slug": "hive",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Hone",
+      "ats": "greenhouse",
+      "slug": "hone",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Housemarque",
+      "ats": "greenhouse",
+      "slug": "housemarque",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "HoYoverse",
+      "ats": "greenhouse",
+      "slug": "hoyoverse",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "HumanSignal (Label Studio)",
+      "ats": "greenhouse",
+      "slug": "humansignal"
+    },
+    {
+      "name": "Hume AI",
+      "ats": "greenhouse",
+      "slug": "humeai"
+    },
+    {
+      "name": "Inflection AI (Ashby board)",
+      "ats": "greenhouse",
+      "slug": "inflectionai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Innodata Inc.",
+      "ats": "greenhouse",
+      "slug": "innodatainc",
+      "tags": [
+        "ai-safety"
+      ]
+    },
+    {
+      "name": "Insomniac Games",
+      "ats": "greenhouse",
+      "slug": "insomniac",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Intercom (Fin)",
+      "ats": "greenhouse",
+      "slug": "intercom",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Invisible Technologies",
+      "ats": "greenhouse",
+      "slug": "invisibletech",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "K Health",
+      "ats": "greenhouse",
+      "slug": "khealthcareers",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Kasisto",
+      "ats": "greenhouse",
+      "slug": "kasisto",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Koa Health",
+      "ats": "greenhouse",
+      "slug": "koahealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Labelbox / Alignerr",
+      "ats": "greenhouse",
+      "slug": "labelbox",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Lantern",
+      "ats": "greenhouse",
+      "slug": "lanternstudiosinc",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Lantern (Employer Direct Healthcare)",
+      "ats": "greenhouse",
+      "slug": "employerdirecthealthcare",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Lattice",
+      "ats": "greenhouse",
+      "slug": "lattice",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "League",
+      "ats": "greenhouse",
+      "slug": "leagueinc",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "LetsGetChecked",
+      "ats": "greenhouse",
+      "slug": "letsgetchecked",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "LivePerson",
+      "ats": "greenhouse",
+      "slug": "liveperson",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "manatee",
+      "ats": "greenhouse",
+      "slug": "manatee",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Mantra Health",
+      "ats": "greenhouse",
+      "slug": "mantrahealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Maven Clinic",
+      "ats": "greenhouse",
+      "slug": "mavenclinic",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Meru Health",
+      "ats": "greenhouse",
+      "slug": "meruhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Midi Health",
+      "ats": "greenhouse",
+      "slug": "midihealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Midsummer Studios",
+      "ats": "greenhouse",
+      "slug": "midsummerstudios",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Mintel",
+      "ats": "greenhouse",
+      "slug": "mintel",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Modern Health",
+      "ats": "greenhouse",
+      "slug": "modernhealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Monomi Park",
+      "ats": "greenhouse",
+      "slug": "monomipark",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Moveworks",
+      "ats": "greenhouse",
+      "slug": "moveworks",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Naughty Dog",
+      "ats": "greenhouse",
+      "slug": "naughtydog",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Nextdoor",
+      "ats": "greenhouse",
+      "slug": "nextdoor",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "NICE (CXone, incl. Cognigy)",
+      "ats": "greenhouse",
+      "slug": "nice",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "NOCD",
+      "ats": "greenhouse",
+      "slug": "nocdinc",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Noom",
+      "ats": "greenhouse",
+      "slug": "noom",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Nourish",
+      "ats": "greenhouse",
+      "slug": "usenourish",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Observe.AI",
+      "ats": "greenhouse",
+      "slug": "observeai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Octave",
+      "ats": "greenhouse",
+      "slug": "octave",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Omada Health",
+      "ats": "greenhouse",
+      "slug": "omadahealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Ophelia",
+      "ats": "greenhouse",
+      "slug": "ophelia",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Oscar Health",
+      "ats": "greenhouse",
+      "slug": "oscar",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Otter.ai",
+      "ats": "greenhouse",
+      "slug": "otterai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Oula",
+      "ats": "greenhouse",
+      "slug": "oulahealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Oura",
+      "ats": "greenhouse",
+      "slug": "oura",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Oviva",
+      "ats": "greenhouse",
+      "slug": "oviva",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Parloa",
+      "ats": "greenhouse",
+      "slug": "parloa",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Pelago (formerly Quit Genius)",
+      "ats": "greenhouse",
+      "slug": "pelago",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Peloton",
+      "ats": "greenhouse",
+      "slug": "peloton",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "PlayQ",
+      "ats": "greenhouse",
+      "slug": "playq",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Pocket Gems (Episode)",
+      "ats": "greenhouse",
+      "slug": "pocketgems",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "PolyAI",
+      "ats": "greenhouse",
+      "slug": "polyai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Pomelo Care",
+      "ats": "greenhouse",
+      "slug": "pomelocare",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Qualtrics",
+      "ats": "greenhouse",
+      "slug": "qualtrics",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Reddit",
+      "ats": "greenhouse",
+      "slug": "reddit",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Remesh",
+      "ats": "greenhouse",
+      "slug": "remesh",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Remote.com",
+      "ats": "greenhouse",
+      "slug": "remotecom",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Riot Games",
+      "ats": "greenhouse",
+      "slug": "riotgames",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Robinhood",
+      "ats": "greenhouse",
+      "slug": "robinhood",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Roblox",
+      "ats": "greenhouse",
+      "slug": "roblox",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Sama",
+      "ats": "greenhouse",
+      "slug": "samainc"
+    },
+    {
+      "name": "Scale AI",
+      "ats": "greenhouse",
+      "slug": "scaleai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Scopely",
+      "ats": "greenhouse",
+      "slug": "scopely",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Snorkel AI",
+      "ats": "greenhouse",
+      "slug": "snorkelai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "SoundHound AI (incl. Amelia)",
+      "ats": "greenhouse",
+      "slug": "soundhoundinc",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Speechify",
+      "ats": "greenhouse",
+      "slug": "speechify",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Spring Health",
+      "ats": "greenhouse",
+      "slug": "springhealth66",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Stability AI",
+      "ats": "greenhouse",
+      "slug": "stabilityai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "starfishneuroscience",
+      "ats": "greenhouse",
+      "slug": "starfishneuroscience",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Talkspace",
+      "ats": "greenhouse",
+      "slug": "talkspacetherapist",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "teamLFG",
+      "ats": "greenhouse",
+      "slug": "teamlfg",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "That's No Moon",
+      "ats": "greenhouse",
+      "slug": "thatsnomoonentertainment",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Thorn",
+      "ats": "greenhouse",
+      "slug": "thorn",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Thrive Global",
+      "ats": "greenhouse",
+      "slug": "thrive",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Tia",
+      "ats": "greenhouse",
+      "slug": "tia"
+    },
+    {
+      "name": "Turing",
+      "ats": "greenhouse",
+      "slug": "turing",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Twill (Happify)",
+      "ats": "greenhouse",
+      "slug": "twill",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Two Chairs",
+      "ats": "greenhouse",
+      "slug": "twochairs",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "UK AI Security Institute (AISI)",
+      "ats": "greenhouse",
+      "slug": "aisi",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Urban Sports Club",
+      "ats": "greenhouse",
+      "slug": "urbansportsclub",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "User Interviews",
+      "ats": "greenhouse",
+      "slug": "userinterviews",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Valera Health",
+      "ats": "greenhouse",
+      "slug": "valerahealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Volley",
+      "ats": "greenhouse",
+      "slug": "volleythat",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Wargaming (incl. Belgrade office)",
+      "ats": "greenhouse",
+      "slug": "wargamingen",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Weights & Biases (CoreWeave)",
+      "ats": "greenhouse",
+      "slug": "coreweave",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "WeightWatchers",
+      "ats": "greenhouse",
+      "slug": "ww",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Wellhub (formerly Gympass)",
+      "ats": "greenhouse",
+      "slug": "gympass",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Wellthy",
+      "ats": "greenhouse",
+      "slug": "wellthy-care-network",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Wikimedia Foundation",
+      "ats": "greenhouse",
+      "slug": "wikimedia",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Wizards of the Coast / Hasbro (digital D&D, MTG)",
+      "ats": "greenhouse",
+      "slug": "hasbro",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Wooga",
+      "ats": "greenhouse",
+      "slug": "wooga",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Workit Health",
+      "ats": "greenhouse",
+      "slug": "workithealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "xAI",
+      "ats": "greenhouse",
+      "slug": "xai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Yoodli (AI roleplays / communication coaching)",
+      "ats": "greenhouse",
+      "slug": "yoodliinc",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "YuLife",
+      "ats": "greenhouse",
+      "slug": "yulife",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Zynga",
+      "ats": "greenhouse",
+      "slug": "zyngacareers",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "15Five",
+      "ats": "lever",
+      "slug": "15five",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Alignerr (Labelbox)",
+      "ats": "lever",
+      "slug": "labelbox",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Apollo Research",
+      "ats": "lever",
+      "slug": "apolloresearch",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Appen",
+      "ats": "lever",
+      "slug": "appen-2",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Asobo Studio",
+      "ats": "lever",
+      "slug": "asobostudio",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Behaviour Interactive",
+      "ats": "lever",
+      "slug": "bhvr",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Big Health (Sleepio, Daylight)",
+      "ats": "lever",
+      "slug": "bighealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Blink UX",
+      "ats": "lever",
+      "slug": "blinkux",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Busara Center for Behavioral Economics",
+      "ats": "lever",
+      "slug": "BusaraCenter",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Carbon Health",
+      "ats": "lever",
+      "slug": "carbonhealth"
+    },
+    {
+      "name": "Center for AI Safety (CAIS)",
+      "ats": "lever",
+      "slug": "aisafety",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Center for Humane Technology",
+      "ats": "lever",
+      "slug": "humanetech",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Cogito Corp",
+      "ats": "lever",
+      "slug": "cogitocorp",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "ControlAI",
+      "ats": "lever",
+      "slug": "controlai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "ConverseNow",
+      "ats": "lever",
+      "slug": "ConverseNow",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Conversica",
+      "ats": "lever",
+      "slug": "conversica",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "CrowdGen by Appen",
+      "ats": "lever",
+      "slug": "appen",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Encord",
+      "ats": "lever",
+      "slug": "CordTechnologies",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Epoch AI",
+      "ats": "lever",
+      "slug": "epoch-ai",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Future of Life Institute",
+      "ats": "lever",
+      "slug": "futureof-life",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Gobrightside",
+      "ats": "lever",
+      "slug": "gobrightside",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Gupshup",
+      "ats": "lever",
+      "slug": "gupshup",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Haptik (Jio)",
+      "ats": "lever",
+      "slug": "haptik",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Included Health",
+      "ats": "lever",
+      "slug": "includedhealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Innodata",
+      "ats": "lever",
+      "slug": "innodata",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "InnoGames",
+      "ats": "lever",
+      "slug": "innogames",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Jam City (incl. Ludia)",
+      "ats": "lever",
+      "slug": "jamcity",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Kabam",
+      "ats": "lever",
+      "slug": "kabam",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Larian Studios",
+      "ats": "lever",
+      "slug": "larian",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "lionbridge",
+      "ats": "lever",
+      "slug": "lionbridge",
+      "tags": [
+        "ai-safety"
+      ]
+    },
+    {
+      "name": "Luzia (WhatsApp AI assistant)",
+      "ats": "lever",
+      "slug": "luzia",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Lyra Collective",
+      "ats": "lever",
+      "slug": "lyracollective",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Lyra Health",
+      "ats": "lever",
+      "slug": "lyrahealth",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Mahana Therapeutics",
+      "ats": "lever",
+      "slug": "mahanatherapeutics",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Match Group (Tinder, Hinge, OkCupid)",
+      "ats": "lever",
+      "slug": "matchgroup",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Medallia",
+      "ats": "lever",
+      "slug": "medallia",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "MERU",
+      "ats": "lever",
+      "slug": "wearemeru"
+    },
+    {
+      "name": "METR",
+      "ats": "lever",
+      "slug": "metr",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Mindful",
+      "ats": "lever",
+      "slug": "mindful",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Modulate",
+      "ats": "lever",
+      "slug": "modulate",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Mountaintop Studios",
+      "ats": "lever",
+      "slug": "mountaintop",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Neowiz",
+      "ats": "lever",
+      "slug": "neowiz",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Netomi",
+      "ats": "lever",
+      "slug": "netomi",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Nielsen",
+      "ats": "lever",
+      "slug": "nielsen",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Numan",
+      "ats": "lever",
+      "slug": "numan",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "peppy",
+      "ats": "lever",
+      "slug": "peppy",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Quantic Dream",
+      "ats": "lever",
+      "slug": "quanticdream",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Quiq",
+      "ats": "lever",
+      "slug": "quiq",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Resiliencelab",
+      "ats": "lever",
+      "slug": "resiliencelab",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Respondent",
+      "ats": "lever",
+      "slug": "respondent",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "RWS TrainAI",
+      "ats": "lever",
+      "slug": "rws",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Skydance (Games/Animation)",
+      "ats": "lever",
+      "slug": "skydance",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "SuperAnnotate",
+      "ats": "lever",
+      "slug": "superannotate",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Sword Health",
+      "ats": "lever",
+      "slug": "swordhealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "System1",
+      "ats": "lever",
+      "slug": "system1",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Vida Health",
+      "ats": "lever",
+      "slug": "vida",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Wildlight Entertainment",
+      "ats": "lever",
+      "slug": "wildlight",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Wysa",
+      "ats": "lever",
+      "slug": "wysa",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "7Mind",
+      "ats": "personio",
+      "slug": "7mind",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Daedalic Entertainment",
+      "ats": "personio",
+      "slug": "daedalic",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "HelloBetter",
+      "ats": "personio",
+      "slug": "geton",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Likeminded",
+      "ats": "personio",
+      "slug": "likeminded",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Nilo Health",
+      "ats": "personio",
+      "slug": "nilohealth",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Quantilope",
+      "ats": "personio",
+      "slug": "quantilope",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Selfapy",
+      "ats": "personio",
+      "slug": "selfapy",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Sharpist",
+      "ats": "personio",
+      "slug": "sharpist",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Travian Games",
+      "ats": "personio",
+      "slug": "traviangames",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "BV Peak Coaching",
+      "ats": "recruitee",
+      "slug": "jobspeakcoaching",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Innova Market Insights",
+      "ats": "recruitee",
+      "slug": "innovamarketinsights",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "OpenUp",
+      "ats": "recruitee",
+      "slug": "openup",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Talkie.ai (Poland voicebots)",
+      "ats": "recruitee",
+      "slug": "talkieai",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "TaskUs",
+      "ats": "recruitee",
+      "slug": "taskus",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "CD Projekt Red",
+      "ats": "smartrecruiters",
+      "slug": "CDPROJEKTRED",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Cint",
+      "ats": "smartrecruiters",
+      "slug": "Cint",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Don't Nod",
+      "ats": "smartrecruiters",
+      "slug": "Dontnod",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Freshworks (Freddy AI)",
+      "ats": "smartrecruiters",
+      "slug": "Freshworks",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Gameloft",
+      "ats": "smartrecruiters",
+      "slug": "Gameloft",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "GymPass",
+      "ats": "smartrecruiters",
+      "slug": "gympass",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "HireVue",
+      "ats": "smartrecruiters",
+      "slug": "HireVue",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Ipsos",
+      "ats": "smartrecruiters",
+      "slug": "Ipsos",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Kaia Health",
+      "ats": "smartrecruiters",
+      "slug": "kaiahealth",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Keywords Studios",
+      "ats": "smartrecruiters",
+      "slug": "keywordsstudios",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Levels",
+      "ats": "smartrecruiters",
+      "slug": "levelset",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Netflix (Games)",
+      "ats": "smartrecruiters",
+      "slug": "netflix",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "NielsenIQ (NIQ, incl. GfK)",
+      "ats": "smartrecruiters",
+      "slug": "NielsenIQ",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Paradox (paradox.ai, incl. Traitify)",
+      "ats": "smartrecruiters",
+      "slug": "paradox",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "People Can Fly",
+      "ats": "smartrecruiters",
+      "slug": "PeopleCanFly",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Reward Gateway | Edenred",
+      "ats": "smartrecruiters",
+      "slug": "rewardgateway",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Sama (Samasource)",
+      "ats": "smartrecruiters",
+      "slug": "samasource",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Techland",
+      "ats": "smartrecruiters",
+      "slug": "TechlandSA",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "The Nielsen Company",
+      "ats": "smartrecruiters",
+      "slug": "thenielsencompany",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Twitch",
+      "ats": "smartrecruiters",
+      "slug": "twitch",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Ubisoft (incl. Ubisoft Belgrade)",
+      "ats": "smartrecruiters",
+      "slug": "Ubisoft2",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Askable",
+      "ats": "teamtailor",
+      "slug": "askable",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Lingoda",
+      "ats": "teamtailor",
+      "slug": "lingoda",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Paradox Interactive",
+      "ats": "teamtailor",
+      "slug": "paradox-interactive",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Simple Life App / Zing Coach",
+      "ats": "teamtailor",
+      "slug": "palta",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Acuity Insights",
+      "ats": "workable",
+      "slug": "acuity-insights",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "BetterSleep",
+      "ats": "workable",
+      "slug": "bettersleep",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Botpress",
+      "ats": "workable",
+      "slug": "botpress",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Cambridge Healthcare Research",
+      "ats": "workable",
+      "slug": "cambridge-healthcare-research",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "CloudFactory",
+      "ats": "workable",
+      "slug": "cloudfactory",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Devoted Studios",
+      "ats": "workable",
+      "slug": "devoted-studios-1",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Elevate Labs (Balance)",
+      "ats": "workable",
+      "slug": "elevate-7",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Elvie",
+      "ats": "workable",
+      "slug": "elvie"
+    },
+    {
+      "name": "Euromonitor International",
+      "ats": "workable",
+      "slug": "euromonitor",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Fabulous",
+      "ats": "workable",
+      "slug": "fabulousco",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Giskard",
+      "ats": "workable",
+      "slug": "giskard",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Hugging Face",
+      "ats": "workable",
+      "slug": "hugging-face",
+      "tags": [
+        "ai-safety"
+      ]
+    },
+    {
+      "name": "Hugging Face (Argilla)",
+      "ats": "workable",
+      "slug": "huggingface",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Hutch",
+      "ats": "workable",
+      "slug": "hutch",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "ieso",
+      "ats": "workable",
+      "slug": "ieso",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "ieso Digital Health",
+      "ats": "workable",
+      "slug": "ieso-careers",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "ifeel",
+      "ats": "workable",
+      "slug": "ifeel",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Insight Timer",
+      "ats": "workable",
+      "slug": "insight-network-inc"
+    },
+    {
+      "name": "Intellect",
+      "ats": "workable",
+      "slug": "intellecthq",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Keywords Studios (incl. Sperasoft Belgrade, narrative/writing division)",
+      "ats": "workable",
+      "slug": "keywords-intl1",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Kooth",
+      "ats": "workable",
+      "slug": "koothjobs",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Meditopia",
+      "ats": "workable",
+      "slug": "meditopia",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Mila - Quebec AI Institute",
+      "ats": "workable",
+      "slug": "mila-2",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Oliva",
+      "ats": "workable",
+      "slug": "oliva1",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Omilia",
+      "ats": "workable",
+      "slug": "omilia-natural-language-solutions-ua-ltd",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "OpenMined",
+      "ats": "workable",
+      "slug": "openmined",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Owlchemy Labs",
+      "ats": "workable",
+      "slug": "owlchemy-labs",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Pinterest",
+      "ats": "workable",
+      "slug": "pinterest",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Plum",
+      "ats": "workable",
+      "slug": "plum-inc",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Prolific",
+      "ats": "workable",
+      "slug": "prolific-world",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Psychology Today",
+      "ats": "workable",
+      "slug": "psychology-today"
+    },
+    {
+      "name": "pymetrics",
+      "ats": "workable",
+      "slug": "pymetrics",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "RAND Europe",
+      "ats": "workable",
+      "slug": "rand-europe",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Rebellion",
+      "ats": "workable",
+      "slug": "rebellion",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Sama (coaching)",
+      "ats": "workable",
+      "slug": "samacoaching"
+    },
+    {
+      "name": "Second Nature",
+      "ats": "workable",
+      "slug": "secondnature",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Speech Graphics / Rapport (digital humans)",
+      "ats": "workable",
+      "slug": "speech-graphics",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Speechmatics",
+      "ats": "workable",
+      "slug": "speechmatics-cantab",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Spill",
+      "ats": "workable",
+      "slug": "spill",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Teleperformance",
+      "ats": "workable",
+      "slug": "teleperformance-spain",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "TherapyNotes.com",
+      "ats": "workable",
+      "slug": "therapynotes",
+      "tags": [
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Thomas International (Thomas)",
+      "ats": "workable",
+      "slug": "thomas-5a",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "ThoughtFull™ World",
+      "ats": "workable",
+      "slug": "thoughtfull-world",
+      "tags": [
+        "psychology"
+      ]
+    },
+    {
+      "name": "Toloka (Mindrift)",
+      "ats": "workable",
+      "slug": "toloka-ai",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "toloka-annotators",
+      "ats": "workable",
+      "slug": "toloka-annotators",
+      "tags": [
+        "ai-safety"
+      ]
+    },
+    {
+      "name": "Unitary",
+      "ats": "workable",
+      "slug": "unitary",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Velan Studios",
+      "ats": "workable",
+      "slug": "velanstudios",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Yellow.ai",
+      "ats": "workable",
+      "slug": "yellowleaf",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Activision (Infinity Ward, Treyarch, Sledgehammer...)",
+      "ats": "workday",
+      "slug": "xboxgaming|wd1|External",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Blizzard Entertainment",
+      "ats": "workday",
+      "slug": "xboxgaming|wd1|Blizzard_External_Careers",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Carelon Behavioral Health (Elevance)",
+      "ats": "workday",
+      "slug": "elevancehealth|wd1|EXT",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Centific (OneForma)",
+      "ats": "workday",
+      "slug": "centific|wd1|centific_global",
+      "tags": [
+        "ai-safety",
+        "trust-and-safety",
+        "human-feedback"
+      ]
+    },
+    {
+      "name": "Cerence",
+      "ats": "workday",
+      "slug": "cerence|wd5|Cerence",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Cigna / Evernorth (EAP)",
+      "ats": "workday",
+      "slug": "cigna|wd5|cignacareers",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Cityblock Health",
+      "ats": "workday",
+      "slug": "cityblockhealth|wd1|cityblockexternalcareersite",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "CSET (Georgetown University)",
+      "ats": "workday",
+      "slug": "georgetown|wd1|georgetown_admin_careers",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Dynata",
+      "ats": "workday",
+      "slug": "dynata|wd108|careers",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Forrester",
+      "ats": "workday",
+      "slug": "forrester|wd501|careers",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Interactions LLC",
+      "ats": "workday",
+      "slug": "interactions|wd1|interactions",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Kantar",
+      "ats": "workday",
+      "slug": "kantar|wd3|KANTAR",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "KANTAR Kantar (KANTART)",
+      "ats": "workday",
+      "slug": "kantar|wd3|kantart",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "King",
+      "ats": "workday",
+      "slug": "xboxgaming|wd1|King_External_Careers",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "LifeStance Health",
+      "ats": "workday",
+      "slug": "lifestance|wd5|Careers",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Lifeworks",
+      "ats": "workday",
+      "slug": "lifeworks|wd3|external",
+      "tags": [
+        "coaching",
+        "people-science"
+      ]
+    },
+    {
+      "name": "Optum / UnitedHealth Group",
+      "ats": "workday",
+      "slug": "uhg|wd1|External",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ],
+      "enabled": false
+    },
+    {
+      "name": "Progyny",
+      "ats": "workday",
+      "slug": "progyny|wd5|progyny",
+      "tags": [
+        "digital-health"
+      ]
+    },
+    {
+      "name": "RAND Corporation",
+      "ats": "workday",
+      "slug": "rand|wd5|External_Career_Site",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "Sharecare",
+      "ats": "workday",
+      "slug": "sharecare|wd1|sharecare_careers",
+      "tags": [
+        "coaching",
+        "well-being",
+        "mental-health"
+      ]
+    },
+    {
+      "name": "Sprinklr",
+      "ats": "workday",
+      "slug": "sprinklr|wd1|careers",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "Teladoc Health",
+      "ats": "workday",
+      "slug": "teladoc|wd503|teladochealth_is_hiring"
+    },
+    {
+      "name": "Thriveworks",
+      "ats": "workday",
+      "slug": "thriveworks|wd5|Thriveworks",
+      "tags": [
+        "mental-health",
+        "digital-health"
+      ]
+    },
+    {
+      "name": "Uniphore",
+      "ats": "workday",
+      "slug": "uniphore|wd503|Uniphore",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    },
+    {
+      "name": "UserTesting",
+      "ats": "workday",
+      "slug": "usertesting|wd12|UserTesting",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Warner Bros. Games (Avalanche, WB Games)",
+      "ats": "workday",
+      "slug": "warnerbros|wd5|global",
+      "tags": [
+        "games",
+        "narrative"
+      ]
+    },
+    {
+      "name": "Welocalize",
+      "ats": "workday",
+      "slug": "welocalize|wd1|welocalize",
+      "tags": [
+        "ai-safety",
+        "responsible-ai"
+      ]
+    },
+    {
+      "name": "YouGov",
+      "ats": "workday",
+      "slug": "yougov|wd103|yougov_external_careers",
+      "tags": [
+        "people-science",
+        "research"
+      ]
+    },
+    {
+      "name": "Zendesk (AI agents)",
+      "ats": "workday",
+      "slug": "zendesk|wd1|zendesk",
+      "tags": [
+        "conversational-ai",
+        "ai-companion"
+      ]
+    }
+  ]
 }

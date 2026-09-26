@@ -24,16 +24,21 @@ import * as aijobs from "./sources/aijobs.ts";
 import * as arbeitnow from "./sources/arbeitnow.ts";
 import { makeSearch } from "./sources/ats.ts";
 import * as eightyk from "./sources/eightyk.ts";
+import * as eures from "./sources/eures.ts";
 import * as himalayas from "./sources/himalayas.ts";
+import * as hiringcafe from "./sources/hiringcafe.ts";
 import * as hn from "./sources/hn.ts";
 import * as jobicy from "./sources/jobicy.ts";
 import * as jobrack from "./sources/jobrack.ts";
 import * as jobspresso from "./sources/jobspresso.ts";
 import * as linkedin from "./sources/linkedin.ts";
 import * as remoteok from "./sources/remoteok.ts";
+import * as reliefweb from "./sources/reliefweb.ts";
 import * as remotive from "./sources/remotive.ts";
+import * as rss from "./sources/rss.ts";
 import * as themuse from "./sources/themuse.ts";
 import * as wellfound from "./sources/wellfound.ts";
+import * as workablesearch from "./sources/workablesearch.ts";
 import * as workingnomads from "./sources/workingnomads.ts";
 import * as wwr from "./sources/wwr.ts";
 import { loadDb, loadSeen, log, logFiltered, saveDb, saveSeen, toStored, ts } from "./store.ts";
@@ -46,8 +51,9 @@ const { values: args } = parseArgs({
 const SEARCHERS: Record<Source, (ctx: SearchCtx) => Promise<Job[]>> = {
   himalayas: himalayas.search, wwr: wwr.search, remoteok: remoteok.search, workingnomads: workingnomads.search, jobicy: jobicy.search, remotive: remotive.search,
   arbeitnow: arbeitnow.search, themuse: themuse.search, jobspresso: jobspresso.search, aijobs: aijobs.search, eightyk: eightyk.search, adzuna: adzuna.search, hn: hn.search,
+  rss: rss.search, workablesearch: workablesearch.search, hiringcafe: hiringcafe.search, eures: eures.search, reliefweb: reliefweb.search,
   greenhouse: makeSearch("greenhouse"), lever: makeSearch("lever"), ashby: makeSearch("ashby"), workable: makeSearch("workable"), smartrecruiters: makeSearch("smartrecruiters"),
-  recruitee: makeSearch("recruitee"), personio: makeSearch("personio"), bamboohr: makeSearch("bamboohr"), workday: makeSearch("workday"),
+  recruitee: makeSearch("recruitee"), personio: makeSearch("personio"), bamboohr: makeSearch("bamboohr"), workday: makeSearch("workday"), teamtailor: makeSearch("teamtailor"),
   jobrack: jobrack.search, linkedin: linkedin.search, wellfound: wellfound.search,
 };
 const SOURCES = ALL_SOURCES.map((name) => ({ name, search: SEARCHERS[name] }));

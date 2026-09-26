@@ -149,8 +149,10 @@ const when = (j) => j.postedAt ?? j.firstSeen;
 const LEVEL = { excellent: "Excellent match", good: "Strong match", possible: "Possible match", low: "Weak match" };
 const SRC = { himalayas: "Himalayas", wwr: "WWR", remoteok: "Remote OK", workingnomads: "Working Nomads", jobrack: "JobRack", linkedin: "LinkedIn", wellfound: "Wellfound", jobicy: "Jobicy", remotive: "Remotive",
   arbeitnow: "Arbeitnow", themuse: "The Muse", jobspresso: "Jobspresso", aijobs: "aijobs.net", hn: "Hacker News", adzuna: "Adzuna", eightyk: "80,000 Hours",
+  rss: "RSS boards", workablesearch: "Workable search", hiringcafe: "hiring.cafe", eures: "EURES", reliefweb: "ReliefWeb", teamtailor: "Career page (Teamtailor)",
   greenhouse: "Career page (Greenhouse)", lever: "Career page (Lever)", ashby: "Career page (Ashby)", workable: "Career page (Workable)", smartrecruiters: "Career page (SmartRecruiters)", recruitee: "Career page (Recruitee)", personio: "Career page (Personio)", bamboohr: "Career page (BambooHR)", workday: "Career page (Workday)" };
-const SRC_SHORT = { greenhouse: "Career page", lever: "Career page", ashby: "Career page", workable: "Career page", smartrecruiters: "Career page", recruitee: "Career page", personio: "Career page", bamboohr: "Career page", workday: "Career page" };
+const SRC_SHORT = { greenhouse: "Career page", lever: "Career page", ashby: "Career page", workable: "Career page", smartrecruiters: "Career page", recruitee: "Career page", personio: "Career page", bamboohr: "Career page", workday: "Career page", teamtailor: "Career page" };
+const srcName = (j) => j.sourceLabel || SRC_SHORT[j.source] || SRC[j.source] || j.source;
 const ELIG = { serbia: ["Serbia OK", "elig"], worldwide: ["Worldwide", "elig"], europe: ["Europe (check)", "maybe"], unclear: ["Location?", "maybe"], excluded: ["Not eligible", "warn"] };
 const LIC = { required: ["License required", "warn"], preferred: ["License preferred", "maybe"], unclear: ["License?", "maybe"] };
 const GOOD_BADGE = /^(Full-time|Remote|Junior-friendly|Contract|EU hours|Early career|Serbia mentioned|Psychology background|Sensitive users|Flexible hours|Hires globally|[0-2]\+ yrs|UTC.*)$/;
@@ -222,7 +224,7 @@ function card(j) {
     <div class="head">
       <div class="logo">${logo}</div>
       <div class="company" title="${esc(j.company)}">${esc(j.company || "Unknown company")}</div>
-      <span class="src" title="${esc(SRC[j.source] || j.source)}">${esc(SRC_SHORT[j.source] || SRC[j.source] || j.source)}</span>
+      <span class="src" title="${esc(SRC[j.source] || j.source)}">${esc(srcName(j))}</span>
     </div>
     <div class="body">
       <h3 class="title">${esc(j.title)}</h3>
@@ -235,7 +237,7 @@ function card(j) {
       ${j.description ? `<details><summary>Full description</summary><p>${esc(j.description)}</p></details>` : ""}
       ${why ? `<details><summary>Why this score</summary><ul>${why}</ul></details>` : ""}
       <div class="when"><span>${esc(fmtWhen(j))}${j.postedAt ? " · " : ""}found ${esc(new Date(j.firstSeen).toLocaleString("en-GB", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }))}</span>
-        ${j.sourceUrl ? `<a href="${esc(j.sourceUrl)}" target="_blank" rel="noopener" title="Listing on the source site (the Open button goes straight to the employer)">listing on ${esc(SRC_SHORT[j.source] || SRC[j.source] || j.source)}</a>` : ""}
+        ${j.sourceUrl ? `<a href="${esc(j.sourceUrl)}" target="_blank" rel="noopener" title="Listing on the source site (the Open button goes straight to the employer)">listing on ${esc(srcName(j))}</a>` : ""}
         ${j.company && state.tab === "new" ? `<button class="link" data-block="${esc(j.company)}" title="Reject every job of this company and hide future ones">hide company</button>` : ""}</div>
     </div>
     <div class="actions">
