@@ -157,12 +157,12 @@ export interface Config {
   jobrack: { categories: string[]; maxPages: number; listPages: number; maxDetails: number };
   linkedin: { serbia: { location: string; maxPages: number; queries: string[] }; europe: { location: string; maxPages: number; queries: string[] }; maxDetails: number };
   wellfound: { maxPages: number; paths: string[] };
-  jobicy: { industries: string[]; tags?: string[]; count: number };
-  remotive: { queries: string[] };
+  jobicy: { industries: string[]; tags?: string[]; geos?: string[]; count: number }; // geos: ?get=locations slugs ("serbia" = open to Serbia); [] = unfiltered
+  remotive: { queries: string[]; maxPages: number; maxDetails: number }; // maxPages × 50 hits per search query; maxDetails = detail pages per run
   arbeitnow: { maxPages: number };
   themuse: { categories: string[]; levels: string[]; maxPages: number };
   jobspresso: { queries: string[] };
-  aijobs: { feeds: string[] };
+  aijobs: { queries: string[]; maxPages: number; maxDetails: number }; // foorilla.com/hiring title-substring searches (ex aijobs.net RSS)
   hn: { keywords: string[]; maxComments: number };
   adzuna: { appId: string; appKey: string; countries: string[]; queries: string[]; resultsPerPage: number };
   eightyk: { url: string; algoliaAppId: string; algoliaApiKey: string; index: string };

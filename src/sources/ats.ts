@@ -292,7 +292,7 @@ export function makeSearch(kind: AtsKind): (ctx: SearchCtx) => Promise<Job[]> {
     const budget = { details: CONFIG.careersMaxDetails };
     let failed = 0;
     const errors: string[] = [];
-  const br = new Breaker(8, "ats");
+    const br = new Breaker(8, kind);
     for (const site of sites) {
       try {
         const jobs = await FETCHERS[kind](site, ctx, budget);
@@ -305,7 +305,9 @@ export function makeSearch(kind: AtsKind): (ctx: SearchCtx) => Promise<Job[]> {
         ctx.log(`[${kind}] ${site.name}: ${n} open positions`); br.ok();
       } catch (e) {
         failed++;
-        br.fail(e); const msg = (e as Error).message;
+        const msg = (e as Error).message;
+        // a wrong slug (404 / unknown host) is a config problem of that company, not a dead ATS: it must not trip the breaker
+        if (!/HTTP 404|ENOTFOUND|getaddrinfo|curl HTTP 404/.test(msg)) br.fail(e);
         errors.push(`${site.name}: ${msg.slice(0, 60)}`);
         ctx.log(`[${kind}] ${site.name} (${site.slug}): ${msg}`);
       }

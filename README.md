@@ -108,20 +108,19 @@ career pages in **`config.json`**. After editing rules run `npm run score -- --r
 | Himalayas | JSON search API, `country=RS` (site filters by eligibility from Serbia), ~120 queries × 2 pages | 15 min |
 | LinkedIn Jobs | public guest API: `location=Serbia` + remote, and `location=European Union` + remote + entry/associate; details for new relevant titles | 60 min |
 | We Work Remotely | RSS: product, design, management & finance, customer support, sales & marketing, all-other | 30 min |
-| Remote OK | JSON API + tags (health, research, ux, content, writing, non-tech, ai, product, hr, education, psychology…) | 60 min |
-| Working Nomads | JSON feed (design, writing, management, healthcare, education, HR, consulting, marketing, legal) | 60 min |
-| Jobicy | JSON API (hr, product, copywriting, design, business, management, technical-writing, supporting, marketing) | 60 min |
+| Remote OK | JSON API + tags (healthcare, medical, ux, content, copywriting, non-tech, ai, product, hr, education, teaching, design, data annotation) | 60 min |
+| Working Nomads | JSON search index per category (design, writing, management, healthcare, education, HR, consulting, marketing, legal) + public feed as fallback | 60 min |
+| Jobicy | JSON API, industry slugs (hr, management, copywriting, design-multimedia, web-app-design, business, supporting, marketing, healthcare) + tags, all with `geo=serbia` | 60 min |
 | Remotive | JSON API (free sample only) | 6 h |
 | Arbeitnow | free JSON API, newest first (Europe-heavy) | 60 min |
 | The Muse | public JSON API, “Flexible / Remote”, entry + mid levels, 11 categories | 2 h |
 | Jobspresso | WP Job Manager RSS with keyword searches | 60 min |
-| aijobs.net | RSS feed (AI safety / policy / annotation / conversation roles among the engineering ones) | 60 min |
+| aijobs.net → foorilla.com | htmx list fragments of `foorilla.com/hiring/jobs/?job_search=<title substring>` (header `HX-Request: true`; no RSS any more, API is paid) + details for unseen matching titles; company is masked for anonymous visitors | 60 min |
 | Hacker News “Who is hiring” | monthly thread via the Algolia API, remote postings only | 6 h |
 | JobRack | SSR HTML lists + details (Eastern Europe remote) | 60 min |
 | Wellfound | SSR `__NEXT_DATA__` role pages (ux-researcher, product-manager, prompt-engineer, content, instructional/narrative designer, coach…) | 6 h |
 | Adzuna | official API with free keys (optional) | 2 h |
-| 80,000 Hours | JSON endpoint when configured (optional) | 2 h |
-| Workable global search | keyless search API over every public Workable employer (`jobs.workable.com/api/v1/jobs?query=…&location=Remote`), 25 domain queries | 2 h |
+| Workable global search | keyless search API over every public Workable employer (`jobs.workable.com/api/v1/jobs?query=…&workplace=remote&day_range=7`), 25 domain queries | 2 h |
 | hiring.cafe | unofficial multi-ATS aggregator API, remote filter, 29 domain queries (may be blocked from datacenter IPs; fine from a home PC) | 2 h |
 | EURES | EU public employment services search API, 12 keyword sets + details | 3 h |
 | ReliefWeb | UN OCHA jobs API: MHPSS, staff well-being, social & behaviour change roles (many remote consultancies) | 3 h |

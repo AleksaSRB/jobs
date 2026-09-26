@@ -283,13 +283,10 @@
   },
   "remoteok": {
     "tags": [
-      "health",
       "healthcare",
       "medical",
-      "research",
       "ux",
       "content",
-      "writing",
       "copywriting",
       "non tech",
       "ai",
@@ -297,8 +294,8 @@
       "hr",
       "education",
       "teaching",
-      "psychology",
-      "design"
+      "design",
+      "data annotation"
     ]
   },
   "workingnomads": {
@@ -410,14 +407,17 @@
   "jobicy": {
     "industries": [
       "hr",
-      "product",
+      "management",
       "copywriting",
       "design-multimedia",
+      "web-app-design",
       "business",
-      "management",
-      "technical-writing",
       "supporting",
-      "marketing"
+      "marketing",
+      "healthcare"
+    ],
+    "geos": [
+      "serbia"
     ],
     "count": 50,
     "tags": [
@@ -433,16 +433,16 @@
     ]
   },
   "arbeitnow": {
-    "maxPages": 4
+    "maxPages": 8
   },
   "themuse": {
     "categories": [
       "Design and UX",
-      "Product",
+      "Product Management",
       "Healthcare",
-      "Writing and Editing",
-      "HR",
       "Social Services",
+      "Writing and Editing",
+      "Human Resources and Recruitment",
       "Data and Analytics",
       "Project Management",
       "Education",
@@ -450,10 +450,10 @@
       "Media, PR, and Communications"
     ],
     "levels": [
-      "entry",
-      "mid"
+      "Entry Level",
+      "Mid Level"
     ],
-    "maxPages": 3
+    "maxPages": 20
   },
   "jobspresso": {
     "queries": [
@@ -470,9 +470,26 @@
     ]
   },
   "aijobs": {
-    "feeds": [
-      "https://aijobs.net/feed/"
-    ]
+    "queries": [
+      "psycholog",
+      "behavio",
+      "ux research",
+      "user research",
+      "mental health",
+      "wellbeing",
+      "well-being",
+      "annotat",
+      "conversation design",
+      "prompt",
+      "ai safety",
+      "responsible ai",
+      "ai ethic",
+      "human factors",
+      "cognitive",
+      "digital health"
+    ],
+    "maxPages": 2,
+    "maxDetails": 40
   },
   "hn": {
     "keywords": [
@@ -488,8 +505,7 @@
       "de",
       "nl",
       "pl",
-      "at",
-      "ie"
+      "at"
     ],
     "queries": [
       "behavioural scientist",
@@ -551,7 +567,9 @@
       "content",
       "policy",
       "trust and safety"
-    ]
+    ],
+    "maxPages": 3,
+    "maxDetails": 40
   },
   "workablesearch": {
     "queries": [
