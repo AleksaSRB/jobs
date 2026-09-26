@@ -80,6 +80,9 @@ const CASES: Array<[string, Job, Expect]> = [
   ["ad in spanish", j("Psicólogo/a para plataforma de salud mental", "Buscamos un psicólogo para nuestro equipo. Trabajo remoto con pacientes de la plataforma. Experiencia en terapia cognitivo conductual y salud mental. Ofrecemos contrato para el puesto y formación continua con nuestro equipo."), { reject: true }],
   ["remote areas is not remote work", j("Field Coordinator, remote areas of Turkana", "Mental health and psychosocial support (MHPSS) programs serving hard-to-reach and remote areas of the county.", { locations: ["Kenya"] }), { remote: "unknown" }],
   ["weak concept-only family is not a good match", j("Risk Operations Analyst", "Analyse fraud patterns and payment risk. We offer wellness stipends and mindfulness sessions.", { locations: ["Worldwide"], remote: "remote", locationVerified: true }), { max: 74 }],
+  ["hr generalist at a dialysis company is not organisational psychology", j("HR Generalist", "Fresenius Medical Care, dialysis services. Administer payroll, contracts, onboarding paperwork, HR records. Benefits: mental health days, coaching budget, wellness allowance. 2+ years of experience.", { locations: ["Serbia"], remote: "remote", locationVerified: true, employment: ["full-time"] }), { max: 99 }],
+  ["bare psychology subfield title is psychology work", j("Developmental Psychology", WW + "Subject-matter expert for AI training data: review child development scenarios and rate model answers. PhD or Master's in psychology.", { remote: "remote" }), { primary: "behavioral-science", shown: true }],
+  ["project support specialist is not a coach", j("Project Support Specialist", "Support clinical trial project managers with trackers, meeting minutes and vendor invoices. 2+ years of experience.", { locations: ["Serbia"], remote: "remote", locationVerified: true, employment: ["full-time"] }), { shown: false }],
 ];
 
 let fail = 0;

@@ -57,7 +57,7 @@ npm run scrape:force        # scan every source now
 npm run serve               # UI on http://localhost:3008
 npm run scrape -- --only himalayas,linkedin,greenhouse,rss
 npm run check               # ping every source from this machine (add -- --careers to test every career page)
-npm test                    # offline matcher regression tests (45 fixtures)
+npm test                    # offline matcher regression tests (60 fixtures)
 npm run score -- --all      # table of everything in the database by current rules
 npm run score -- "conversation designer"   # full score breakdown for one job
 npm run score -- --rescore  # re-score the database after editing rules.json
@@ -99,6 +99,8 @@ below `minScore` (50) it is hidden (logged in `data/filtered.log`).
 | purely technical role (5+ stack terms, no psychology concepts) | −80 |
 | hybrid / on-site, US-only, other language mandatory, unpaid, commission-only, MLM | hidden |
 | psychology background wanted, sensitive users, early career, hires globally, Serbia mentioned | +5 … +15 |
+| job family found only in the description (not the title) · no family at all (adjacent title / industry only) | capped at 99 · capped at 74 |
+| industry words inside a perks sentence ("mental health days", "coaching budget") | ignored |
 
 Everything is data: add a synonym, concept, industry, hard reject or weight in **`rules.json`**; queries, feeds, categories, rhythm and
 career pages in **`config.json`**. After editing rules run `npm run score -- --rescore`; to re-evaluate previously hidden listings delete `data/seen.json`.

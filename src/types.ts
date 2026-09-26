@@ -195,10 +195,12 @@ export interface JobFamily {
 export interface Rules {
   thresholds: { excellent: number; good: number; possible: number };
   families: JobFamily[];
-  familyRules: { conceptFull: number; conceptPartialFactor: number; gatedFactor: number; gatedPenalty: number; secondaryMin: number; secondaryConceptMin: number; secondaryBonus: number; secondaryBonusMax: number; noFamilyIndustryOnly: number; conceptOnlyPenalty?: number };
+  familyRules: { conceptFull: number; conceptPartialFactor: number; gatedFactor: number; gatedPenalty: number; secondaryMin: number; secondaryConceptMin: number; secondaryBonus: number; secondaryBonusMax: number; noFamilyIndustryOnly: number; conceptOnlyPenalty?: number; noTitleMaxScore?: number; adjacentOnlyMaxScore?: number };
   adjacentTitles: { patterns: string[]; score: number };
   industries: Array<{ id: string; label: string; score: number; patterns: string[] }>;
   industryScoreMax: number;
+  industryExcludeSentence?: string; // an industry hit inside a sentence matching this (perks / benefits) is ignored
+  conceptOnlyPenalty?: number;      // (unused here – see familyRules)
   concepts: Array<{ group: string; label: string; patterns: string[] }>;
   conceptGroupOrder: string[];
   conceptScore: number;

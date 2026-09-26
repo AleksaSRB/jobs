@@ -26,7 +26,8 @@
     "behaviou?ral health (research|scien)",
     "\\bnudge",
     "choice architect",
-    "behaviou?ral (economics|insights) (unit|team|lead|associate)"
+    "behaviou?ral (economics|insights) (unit|team|lead|associate)",
+    "^(developmental|cognitive|social|educational|health|sport|forensic|positive|experimental|neuro|child|adolescent|environmental|consumer|research|evolutionary|cultural) psycholog(y|ist)( \\(?ph\\.?d\\.?\\)?| expert| specialist| consultant| sme| subject matter expert| advisor| tutor| trainer| annotator)?$"
    ],
    "conceptPatterns": [
     "behaviou?r[- ]change",
@@ -409,10 +410,10 @@
     "mental health (practitioner|associate|advocate|navigator|guide|companion|support|worker|professional|ambassador|facilitator|mentor|educator|first aider)",
     "wellness (practitioner|specialist|consultant|advisor|guide|coordinator|associate|facilitator|educator)",
     "peer (support|specialist|counsel|mentor|recovery)",
-    "care (navigator|guide|partner|advocate|companion|advisor|specialist|associate)",
+    "care (navigator|guide|advocate|companion|advisor)",
     "behaviou?ral health (coach|specialist|associate|navigator|technician|support|advocate|educator)",
     "mindfulness (teacher|instructor|coach|facilitator|guide)|meditation (teacher|guide|instructor|facilitator)|breathwork|yoga (teacher|instructor)",
-    "support (coach|specialist|worker|guide|practitioner|facilitator)",
+    "(peer|mental health|well-?being|recovery|crisis|emotional|behaviou?ral health|family|caregiver|member) support (coach|specialist|worker|guide|practitioner|facilitator)",
     "(health|wellness|well-?being|life) (mentor|guide|educator|facilitator|advisor)",
     "crisis (counsel|support|responder|text|line|advocate|specialist)|helpline|warmline|listener"
    ],
@@ -484,7 +485,7 @@
    "conceptWeight": 30,
    "badge": "Corporate Well-being",
    "titlePatterns": [
-    "(corporate|employee|workplace|organi[sz]ational|team|people|staff|workforce|colleague|associate|member|student|campus) (well-?being|wellness|mental health|health|experience|engagement|resilience|happiness|care|success|assistance|listening|relations|support|advocacy)",
+    "(corporate|employee|workplace|organi[sz]ational|team|people|staff|workforce|colleague|associate|member|student|campus) (well-?being|wellness|mental health|health|experience|engagement|resilience|happiness|assistance|listening|advocacy)",
     "well-?being (program|programme|specialist|manager|lead|coordinator|consultant|strateg|partner|champion|advisor|associate|analyst|director|officer|ambassador|educator|facilitator|advocate|practitioner|operations|content)",
     "wellness (program|programme|specialist|manager|lead|coordinator|consultant|strateg|partner|champion|advisor|associate|director|officer|ambassador|educator|facilitator|operations)",
     "psychological safety",
@@ -492,11 +493,11 @@
     "burnout (prevention|specialist|consultant|coach|program)",
     "employee (health|assistance|experience|engagement|listening|success|relations|benefits|programs?|advocacy|communications?|voice)",
     "\\beap\\b|employee assistance",
-    "benefits (specialist|program|analyst|coordinator|manager|partner|consultant)",
-    "people (experience|programs?|partner|operations|ops|specialist|coordinator|associate|generalist|advisor|team|success|engagement|care|culture|analyst|manager|lead)",
+    "(well-?being|wellness|mental health) benefits? (specialist|program|analyst|manager|partner|consultant)",
+    "people (experience|programs?|partner|operations|ops|engagement|culture)",
     "culture (and|&) (engagement|well-?being|people|belonging|inclusion|experience|talent)|engagement (and|&) culture",
-    "engagement (specialist|manager|lead|program|analyst|coordinator|partner|consultant|strateg|officer|associate)",
-    "\\bhr (business partner|generalist|specialist|coordinator|associate|analyst|manager|advisor|partner|operations|lead)\\b|human resources (specialist|generalist|coordinator|business partner|associate|manager|advisor|analyst|partner)|\\bhrbp\\b",
+    "employee engagement (specialist|manager|lead|program|analyst|coordinator|partner|consultant|strateg|officer|associate)",
+    "\\bhr business partner\\b|\\bhrbp\\b",
     "workplace (psycholog|health|culture|experience|consultant|strateg|well-?being|mental health)",
     "occupational (health|psycholog|well-?being)",
     "\\bdei\\b|\\bdeib?\\b|diversity[^\\n]{0,20}inclusion|belonging|inclusion (specialist|lead|manager|partner|program)",
@@ -754,7 +755,7 @@
     "(leadership|learning|talent|management|people|professional|capability|career|skills?|organi[sz]ational) (development|enablement|growth) (specialist|consultant|partner|manager|lead|program|coordinator|associate|designer|facilitator|advisor|analyst|coach|director)|\\bl&d\\b|learning (and|&) development|talent development|leadership development",
     "(executive|leadership|team|business|agile|performance|career|transformation) coach",
     "facilitator\\b|training (specialist|facilitator|consultant|manager|coordinator|lead|designer|developer|delivery)|trainer\\b|workshop (facilitator|lead|designer)",
-    "hr (transformation|strategy|consultant|analytics|business partner|advisor|specialist|generalist|manager|operations|partner|associate|coordinator|analyst|lead|program)|\\bhrbp\\b|human resources",
+    "hr (transformation|strategy|consultant|analytics|business partner)|\\bhrbp\\b|people (business )?partner",
     "engagement (consultant|specialist|strateg|manager|lead|analyst|partner|program|coordinator|officer|associate)",
     "people (and|&) culture|talent (and|&) culture|culture (and|&) people|people (and|&) organi[sz]ation|people (and|&) talent",
     "(business|management|strategy|hr|people|transformation|leadership|organi[sz]ation|workforce|culture|change|talent) consultant|consulting (analyst|associate|manager|consultant|lead|partner|senior)",
@@ -768,19 +769,27 @@
     "team dynamics|group dynamics|team (effectiveness|performance|coaching|development|building|health|norms|rituals)",
     "organi[sz]ational (behaviou?r|psychology|design|development|effectiveness|health|culture|change|structure|network|design|learning|capability)",
     "workplace psychology|work psychology|occupational psychology|\\bi/?o psycholog|industrial[- ]organi[sz]ational|business psychology",
-    "communication (processes|patterns|norms|skills|styles)|collaboration|conflict (resolution|management|styles)|feedback (culture|skills|loops)|difficult conversations",
+    "communication (processes|patterns|norms|styles)|cross-functional collaboration|conflict (resolution|management|styles)|feedback (culture|loops)|difficult conversations",
     "remote teams|distributed teams|hybrid (work|teams|workforce|working)|asynchronous|async|remote[- ]first|future of work|ways of working",
     "organi[sz]ation(al)? design|operating model|role clarity|spans and layers|org (design|structure|health|effectiveness)|workforce planning|job (design|architecture|families)",
-    "culture (change|transformation|assessment|building|survey|design|strategy|fit|add)|values|rituals|behaviou?rs\\b|norms",
+    "culture (change|transformation|assessment|building|survey|design|strategy|fit|add)|team (norms|rituals)|cultural values|behaviou?ral norms",
     "employee engagement|engagement (surveys?|data|scores?|drivers|strategy|results)|\\benps\\b|pulse (surveys?|checks?)|employee (listening|voice|sentiment|feedback|surveys?)",
     "change management|change (readiness|adoption|communications?|impact|leadership|curve|resistance)|prosci|adkar|kotter|transformation",
-    "psychological safety|trust\\b|belonging|inclusion|inclusive (leadership|culture|teams)|equity|diversity",
+    "psychological safety|trust (building|culture)|sense of belonging|inclusive (leadership|culture|teams)|diversity, equity|\\bdei\\b|\\bdeib?\\b",
     "leadership (development|assessment|coaching|programs?|effectiveness|behaviou?rs|competenc|training|pipeline)|manager (training|effectiveness|development|enablement|capability)|\\b360\\b|executive coaching",
     "people analytics|hr analytics|workforce analytics|people data|people science|talent analytics|people insights?|hr (metrics|data|dashboards?)",
-    "facilitat|workshops?|training (design|delivery|programs?|needs)|learning (design|programs?|experience|journeys?|culture|needs)|onboarding|offsites?|team (sessions?|retreats?|workshops?)",
-    "performance management|talent management|succession|competenc|okrs?|goal setting|career (development|paths?|frameworks?|growth)|talent reviews?|calibration|promotion",
-    "employee (experience|journey|lifecycle|well-?being|retention|turnover|attrition|satisfaction|motivation|productivity|burnout)|retention|attrition|turnover|motivation|job satisfaction|burnout|well-?being",
-    "psycholog|behaviou?ral science|social science|research (methods|design)|surveys?|interviews|focus groups|qualitative|quantitative|statistic|evidence[- ]based|\\bhbr\\b|academic"
+    "facilitat(e|ion|or)|training (design|delivery|needs analysis)|learning (design|journeys?|culture|needs analysis)|team (retreats?|workshops?|offsites?)",
+    "performance management|talent management|succession planning|competency (framework|model)|career (paths?|frameworks?)|talent reviews?|calibration",
+    "employee (experience|journey|lifecycle|well-?being|retention|turnover|attrition|satisfaction|motivation|burnout)|job satisfaction",
+    "psycholog|behaviou?ral science|social science|research (methods|design)|focus groups|qualitative research|evidence[- ]based"
+   ],
+   "gated": true,
+   "industries": [
+    "organizational-psychology",
+    "people-science",
+    "psychology",
+    "mental-health",
+    "coaching-wellbeing"
    ]
   }
  ],
@@ -794,7 +803,9 @@
   "secondaryBonus": 5,
   "secondaryBonusMax": 10,
   "noFamilyIndustryOnly": -25,
-  "conceptOnlyPenalty": -25
+  "conceptOnlyPenalty": -25,
+  "noTitleMaxScore": 99,
+  "adjacentOnlyMaxScore": 74
  },
  "adjacentTitles": {
   "score": 10,
@@ -2442,5 +2453,6 @@
     "\\bevery(one|body) deserves\\b|\\bdemocrati[sz]e (mental health|access|care)\\b"
    ]
   }
- ]
+ ],
+ "industryExcludeSentence": "\\b(benefits?|perks?|we offer|you get|you'll get|you will get|allowance|stipend|budget|days? off|\\bpto\\b|paid time|insurance|reimburse|subscription|discount|gym|unlimited|flexible (hours|working|schedule)|equipment|home office|401\\(k\\)|pension|holiday|vacation|parental leave|sick leave|take care of you|we care about|support (for|to) (you|our (team|employees|people))|employee assistance)\\b"
 }

@@ -83,6 +83,15 @@ technicians, merchant services, product sourcing rejected; soft −15 for US-emp
 (clients, culture, benefits, workshops, players, wellness, stress, brands, needs…) need their psychology/health context before they build a job family;
 ads in another language detected by stop-word density; "remote areas" is not remote work; "- On-site" in a title counts even when the site's remote filter says otherwise.
 
+Second pass after reviewing the top 50 cards of the full run (3 more fixtures, 60/60; rescoring the same 288 cards hid 30 and moved excellent 148 → 73 / good 76 → 121):
+an industry term inside a perks/benefits sentence ("mental health days", "coaching budget", "wellness stipend" – `industryExcludeSentence`) no longer counts as an industry signal
+(it was worth +45 on an HR ad at a dialysis company); *organizational psychology* is gated like the other generic families and no longer owns plain HR titles
+(HR Generalist / Human Resources Specialist), its perk-like concepts (values, collaboration, diversity, surveys, onboarding…) need their org-psych context;
+corporate well-being lost "workplace support / employee relations / HR generalist / people specialist / benefits specialist" titles; coaching lost "support specialist" and
+"care specialist/associate" (a clinical-trials Project Support Specialist scored 158 as a coach); bare psychology-subfield titles ("Developmental Psychology (PhD)" – AI-training
+and SME gigs) are behavioral-science work; and two caps: a card whose job family is not in the title cannot exceed 99 (`familyRules.noTitleMaxScore`), a card with no family at all
+(adjacent title / industry only) cannot exceed 74 (`adjacentOnlyMaxScore`) – the generic bonuses (remote, eligible, junior, full-time, degree) used to stack to 190 on a Medical Project Coordinator.
+
 ## Full pass (`npm run scrape:force`, 27.09.2026 00:40–01:04, fresh scratch DB)
 
 **24 min 23 s** for all 31 sources, 0 errors, ~25 000 listings parsed → **288 cards** (148 excellent / 76 good / 64 possible); 7-day baseline.

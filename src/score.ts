@@ -68,6 +68,13 @@ const PREFERRED_GROUPS: Record<string, string[]> = {
 };
 
 const firstMatch = (res: RegExp[], text: string): RegExpMatchArray | null => { for (const r of res) { const m = text.match(r); if (m) return m; } return null; };
+const PERK_SENTENCE = RULES.industryExcludeSentence ? new RegExp(RULES.industryExcludeSentence, "i") : null;
+/** An industry term inside a benefits/perks sentence ("mental health days", "coaching budget", "wellness stipend") says nothing about the employer's business. */
+function hitOutsidePerks(re: RegExp, body: string): boolean {
+  if (!PERK_SENTENCE) return re.test(body);
+  for (const m of body.matchAll(new RegExp(re.source, "gi"))) if (!PERK_SENTENCE.test(sentenceAround(body, m.index ?? 0))) return true;
+  return false;
+}
 const countMatches = (res: RegExp[], text: string): { n: number; samples: string[] } => {
   const samples: string[] = [];
   for (const r of res) { const m = text.match(r); if (m && m[0].trim()) samples.push(m[0].trim().replace(/\s+/g, " ")); }
@@ -184,7 +191,7 @@ export function scoreJob(job: Job): Scoring {
   const hardReject = (why: string) => { if (!reject) reject = why; reasons.push(`✕ ${why}`); negativeReasons.push(`✕ ${why}`); };
 
   // ---- industry / company signals (title + description + tags)
-  const industries = INDUSTRIES.filter((i) => i.re.some((r) => r.test(text))).sort((a, b) => b.score - a.score);
+  const industries = INDUSTRIES.filter((i) => i.re.some((r) => r.test(title) || hitOutsidePerks(r, body))).sort((a, b) => b.score - a.score);
   const industryIds = industries.map((i) => i.id);
   if (industries.length) {
     const pts = Math.min(RULES.industryScoreMax, industries[0].score + (industries[1] ? Math.round(industries[1].score / 2) : 0));
@@ -214,9 +221,9 @@ export function scoreJob(job: Job): Scoring {
     if (primary.gatedMiss) add(FR.gatedPenalty, "generic role: no mental-health / health-tech / AI / psychology context");
     if (secondaries.length) add(Math.min(FR.secondaryBonusMax, FR.secondaryBonus * secondaries.length), `also matches: ${secondaries.slice(0, 3).map((x) => x.f.label).join(", ")}`);
     if (!primary.t) {
-      if (adj) add(RULES.adjacentTitles.score, `adjacent title ${quote(adj[0])} with matching responsibilities`);
+      if (adj && primary.c.n >= FR.conceptFull) add(RULES.adjacentTitles.score, `adjacent title ${quote(adj[0])} with matching responsibilities`);
       else if (primary.c.n >= FR.conceptFull) add(-10, "job family found only in the description, not the title");
-      else add(FR.conceptOnlyPenalty ?? -10, `job family only weakly present in the description (${primary.c.n} concept${primary.c.n > 1 ? "s" : ""}, title unrelated)`); // 1–2 perk-paragraph hits must not ride the site bonuses over the threshold
+      else add(FR.conceptOnlyPenalty ?? -10, `job family only weakly present in the description (${primary.c.n} concept${primary.c.n > 1 ? "s" : ""}, title ${adj ? "only adjacent" : "unrelated"})`); // 1–2 perk-paragraph hits must not ride the site bonuses over the threshold
     }
   } else if (adj && industries.length) {
     add(RULES.adjacentTitles.score, `adjacent title ${quote(adj[0])} in a relevant industry`);
@@ -432,6 +439,10 @@ export function scoreJob(job: Job): Scoring {
 
   if (primary) badges.unshift(primary.f.badge ?? primary.f.label);
   for (const x of secondaries.slice(0, 2)) badges.push(x.f.badge ?? x.f.label);
+  // generic bonuses (remote, eligible, junior, full-time, degree) stack to 100+ on their own: without a title-level family match a card is never "excellent",
+  // without any family (adjacent title / industry only) never "good"
+  const cap = !primary ? FR.adjacentOnlyMaxScore : !primary.t ? FR.noTitleMaxScore : undefined;
+  if (cap != null && score > cap) add(cap - score, `capped at ${cap}: ${!primary ? "no job family in the title or description" : "job family not in the title"}`);
   reasons.push(`= ${score}`);
   return {
     score, level: levelOf(score), reasons, matchReasons, negativeReasons,
