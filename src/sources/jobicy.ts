@@ -1,13 +1,17 @@
 /**
- * Jobicy – public JSON API (checked 26.09.2026): GET https://jobicy.com/api/v2/remote-jobs?count=50[&industry=<slug>][&tag=<text>][&geo=<slug>]
- * count is capped at 50 (newest first). industry must be a slug from ?get=industries – hr, management ("Product & Operations"), copywriting
- * ("Content & Editorial"), design-multimedia, web-app-design, business, supporting, marketing, healthcare, education, data-science, project-management…;
- * an unknown slug answers HTTP 400 ("product" and "technical-writing" no longer exist). tag= is free text (unknown tag -> 200 with 0 jobs + message).
- * geo must be a slug from ?get=locations; geo=serbia returns listings open to Serbia (jobGeo "Anywhere", "Europe", "EMEA" and combinations with them),
- * so the 50-row cap is not spent on US-only rows (about half of the unfiltered feed). Fields: id, url, jobTitle, companyName, companyLogo, jobIndustry[],
- * jobType[] ("Full-Time"/"Contract"/"Part-Time"/"Internship"), jobGeo ("USA", "Anywhere", "Canada,  UK,  USA"), jobLevel ("Any"/"Midweight"/"Senior"/
- * "Director"/"Entry-Level, Junior"), jobExcerpt, jobDescription (HTML), pubDate (ISO), salaryMin/salaryMax (numbers), salaryCurrency, salaryPeriod
- * ("yearly"/"monthly"/"hourly"; the old annualSalaryMin/Max fields are gone).
+ * Jobicy – public JSON API (checked 26.09.2026, docs github.com/Jobicy/remote-jobs-api): GET https://jobicy.com/api/v2/remote-jobs?count=200[&industry=<slug>][&tag=<text>][&geo=<slug>]
+ * count 1–200 (default 200, larger values are clamped – NOT capped at 50 as assumed earlier), newest first, the API holds ~30 days of listings per filter,
+ * so count=200 returns everything for a filtered query (industry=marketing&geo=serbia = 64 rows, tag=research&geo=serbia = 82; unfiltered geo=serbia
+ * = 200 rows / 12 days). industry must be a slug from ?get=industries – hr, management ("Product & Operations"), copywriting ("Content & Editorial"),
+ * design-multimedia, web-app-design, business, supporting, marketing, healthcare, education, data-science, project-management…; an unknown slug answers
+ * HTTP 400 ("product" and "technical-writing" no longer exist). tag = keyword search (3–50 chars) over title + excerpt + description: case-insensitive
+ * SUBSTRING per word, words ANDed in any order ("psycholog" finds psychology/psychologist/psychological, "mental health" finds the phrase but also
+ * "environmental"+"health" rows, "mental-health" only the hyphenated spelling = 1 row); an unknown tag answers 200 with 0 jobs + message. geo must be a slug
+ * from ?get=locations; geo=serbia returns listings open to Serbia (jobGeo "Anywhere", "Europe", "EMEA" and combinations with them) and drops single-country
+ * rows (about half of the unfiltered feed is USA-only). Fields: id, url, jobTitle, companyName, companyLogo, jobIndustry[], jobType[] ("Full-Time"/
+ * "Contract"/"Part-Time"/"Internship"), jobGeo ("USA", "Anywhere", "Canada,  UK,  USA"), jobLevel ("Any"/"Midweight"/"Senior"/"Director"/"Entry-Level,
+ * Junior"), jobExcerpt, jobDescription (HTML), pubDate (ISO), salaryMin/salaryMax (numbers), salaryCurrency, salaryPeriod ("yearly"/"hourly"; missing on
+ * some rows -> period null; the old annualSalaryMin/Max fields are gone).
  */
 import { CONFIG } from "../config.ts";
 import { fetchJson, htmlToText, sleep, toIso, truncate } from "../http.ts";
@@ -49,6 +53,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
   const geos = cfg.geos?.length ? keep("geo", cfg.geos, await validSlugs("locations")) : [];
   const base = [...industries.map((i) => ({ label: `industry=${i}`, qs: `industry=${encodeURIComponent(i)}` })), ...(cfg.tags ?? []).map((t) => ({ label: `tag=${t}`, qs: `tag=${encodeURIComponent(t)}` }))];
   const plan = (geos.length ? geos : [""]).flatMap((g) => base.map((q) => (g ? { label: `${q.label} geo=${g}`, qs: `${q.qs}&geo=${encodeURIComponent(g)}` } : q)));
+  if (!plan.length) ctx.log("[jobicy] nothing to query – config.json jobicy.industries / jobicy.tags are empty (or every slug unknown)");
   for (const { label, qs } of plan) {
     try {
       const res = await fetchJson<ApiList>(`${API}?count=${cfg.count}&${qs}`);

@@ -6,7 +6,7 @@ const execFileAsync = promisify(execFile);
 
 export const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
-/** Hostovi za koje je Node fetch dobio Cloudflare challenge -> dalje idu direktno preko curl-a. */
+/** Hostovi za koje je Node fetch dobio Cloudflare challenge ili 429/403 na TLS otisak (LinkedIn) -> dalje idu direktno preko curl-a. */
 const curlHosts = new Set<string>();
 
 function looksLikeCloudflareChallenge(status: number, body: string): boolean {
@@ -73,6 +73,15 @@ export async function fetchText(url: string, opts: FetchOpts = {}): Promise<stri
         if (opts.jar || opts.body) throw new Error(`Cloudflare challenge (HTTP ${res.status})`);
         curlHosts.add(host);
         return await fetchTextViaCurl(url);
+      }
+      // 429/403 on a plain GET (no cookies/body/custom headers): bot detection keyed on Node's TLS fingerprint (LinkedIn's guest API answers 429 to the very
+      // first request while curl.exe with the same headers gets 200) -> one retry through curl; when it passes, the host stays on curl for the rest of the run.
+      // A real rate limit fails there too ("curl HTTP 429" still matches the callers' /429/ checks); a curl/spawn problem falls back to the original HTTP error.
+      if ((res.status === 429 || res.status === 403) && !opts.jar && !opts.body && !opts.headers && (opts.method ?? "GET") === "GET") {
+        let viaCurl: string;
+        try { viaCurl = await fetchTextViaCurl(url); } catch (e) { throw /^curl HTTP/.test((e as Error).message) ? e : new Error(`HTTP ${res.status}`); }
+        curlHosts.add(host);
+        return viaCurl;
       }
       if (res.status === 429) throw new Error("HTTP 429 (rate limit)");
       if (!res.ok) throw new Error(`HTTP ${res.status}`);

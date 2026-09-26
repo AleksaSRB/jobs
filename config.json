@@ -202,7 +202,6 @@
       "wellbeing coach",
       "wellness coach",
       "life coach",
-      "health coach",
       "coach",
       "peer support",
       "care navigator",
@@ -315,7 +314,7 @@
     "categories": [
       "content-writer",
       "project-manager",
-      "design",
+      "designer",
       "support"
     ],
     "maxPages": 2,
@@ -385,22 +384,14 @@
     "maxPages": 2,
     "paths": [
       "/role/r/ux-researcher",
-      "/role/r/user-researcher",
       "/role/r/product-manager",
-      "/role/r/prompt-engineer",
-      "/role/r/content-writer",
+      "/role/r/product-owner",
+      "/role/r/program-manager",
       "/role/r/content-strategist",
-      "/role/r/instructional-designer",
-      "/role/r/narrative-designer",
-      "/role/r/game-writer",
-      "/role/r/health-coach",
-      "/role/r/behavioral-scientist",
-      "/role/r/ai-trainer",
-      "/role/r/conversation-designer",
-      "/role/r/trust-and-safety",
-      "/role/r/research-scientist",
-      "/role/r/market-researcher",
-      "/role/r/psychologist",
+      "/role/r/copywriter",
+      "/role/r/people-operations",
+      "/role/r/recruiter",
+      "/role/r/game-designer",
       "/role/l/product-manager/europe"
     ]
   },
@@ -419,17 +410,16 @@
     "geos": [
       "serbia"
     ],
-    "count": 50,
+    "count": 200,
     "tags": [
-      "psychology",
-      "mental-health",
-      "ux-research",
+      "psycholog",
+      "mental health",
+      "ux research",
       "coaching",
       "research",
       "healthcare",
       "education",
-      "content",
-      "policy"
+      "content"
     ]
   },
   "arbeitnow": {
@@ -486,10 +476,19 @@
       "ai ethic",
       "human factors",
       "cognitive",
-      "digital health"
+      "digital health",
+      "people analytics",
+      "psychometr",
+      "consumer insight",
+      "ai evaluat",
+      "model evaluat",
+      "alignment",
+      "content design",
+      "linguist",
+      "security awareness"
     ],
     "maxPages": 2,
-    "maxDetails": 40
+    "maxDetails": 60
   },
   "hn": {
     "keywords": [
@@ -586,7 +585,7 @@
       "counsellor",
       "trust and safety",
       "conversation designer",
-      "prompt engineer",
+      "\"prompt engineer\"",
       "instructional designer",
       "content strategist health",
       "organisational psychologist",
@@ -599,6 +598,7 @@
       "psychoeducation",
       "behaviour change"
     ],
+    "locations": [],
     "maxPages": 2
   },
   "hiringcafe": {
@@ -633,8 +633,9 @@
       "human risk",
       "psychology"
     ],
-    "pageSize": 40,
-    "maxPages": 2
+    "country": "RS",
+    "maxPages": 2,
+    "maxDetails": 60
   },
   "eures": {
     "keywords": [
@@ -655,6 +656,7 @@
     "maxDetails": 30
   },
   "reliefweb": {
+    "appname": "",
     "query": "psychosocial OR \"mental health\" OR MHPSS OR \"behaviour change\" OR \"behavior change\" OR \"staff well-being\" OR \"staff wellbeing\" OR psychologist OR \"social and behavior change\" OR \"social and behaviour change\" OR counsellor OR \"user research\" OR \"trust and safety\"",
     "limit": 100
   },

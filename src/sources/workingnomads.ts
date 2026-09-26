@@ -1,7 +1,7 @@
 /**
  * Working Nomads – dva javna JSON endpointa (provereno 26.09.2026):
  *  1. GET https://www.workingnomads.com/jobsapi/_search?q=<lucene>&size=N&sort=pub_date:desc – Elasticsearch indeks samog sajta (svi aktivni oglasi, GET sa
- *     Lucene query stringom); po jedan zahtev po konfigurisanoj kategoriji: category_name:"Healthcare" AND pub_date:[<since> TO now] AND expired:false.
+ *     Lucene query stringom); po jedan zahtev po konfigurisanoj kategoriji: category_name:"Healthcare" AND pub_date:[<since ISO, npr. 2026-09-19T17:28:32Z> TO now] AND expired:false.
  *     _source: id, slug, title, company, category_name, description (HTML), tags[], locations[] ("USA", "Europe", "EMEA", "Anywhere"…), location_base/location_extra,
  *     position_type (ft|pt|fr), experience_level (ENTRY_LEVEL|MID_LEVEL|SENIOR_LEVEL), apply_option (with_your_ats|with_email), apply_url (ATS stranica poslodavca),
  *     salary_range ("$48k-$63k per year"), annual_salary_usd, pub_date, expired. Stranica oglasa: /jobs/<slug>. Kategorije nedeljno: Management ~260, Marketing ~100,
@@ -74,7 +74,7 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
   } catch (e) { ctx.log(`[workingnomads] feed failed: ${(e as Error).message}`); }
 
   // 2. search index, one query per category (empty category list = everything since the baseline)
-  const since = ctx.since.toISOString().slice(0, 10);
+  const since = ctx.since.toISOString().replace(/\.\d{3}Z$/, "Z"); // the index accepts a full timestamp in the range (date-only would re-fetch the whole baseline day)
   const breaker = new Breaker(3, "[workingnomads] search index");
   try {
     for (const cat of cats.length ? cats : [""]) {

@@ -10,6 +10,8 @@
  *   europe  – location=European Union + remote + entry/associate: oglas sa lokacijom „European Union“ ide dalje kao „Europe“ (proveri opis);
  *             oglas sa konkretnim gradom/zemljom (Stockholm, Sweden) je po pravilu remote SAMO u toj zemlji -> lokacija te zemlje (ocena ga odbija)
  * Rizik: rate limit (HTTP 429) posle većeg broja zahteva -> mali broj upita, pauze, detalj samo za neviđene sa pogođenom kategorijom; 429 prekida izvor.
+ * TLS otisak (provereno 26.09.2026): sa ove mašine Node fetch povremeno dobija 429 već na PRVOM zahtevu, dok curl.exe sa istim zaglavljima dobija 200 –
+ *   http.ts zato 429/403 na običnom GET-u ponavlja kroz curl.exe i host ostaje na curl-u (lista i detalj); tek „curl HTTP 429“ je pravi rate limit i zaustavlja izvor.
  */
 import { CONFIG } from "../config.ts";
 import { decodeEntities, fetchText, htmlToText, sleep, toIso, truncate } from "../http.ts";

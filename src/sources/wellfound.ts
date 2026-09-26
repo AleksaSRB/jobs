@@ -1,17 +1,22 @@
 /**
- * Wellfound – javne SEO stranice po ulozi su SSR (provereno 19.09.2026; adapter iz jobs/ scrapera), bez logina:
- *   https://wellfound.com/role/r/<uloga>            remote oglasi za ulogu (rade: marketing, digital-marketing, social-media-manager, sales, account-executive…;
- *                                                   marketing-coordinator, sdr, customer-success, business-development, operations -> 303, ne postoje)
- *   https://wellfound.com/role/l/<uloga>/<lokacija> oglasi po lokaciji (meša onsite -> filtriramo po `remote`)
- * Podaci: <script id="__NEXT_DATA__"> -> props.pageProps.apolloState.data -> "JobListingSearchResult:<id>" (title, slug, description, jobType,
- * liveStartAt, remote, remoteConfig.kind, acceptedRemoteLocationNames[], compensation, yearsExperienceMin/Max), firma u "StartupResult:<id>".
- * 20 oglasa po strani, ?page=N, sortirano po relevantnosti (ne po datumu) i dosta senior -> maxPages mali, ocena filtrira.
- * Zamke: sajt je istorijski iza DataDome-a -> može 403; tada ovaj izvor samo prijavi grešku. Pauza 2,5 s između strana.
+ * Wellfound – public SEO role pages are SSR (verified 26.09.2026), no login:
+ *   https://wellfound.com/role/r/<role>             remote listings for a role (__NEXT_DATA__.page = "/seoLanding/roleRemoteSearch", pageProps.role = slug)
+ *   https://wellfound.com/role/l/<role>/<location>  listings by location, mixes onsite -> filtered by `remote` ("/seoLanding/roleLocationSearch")
+ *   Role slugs are a fixed SEO list (ux-researcher, product-manager, product-owner, content-strategist, hr-manager, data-analyst… exist);
+ *   an unknown slug answers 303 -> /remote (generic "Remote Tech & Startup Jobs", page = "/seoLanding/remoteSearch", ~56 engineering jobs/page).
+ *   Node fetch follows that redirect silently, so a missing `pageProps.role` is what tells the two apart – such a path is logged and skipped
+ *   (it must NOT be parsed: the generic page would pollute the db with random tech jobs).
+ * Data: <script id="__NEXT_DATA__"> -> props.pageProps.apolloState.data -> "JobListingSearchResult:<id>" (title, slug, description (markdown), jobType,
+ * liveStartAt (unix s), locationNames[] = HQ, remote, remoteConfig.kind REMOTE|ONSITE|ONSITE_OR_REMOTE|null, acceptedRemoteLocationNames[],
+ * compensation "$90k – $130k • 0.1% – 0.5%", yearsExperienceMin/Max, primaryRoleTitle); company in "StartupResult:<id>" (name, logoUrl,
+ * highlightedJobListings[].__ref). ROOT_QUERY carries pageCount / totalJobCount; ?page=N; sorted by relevance (not date), lots of senior and
+ * years-old listings -> keep maxPages small, the scorer / baseline filter the rest. Historically behind DataDome -> may 403 (then the source only
+ * reports the error). 2.5 s pause between pages.
  */
 import { CONFIG } from "../config.ts";
 import { fetchText, sleep, toIso, truncate } from "../http.ts";
 import { parseSalaryText, salaryFromDescription } from "../salary.ts";
-import type { Job } from "../types.ts";
+import type { Job, SearchCtx } from "../types.ts";
 import { Breaker, employmentOf } from "./common.ts";
 
 const BASE = "https://wellfound.com";
@@ -23,10 +28,11 @@ interface WfJob {
 }
 interface WfStartup { name?: string; logoUrl?: string; highlightedJobListings?: Array<{ __ref?: string }> }
 
-function parsePage(html: string): { jobs: Job[]; pageCount: number } {
+function parsePage(html: string): { jobs: Job[]; pageCount: number; total: number; role: string | null } {
   const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
   if (!m) throw new Error("nema __NEXT_DATA__ (anti-bot ili promenjen sajt)");
   const next = JSON.parse(m[1]);
+  const role: string | null = next?.props?.pageProps?.role ?? next?.query?.role ?? null; // null = redirected to /remote (unknown role slug)
   const state: Record<string, any> = next?.props?.pageProps?.apolloState?.data ?? next?.props?.pageProps?.apolloState ?? {};
 
   const startupOf = new Map<string, WfStartup>();
@@ -67,30 +73,37 @@ function parsePage(html: string): { jobs: Job[]; pageCount: number } {
     });
   }
 
-  const pageCount = Number(JSON.stringify(state.ROOT_QUERY ?? {}).match(/"pageCount":(\d+)/)?.[1] ?? 1);
-  return { jobs, pageCount };
+  const root = JSON.stringify(state.ROOT_QUERY ?? {});
+  const pageCount = Number(root.match(/"pageCount":(\d+)/)?.[1] ?? 1);
+  const total = Number(root.match(/"totalJobCount":(\d+)/)?.[1] ?? jobs.length);
+  return { jobs, pageCount, total, role };
 }
 
-export async function search(): Promise<Job[]> {
+export async function search(ctx: SearchCtx): Promise<Job[]> {
   const out = new Map<string, Job>();
-  let failed = 0;
+  let failed = 0, dead = 0;
   const br = new Breaker(3, "wellfound");
   for (const path of CONFIG.wellfound.paths) {
     try {
-      let pageCount = 1;
+      let pageCount = 1, n = 0, total = 0;
       for (let page = 1; page <= Math.min(pageCount, CONFIG.wellfound.maxPages); page++) {
         const html = await fetchText(`${BASE}${path}${page > 1 ? `?page=${page}` : ""}`, { tries: 2 });
         const parsed = parsePage(html);
-        pageCount = parsed.pageCount;
+        if (!parsed.role) throw new Error("HTTP 303 -> /remote (role slug does not exist)"); // fetch followed the redirect to the generic page
+        pageCount = parsed.pageCount; total = parsed.total; n += parsed.jobs.length;
         for (const j of parsed.jobs) if (!out.has(j.id)) out.set(j.id, j);
         br.ok();
         await sleep(2_500);
       }
+      ctx.log(`[wellfound] ${path}: remote=${n} of ${total} listings, pages ${Math.min(pageCount, CONFIG.wellfound.maxPages)}/${pageCount}`);
     } catch (e) {
-      if (/HTTP 30[1-8]|HTTP 404/.test((e as Error).message)) { failed++; continue; } // role slug does not exist – not a site failure
+      const msg = (e as Error).message;
+      if (/HTTP 30[1-8]|HTTP 404/.test(msg)) { dead++; ctx.log(`[wellfound] ${path}: ${msg} – remove it from config.json wellfound.paths`); continue; } // not a site failure
+      ctx.log(`[wellfound] ${path}: ${msg}`);
       br.fail(e);
       if (++failed === CONFIG.wellfound.paths.length) throw e;
     }
   }
+  if (dead && dead === CONFIG.wellfound.paths.length) throw new Error(`none of the ${dead} configured role slugs exists (303 -> /remote) – fix config.json wellfound.paths`);
   return [...out.values()];
 }

@@ -1,11 +1,15 @@
 /**
- * Himalayas – zvaničan JSON search API (provereno 19.09.2026, IP iz Srbije):
- *   GET https://himalayas.app/jobs/api/search?q=<upit>&country=RS&sort=recent&page=N   (20 po strani)
- * `country=RS` vraća oglase na koje se može konkurisati iz Srbije (uključuje worldwide) -> locationVerified.
- * Polja: title, companyName, companyLogo, employmentType (Full Time/Part Time/Contractor/Freelance/Internship), seniority[] (Entry-level/Mid-level/Senior),
- *        minSalary/maxSalary/currency/salaryPeriod, locationRestrictions[], timezoneRestrictions[], categories[], description (HTML), pubDate (unix),
- *        guid (oglas na Himalayas-u), applicationLink (često direktno kod poslodavca -> „Otvori“ vodi tamo).
- * Zamke: `q` na /jobs/api (bez /search) se ignoriše; slug oglasa se ponavlja među firmama -> id sadrži i firmu.
+ * Himalayas – official JSON search API (re-verified 26.09.2026 from a Serbian IP, plain Node fetch, no Cloudflare challenge; rate limit see below):
+ *   GET https://himalayas.app/jobs/api/search?q=<query>&country=RS&sort=recent&page=N   (20 per page; page=N == offset=(N-1)*20, no overlap)
+ * Response: { comments, updatedAt, offset, limit, totalCount, jobs[] } – sorted by pubDate desc, so paging stops at the first listing older than `since`.
+ * `country=RS` = listings applicable from Serbia (worldwide + country lists that include Serbia) -> locationVerified.
+ * Job fields: title, excerpt, companyName, companySlug, companyLogo, employmentType (Full Time/Part Time/Contractor/Freelance/Internship),
+ *        seniority[] (Entry-level/Mid-level/Senior), minSalary/maxSalary/currency/salaryPeriod (annual/monthly/hourly…), locationRestrictions[] ([] = worldwide),
+ *        timezoneRestrictions[] (UTC offsets; all 37 = unrestricted), categories[], parentCategories[], description (HTML), pubDate/expiryDate (unix),
+ *        guid (listing on Himalayas), applicationLink (currently always == guid; preferEmployer still picks an employer link up if it comes back).
+ * Pitfalls: `q` on /jobs/api (without /search) is ignored; job slugs repeat across companies -> id includes the company slug.
+ *        The `comments` field says offset paging on the feed is deprecated in favour of ?cursor= – /search?page=N still works (checked 26.09.2026).
+ *        Rate limit: ~100 requests/min got one HTTP 429 (26.09.2026, cleared within ~10 s) -> SLEEP_MS between requests + one COOLDOWN_MS retry per query.
  */
 import { CONFIG } from "../config.ts";
 import { fetchJson, htmlToText, sleep, toIso, truncate } from "../http.ts";
@@ -14,6 +18,8 @@ import type { Job, SalaryPeriod, SearchCtx } from "../types.ts";
 import { Breaker, employmentOf, preferEmployer } from "./common.ts";
 
 const PAGE_SIZE = 20;
+const SLEEP_MS = 750;       // 500 ms (~100 req/min) was borderline: one 429 per run on 26.09.2026
+const COOLDOWN_MS = 20_000; // fetchText's own 2 s / 4 s retries do not outlast the site's burst limiter
 const PERIODS: Record<string, SalaryPeriod> = { annual: "year", yearly: "year", monthly: "month", weekly: "week", daily: "day", hourly: "hour" };
 
 interface ApiJob {
@@ -63,6 +69,17 @@ function toJob(j: ApiJob): Job {
   };
 }
 
+/** fetchJson + one long cool-down retry on HTTP 429, so a burst limit costs 20 s instead of a whole query. */
+async function fetchPage(url: string, ctx: SearchCtx): Promise<ApiPage> {
+  try { return await fetchJson<ApiPage>(url); }
+  catch (e) {
+    if (!/HTTP 429/.test((e as Error).message)) throw e;
+    ctx.log(`[himalayas] HTTP 429 – cooling down ${COOLDOWN_MS / 1000}s, then retrying`);
+    await sleep(COOLDOWN_MS);
+    return await fetchJson<ApiPage>(url);
+  }
+}
+
 export async function search(ctx: SearchCtx): Promise<Job[]> {
   const { country, maxPages, queries } = CONFIG.himalayas;
   const out = new Map<string, Job>();
@@ -72,12 +89,12 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
     try {
       for (let page = 1; page <= maxPages; page++) {
         const url = `https://himalayas.app/jobs/api/search?q=${encodeURIComponent(q)}${country ? `&country=${country}` : ""}&sort=recent&page=${page}`;
-        const res = await fetchJson<ApiPage>(url);
+        const res = await fetchPage(url, ctx);
         const jobs = (res.jobs ?? []).map(toJob);
         let n = 0;
         for (const j of jobs) if (!out.has(j.id)) { out.set(j.id, j); n++; }
         ctx.log(`[himalayas] q="${q}" page=${page} results=${jobs.length} new=${n} total=${res.totalCount ?? "?"}`); br.ok();
-        await sleep(500);
+        await sleep(SLEEP_MS);
         const lastPage = jobs.length === 0 || (typeof res.totalCount === "number"
           ? (res.offset ?? (page - 1) * PAGE_SIZE) + (res.limit ?? PAGE_SIZE) >= res.totalCount
           : jobs.length < PAGE_SIZE);

@@ -1,10 +1,13 @@
 /**
- * JobRack – SSR HTML, remote poslovi za Istočnu Evropu (provereno 19.09.2026; adapter preuzet iz mom-jobs/):
- *   lista:  https://jobrack.eu/jobs?page=N  i  https://jobrack.eu/jobs/category/<sales-marketing|seo|content-writer|support|executive-assistant|project-manager>?page=N
- *           <a href="https://jobrack.eu/jobs/<slug>" class="list-group-item"> … job-title, company-name, job-posted-time ("3 days ago"),
- *           jobs-category, job-details (snippet), job-tags (Full Time / "2000.00 - 3000.00 USD / Monthly"), img.employer-logo; ~10 po strani, od najnovijeg
- *   detalj: <div class="job-description …"> ; plata u .text-with-icon.salary; skida se samo za neviđene oglase čiji naslov pogađa kategoriju.
- * Lokacija: JobRack zapošljava iz Istočne Evrope -> "Eastern Europe" (Srbija ulazi).
+ * JobRack – SSR HTML, remote jobs for Eastern Europe (checked live 26.09.2026; adapter taken from mom-jobs/):
+ *   list:   https://jobrack.eu/jobs?page=N  and  https://jobrack.eu/jobs/category/<content-writer|project-manager|designer|developer|support|seo|sales-marketing|executive-assistant>?page=N
+ *           (an unknown slug such as "design" 302-redirects to /jobs WITHOUT ?page= – i.e. the general list, page 1, again)
+ *           <a href="https://jobrack.eu/jobs/<slug>" class="list-group-item"> … h2.job-title, h4.company-name, span.job-posted-time ("3 days ago"),
+ *           span.jobs-category, p.job-details (snippet), .job-tags span.btn-xs (Full Time / "2000.00 - 3000.00 USD / Monthly"), img.employer-logo; 10 per page, newest first (~10 new posts a week)
+ *   detail: <div class="job-description rounded-box"> … </div> followed by <p><a href="#modal-apply">Apply Now</a></p> and <div class="job-details …"> (company box + share buttons)
+ *           -> the description is cut before the apply button; salary in span.text-with-icon.salary ("3000.00 - 5000.00 USD Type: Monthly"), employment in span.text-with-icon.job-type;
+ *           fetched only for unseen listings whose title hits a category. Employer HTML is pasted from Word/Docs (&rsquo; &ldquo; … – decoded locally).
+ * Location: JobRack hires from Eastern Europe -> "Eastern Europe" (Serbia is included). Applying goes through JobRack's own modal -> the card links to the listing.
  */
 import { CONFIG } from "../config.ts";
 import { decodeEntities, fetchText, htmlToText, relativeToIso, sleep, truncate } from "../http.ts";
@@ -15,7 +18,11 @@ import { Breaker } from "./common.ts";
 
 const BASE = "https://jobrack.eu";
 
-const pick = (block: string, re: RegExp) => { const m = block.match(re); return m ? decodeEntities(htmlToText(m[1])).replace(/\s+/g, " ").trim() : ""; };
+/** Typographic entities the shared decodeEntities does not know (employer text pasted from Word / Google Docs). */
+const TYPO: Record<string, string> = { lsquo: "'", rsquo: "'", ldquo: '"', rdquo: '"', hellip: "…", bull: "•", trade: "™", copy: "©", reg: "®", euro: "€", pound: "£" };
+const typo = (s: string) => s.replace(/&(lsquo|rsquo|ldquo|rdquo|hellip|bull|trade|copy|reg|euro|pound);/g, (_, e: string) => TYPO[e]);
+
+const pick = (block: string, re: RegExp) => { const m = block.match(re); return m ? typo(decodeEntities(htmlToText(m[1]))).replace(/\s+/g, " ").trim() : ""; };
 
 function employmentOf(tags: string[]): EmploymentKind[] {
   const t = tags.join(" ").toLowerCase();
@@ -54,12 +61,12 @@ function parseList(html: string): Job[] {
 
 async function enrich(job: Job): Promise<void> {
   const html = await fetchText(job.url);
-  const desc = html.match(/<div class="job-description[^"]*">([\s\S]*?)<\/div>\s*(?:<div class="(?:apply|job-apply|row|col)|<\/section|<footer|<div class="container)/)?.[1]
-    ?? html.match(/<div class="job-description[^"]*">([\s\S]*?)(?=<h\d[^>]*>\s*Apply|<a[^>]*apply|<footer)/i)?.[1];
-  const text = htmlToText(desc ?? "");
+  // the description div is followed by the "Apply Now" button and the company sidebar (blurb, "View company profile", "Share this Job") – stop before them
+  const desc = html.match(/<div class="job-description[^"]*">([\s\S]*?)(?=<a href="#modal-apply"|<div class="job-details|<footer)/)?.[1];
+  const text = typo(htmlToText(desc ?? ""));
   if (text.length > (job.description?.length ?? 0)) job.description = truncate(text);
   const sal = html.match(/class="text-with-icon salary"[^>]*>([\s\S]*?)<\/(?:p|div|span)>/)?.[1];
-  if (sal) job.salary = parseSalaryText(htmlToText(sal).replace(/\s+/g, " ")) ?? job.salary;
+  if (sal) job.salary = parseSalaryText(htmlToText(sal).replace(/\s+/g, " ").replace(/\s*Type:\s*/, " / ")) ?? job.salary; // "3000.00 - 5000.00 USD Type: Monthly" -> "… USD / Monthly" (same form as the list tag)
   job.salary ??= salaryFromDescription(text) ?? undefined;
   const type = htmlToText(html.match(/class="text-with-icon job-type"[^>]*>([\s\S]*?)<\/(?:p|div|span)>/)?.[1] ?? "").trim();
   if (type && job.employment.length === 0) job.employment = employmentOf([type]);

@@ -1,15 +1,17 @@
 /**
- * aijobs.net -> foorilla.com/hiring (the board was rebranded in 2026: aijobs.net/feed/ is a 301 to foorilla, foorilla has NO RSS/Atom,
- * the REST API /api/v1/ needs a paid PRO+ key and the CSV/JSON export needs a login). What works anonymously (verified 26.09.2026):
+ * aijobs.net -> foorilla.com/hiring (the board was rebranded in 2026: aijobs.net/feed/ is a 301 to foorilla, foorilla has NO RSS/Atom
+ * (/feed/, /hiring/feed/, /hiring/jobs/feed/, …/data-ai-and-machine-learning/feed/ -> 404 or 302), the REST API /api/v1/ needs a paid PRO+ key
+ * and the CSV/JSON export needs a login). What works anonymously (verified 26.09.2026):
  *   list:   GET https://foorilla.com/hiring/jobs/?job_search=<q>&page=N with header "HX-Request: true" (django-htmx fragment; without the header -> 302 /hiring/)
- *           <li class="list-group-item"> <a … hx-get="/hiring/jobs/<slug>-<id>/">[<small>Featured</small>] Title</a> <small>2h|3d|1mo ago</small>
+ *           <li class="list-group-item"> <a … hx-get="/hiring/jobs/<slug>-<id>/">[<small>Feat.</small>] Title</a> <div class="flex-shrink-0 terminal-meta"><small>3h|3d|1mo ago</small>
  *           <small class="text-warning-emphasis">[EN|MI|SE|EX]</small> <small class="text-body-secondary">[Full Time][Part Time]…</small>
- *           <small class="text-bg-success|secondary">USD 180K-220K</small> … <div class="text-end"><small>City, Country <span class="text-success">[R]</span></small>
- *           50 per page, newest first (featured ones pinned on top), next page = hx-get="/hiring/jobs/?page=N+1&job_search=…".
- *           job_search is a case-insensitive SUBSTRING of the title ("psycholog" hits psychology + psychologist, "mental health" also "Environmental Health").
- *   detail: GET https://foorilla.com/hiring/jobs/<slug>-<id>/ (same header) -> <h1>, [Senior-level / Expert] [~7yoe] [Full Time], salary "(estimate)",
- *           <strong>Tasks:</strong><ul>, Perks/Benefits, Skills/Tech stack required (tags), Educational requirements, Role(s), "Published: <strong>YYYY-MM-DD</strong>".
- *           Fetched only for unseen listings whose title passes worthDetail (maxDetails). The company is masked for anonymous visitors ("@ T...") -> company "" (unknown).
+ *           <small class="text-bg-success|secondary">USD 180K-220K</small> … <div class="text-end"><small>City, Country (cut to ~40 chars + "…") <span class="text-success">[R]</span></small>
+ *           50 per page, newest first (featured pinned on top); a next page exists when the fragment carries hx-get="/hiring/jobs/?page=N+1&job_search=…".
+ *           job_search is a case-insensitive SUBSTRING of the title ("psycholog" hits psychology + psychologist, "mental health" also "Environmental Health", "research ux" nothing).
+ *   detail: GET https://foorilla.com/hiring/jobs/<slug>-<id>/ (same header; without it only the page shell) -> <h1>, full location + [R] tag (hx-vals context_key "REMO"),
+ *           masked company "@ T..." (-> company "" = unknown), [Mid-level / Intermediate], [~7yoe] (site estimate), [Full Time], salary, <strong>Tasks:</strong><ul>,
+ *           Perks/Benefits, Skills/Tech stack required (tags), Educational requirements, Role(s), "Published: <strong>YYYY-MM-DD</strong>". No apply link / JSON-LD.
+ *           Fetched (maxDetails, newest first) only for unseen listings inside the lookback window whose title passes worthDetail.
  * The board is now a general tech aggregator (~240k jobs / 60 d), so config.json aijobs.queries must be narrow title substrings.
  */
 import { CONFIG } from "../config.ts";
@@ -25,6 +27,8 @@ const SENIORITY: Record<string, string> = { EN: "Entry-level", MI: "Mid-level", 
 const PAGE_SIZE = 50;
 
 const clean = (html: string) => htmlToText(html).replace(/\s+/g, " ").trim();
+/** Site location text -> ours: flag codes ([R], a rare [WH]) and "Remote" / "Remote job" words removed. */
+const locOf = (html: string) => clean(html).replace(/\[[A-Z]{1,3}\]/g, "").replace(/\bremote(?: job)?\b/gi, "").replace(/^[\s·,\-–]+|[\s·,\-–]+$/g, "").trim();
 
 /** "2h ago" | "3d ago" | "2w ago" | "1mo ago" -> approximate ISO (the detail page has the exact "Published:" date). */
 function agoToIso(s: string, now = Date.now()): string | null {
@@ -50,19 +54,18 @@ function parseList(html: string): ListItem[] {
     const employment = [...new Set(empTags.flatMap(employmentOf))];
     const salaryText = clean(li.match(/<small class="text-bg-(?:success|secondary)">([\s\S]*?)<\/small>/)?.[1] ?? "");
     const locHtml = li.match(/<div class="text-end">\s*<small>([\s\S]*?)<\/small>/)?.[1] ?? "";
-    const remote = /\[R\]/.test(locHtml) || /\bremote\b/i.test(locHtml);
-    const locText = clean(locHtml.replace(/<span[^>]*>\[R\]<\/span>/, "")).replace(/\bremote(?: job)?\b/gi, "").replace(/^[\s·,\-–]+|[\s·,\-–]+$/g, "").trim();
-    out.push({ path: a[1], id: a[2], title, ago, seniority, employment, salaryText, locText, remote });
+    out.push({ path: a[1], id: a[2], title, ago, seniority, employment, salaryText, locText: locOf(locHtml), remote: /\[R\]/.test(locHtml) || /\bremote\b/i.test(locHtml) });
   }
   return out;
 }
 
-interface Detail { published: string | null; yearsMin: number | null; hybrid: boolean; text: string; tags: string[] }
+interface Detail { published: string | null; location: string; remote: boolean; yearsMin: number | null; hybrid: boolean; text: string; tags: string[] }
 
 function parseDetail(html: string): Detail {
   const section = (label: string) => html.match(new RegExp(`<strong>${label}</strong>\\s*<(ul|div)[^>]*>([\\s\\S]*?)</\\1>`))?.[2] ?? "";
   const lines = (h: string) => htmlToText(h).split("\n").map((l) => l.replace(/^[•*+\s]+/, "").trim()).filter((l) => l && l !== "N/A");
   const tagsOf = (h: string) => [...h.matchAll(/>\s*\[([^\]]+)\]\s*<\/a>/g)].map((m) => decodeEntities(m[1]).trim());
+  const head = html.match(/<\/h1>[\s\S]{0,600}?<div class="hstack justify-content-between">\s*<div>([\s\S]*?)<\/div>/)?.[1] ?? ""; // "City, Country <a … REMO …>[R]</a>"
   const tasks = lines(section("Tasks:")), perks = lines(section("Perks/Benefits:")), skills = tagsOf(section("Skills/Tech stack required:"));
   const eduHtml = section("Educational requirements:"), edu = tagsOf(eduHtml).length ? tagsOf(eduHtml) : lines(eduHtml), roles = tagsOf(section("Role\\(s\\):"));
   const parts: string[] = [];
@@ -73,8 +76,9 @@ function parseDetail(html: string): Detail {
   if (perks.length) parts.push(`Perks: ${perks.join(", ")}`);
   const yoe = html.match(/\[~(\d+)yoe\]/);
   return {
-    published: toIso(html.match(/Published:\s*<strong>(\d{4}-\d{2}-\d{2})/)?.[1]), yearsMin: yoe ? Number(yoe[1]) : null,
-    hybrid: /\bhybrid\b/i.test(perks.join(" ")), text: parts.join("\n\n"), tags: [...roles, ...skills].filter((t, i, arr) => arr.indexOf(t) === i).slice(0, 15),
+    published: toIso(html.match(/Published:\s*<strong>(\d{4}-\d{2}-\d{2})/)?.[1]), location: locOf(head), remote: /"context_key":\s*"REMO"/.test(head),
+    yearsMin: yoe ? Number(yoe[1]) : null, hybrid: /\bhybrid\b/i.test(perks.join(" ")),
+    text: parts.join("\n\n"), tags: [...roles, ...skills].filter((t, i, arr) => arr.indexOf(t) === i).slice(0, 15),
   };
 }
 
@@ -111,22 +115,23 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
     }
     await sleep(800);
   }
-  // Details (exact published date, tasks/skills/education, yoe) only for unseen listings whose title can match a family.
-  let details = 0;
-  for (const j of out.values()) {
-    if (details >= maxDetails) break;
-    if (ctx.isSeen(j.id) || !worthDetail(j.title)) continue;
-    details++;
+  // Details (exact published date, full location, remote tag, tasks/skills/education, yoe): newest first, only unseen listings inside the lookback
+  // window (list dates are day-granular, hence the 1-day margin – older ones are dropped by scrape.ts anyway) whose title can match a family.
+  const cutoff = ctx.since.getTime() - 86_400_000;
+  const wanted = [...out.values()].filter((j) => !ctx.isSeen(j.id) && (j.postedAt === null || Date.parse(j.postedAt) >= cutoff) && worthDetail(j.title))
+    .sort((a, b) => (b.postedAt ?? "").localeCompare(a.postedAt ?? "")).slice(0, maxDetails);
+  for (const j of wanted) {
     try {
       const d = parseDetail(await fetchText(j.url, HX));
       if (d.published) j.postedAt = d.published;
+      if (d.location) j.locations = [d.location];
       if (d.yearsMin !== null) j.yearsMin = d.yearsMin;
-      if (d.hybrid && j.remote === "unknown") j.remote = "hybrid";
+      if (j.remote === "unknown") j.remote = d.remote ? "remote" : d.hybrid ? "hybrid" : "unknown";
       if (d.text) j.description = truncate(`${j.description}\n\n${d.text}`);
       j.tags = d.tags;
     } catch (e) { ctx.log(`[aijobs] detail ${j.id}: ${(e as Error).message}`); }
     await sleep(600);
   }
-  ctx.log(`[aijobs] ${out.size} listings, ${details} details fetched`);
+  ctx.log(`[aijobs] ${out.size} listings, ${wanted.length} details fetched`);
   return [...out.values()];
 }

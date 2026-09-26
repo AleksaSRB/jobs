@@ -11,7 +11,11 @@
  *     url (employer ATS link), remotive_com_url, salary (text | "unspecified"), category, occupation, skills[], seniority (string | false),
  *     job_type ("full-time"), discovered_on ("YYYY-MM-DD HH:MM:SS" UTC), display_logo, remotive_logo_url. No description in the hit -> detail page
  *     (SSR, ld+json JobPosting.description, no login wall) for unseen titles worth a look, capped by maxDetails. `posted=` is ignored for public users.
- * Job id = numeric suffix of the Remotive URL (the same in both endpoints), so the sample and the search hits dedup to one card.
+ * Job id = numeric suffix of the Remotive URL, NOT hit.id: the sample's jobs are also in the index under a new hit.id (2091144 -> 5958363) but keep
+ * their legacy /remote-jobs/…-2091144 URL, while native index jobs live at /remote/jobs/…-<hit.id>. Keying on the URL suffix dedups both to one card
+ * (verified 26.09.2026: "Content Reviewer – TELUS" sample row = hit 5958363). Verified the same day: proxy 200 via Node fetch, nbHits/nbPages/hits
+ * as described, pages disjoint and strictly date-sorted, 47/50 hits is_blurred with company_name still present, detail pages of blurred hits carry the
+ * full ld+json description.
  */
 import { CONFIG } from "../config.ts";
 import { fetchJson, fetchText, htmlToText, sleep, toIso, truncate } from "../http.ts";
@@ -30,7 +34,7 @@ interface ApiJob {
 }
 interface Hit {
   id: string; title: string; company_name?: string; locations?: string[]; url?: string; remotive_com_url?: string; salary?: string; category?: string;
-  occupation?: string; skills?: string[]; seniority?: string | false; job_type?: string; discovered_on?: string; display_logo?: boolean; remotive_logo_url?: string;
+  occupation?: string; skills?: string[]; seniority?: string | false; job_type?: string; discovered_on?: string; display_logo?: boolean; remotive_logo_url?: string | false;
 }
 interface SearchPage { hits?: Hit[]; nbHits?: number; nbPages?: number; }
 
@@ -92,16 +96,19 @@ async function enrich(j: Job): Promise<void> {
 export async function search(ctx: SearchCtx): Promise<Job[]> {
   const { queries, maxPages, maxDetails } = CONFIG.remotive;
   const out = new Map<string, Job>();
-  let failed = 0, lastErr: unknown;
+  let attempted = 0, failed = 0, lastErr: unknown;
   // 1. free sample (the only endpoint that ships descriptions) – once per run
+  attempted++;
   try {
     const rows = (await fetchJson<{ jobs?: ApiJob[] }>(API)).jobs ?? [];
     for (const r of rows) { const j = fromApi(r); out.set(j.id, j); }
     ctx.log(`[remotive] sample: ${rows.length} jobs`);
   } catch (e) { failed++; lastErr = e; ctx.log(`[remotive] sample: ${(e as Error).message}`); }
-  // 2. keyword searches over the full index, newest first – stop at the baseline or when a whole page is already known
+  // 2. keyword searches over the full index, newest first – stop at the baseline or when a whole page is already known;
+  //    "back to <date>" = oldest hit read: when it is still inside the baseline window, maxPages did not cover the whole window for that query
   for (const q of queries) {
-    let fresh = 0, pages = 0, total: number | undefined;
+    let fresh = 0, pages = 0, total: number | undefined, oldest: string | null = null;
+    attempted++;
     try {
       for (let page = 0; page < maxPages; page++) {
         const r = await searchPage(q, page);
@@ -116,15 +123,19 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
           if (!prev) { out.set(j.id, j); fresh++; }
           else if (!prev.sourceUrl && j.sourceUrl) { prev.url = j.url; prev.sourceUrl = j.sourceUrl; } // sample row + employer link from the hit
         }
-        const oldest = utc(hits.at(-1)?.discovered_on);
+        oldest = utc(hits.at(-1)?.discovered_on) ?? oldest;
         if (hits.length < PAGE || page + 1 >= (r.nbPages ?? 1) || (hits.length > 0 && known === hits.length) || (oldest !== null && new Date(oldest) < ctx.since)) break;
         await sleep(600);
       }
-      ctx.log(`[remotive] "${q}": ${total ?? "?"} hits, ${pages} page(s), ${fresh} new here`);
-    } catch (e) { failed++; lastErr = e; ctx.log(`[remotive] "${q}": ${(e as Error).message}`); }
+      ctx.log(`[remotive] "${q}": ${total ?? "?"} hits, ${pages} page(s), ${fresh} new here, back to ${oldest?.slice(0, 10) ?? "?"}`);
+    } catch (e) {
+      failed++; lastErr = e; const msg = (e as Error).message;
+      ctx.log(`[remotive] "${q}": ${msg}`);
+      if (/429/.test(msg)) { ctx.log("[remotive] search proxy rate-limited – remaining queries skipped this run"); break; }
+    }
     await sleep(600);
   }
-  if (failed === queries.length + 1) throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+  if (failed === attempted) throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
   // 3. descriptions for unseen listings whose title is worth it (bounded – each detail page is ~90 KB of HTML);
   //    a listing the matcher already hard-rejects on title + site fields (US only, director…) does not get a request
   let details = 0, rateLimited = false;

@@ -167,10 +167,10 @@ export interface Config {
   adzuna: { appId: string; appKey: string; countries: string[]; queries: string[]; resultsPerPage: number };
   eightyk: { url: string; algoliaAppId: string; algoliaApiKey: string; index: string };
   rss: { feeds: RssFeed[] };
-  workablesearch: { queries: string[]; maxPages: number };
-  hiringcafe: { queries: string[]; pageSize: number; maxPages: number };
+  workablesearch: { queries: string[]; locations?: string[]; maxPages: number };
+  hiringcafe: { queries: string[]; country: string; maxPages: number; maxDetails: number }; // country = ISO2 "user_country" filter (RS + anywhere in Europe/world); 40 hits per page is fixed by the site
   eures: { keywords: string[]; maxPages: number; maxDetails: number };
-  reliefweb: { query: string; limit: number };
+  reliefweb: { appname: string; query: string; limit: number }; // appname: pre-approved by ReliefWeb (free form, apidoc.reliefweb.int/parameters#appname); "" = skipped
   careers: CareerSite[];
   careersMaxJobsPerCompany: number;
   careersMaxDetails: number;    // per source kind that needs a detail request (SmartRecruiters, BambooHR, Workday)

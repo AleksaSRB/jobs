@@ -1,11 +1,16 @@
 /**
  * Jobspresso – WordPress "WP Job Manager" board, public RSS: GET https://jobspresso.co/?feed=job_feed&search_keywords=<q>&posts_per_page=N
- * search_keywords really filters (an unknown word returns 0 items); the default page is 10 items, posts_per_page is honoured, newest first.
+ * search_keywords really filters (an unknown word returns 0 items, "psychology" 20 items in 9 years) but it is a WP `s` search, so the feed is sorted
+ * by RELEVANCE: title matches (newest first, back to 2016) come before body matches (newest first) – for "research" page 1 = 20 title matches from
+ * 2017–2025 and a new post that only mentions the word in the text never reaches page 1; for "health" (matches "health insurance" in every US post)
+ * the 6 title matches are followed by the newest posts of the board. orderby/order are ignored. Therefore every run first takes the UNFILTERED
+ * newest page (search_keywords= empty, posts_per_page=50 ≈ 0.5 MB, newest first, reaches ~6–10 months back), which is every new post on this slow
+ * board (5–10 posts a month in 2026, up to ~40 in a peak month), and then the keyword pages (title matches; posts_per_page is honoured, default 10).
  * Item fields: <title>, <link>, <pubDate>, <description> (short excerpt), <content:encoded> (full HTML), <media:content url="…"> (logo) and the
- * namespaced <job_listing:company>, <job_listing:location> ("United States, Canada" | "Anywhere in US" | "Worldwide" | "Eastern Time Zone"),
- * <job_listing:job_type> (site category: "Design", "Writing", "AI &amp; Data, Engineer"…) and <job_listing:job_category> (employment: "Full Time" |
- * "Part Time" | "Contract" | "Freelance") – note the swapped meaning of job_type / job_category on this site. <dc:creator> = "Company<br>⚲ Location".
- * Slow curated remote board (~5–10 new posts a month), so most items in a run are older than the baseline. An empty query "" lists the whole board.
+ * namespaced <job_listing:company>, <job_listing:location> ("United States, Canada" | "Anywhere in US" | "Worldwide" | "Eastern Time Zone"; empty
+ * on 2017–2018 posts), <job_listing:job_type> (site category: "Design", "Writing", "AI &amp; Data, Engineer"…) and <job_listing:job_category>
+ * (employment: "Full Time" | "Part Time" | "Contract" | "Freelance") – note the swapped meaning of job_type / job_category on this site.
+ * <dc:creator> = "Company<br>⚲ Location" (fallback for the company). Mostly US/Canada companies, so most new posts fail the eligibility rules.
  */
 import { CONFIG } from "../config.ts";
 import { decodeEntities, fetchText, htmlToText, rssItems, sleep, toIso, truncate } from "../http.ts";
@@ -13,15 +18,18 @@ import { salaryFromDescription } from "../salary.ts";
 import type { Job, SearchCtx } from "../types.ts";
 import { Breaker, employmentOf, splitLocations } from "./common.ts";
 
-const PER_QUERY = 20; // newest matches per keyword (WP default is 10)
+const PER_BOARD = 50; // unfiltered newest page: every new post of the board, whatever words its title has
+const PER_QUERY = 20; // newest title matches per keyword (WP default is 10)
 
 export async function search(ctx: SearchCtx): Promise<Job[]> {
   const out = new Map<string, Job>();
   let failed = 0;
   const br = new Breaker(3, "jobspresso");
-  for (const q of CONFIG.jobspresso.queries) {
+  const queries = [...new Set(["", ...CONFIG.jobspresso.queries])]; // "" = whole board newest first (see header: keyword feeds are sorted by relevance)
+  for (const q of queries) {
+    const label = q ? `q="${q}"` : "newest";
     try {
-      const items = rssItems(await fetchText(`https://jobspresso.co/?feed=job_feed&search_keywords=${encodeURIComponent(q)}&posts_per_page=${PER_QUERY}`));
+      const items = rssItems(await fetchText(`https://jobspresso.co/?feed=job_feed&search_keywords=${encodeURIComponent(q)}&posts_per_page=${q ? PER_QUERY : PER_BOARD}`));
       let n = 0;
       for (const it of items) {
         const link = it.get("link") || it.get("guid");
@@ -43,10 +51,10 @@ export async function search(ctx: SearchCtx): Promise<Job[]> {
         });
         n++;
       }
-      ctx.log(`[jobspresso] q="${q}": ${items.length} items, ${n} new in list`); br.ok();
+      ctx.log(`[jobspresso] ${label}: ${items.length} items, ${n} new in list`); br.ok();
     } catch (e) {
-      ctx.log(`[jobspresso] q="${q}": ${(e as Error).message}`);
-      br.fail(e); if (++failed === CONFIG.jobspresso.queries.length) throw e;
+      ctx.log(`[jobspresso] ${label}: ${(e as Error).message}`);
+      br.fail(e); if (++failed === queries.length) throw e;
     }
     await sleep(800);
   }

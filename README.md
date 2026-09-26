@@ -45,7 +45,9 @@ Other buttons in the folder:
 | `uninstall.cmd` | remove the two scheduled tasks and stop the server (your `data/` stays) |
 
 Optional: get free **Adzuna** API keys at https://developer.adzuna.com and put them into `config.json → adzuna.appId / appKey`
-to add another aggregator (UK, DE, NL, PL, AT, IE searches); it is skipped with a note until configured. Right after the first scan run
+to add another aggregator (UK, DE, NL, PL, AT, IE searches); it is skipped with a note until configured. The same goes for **ReliefWeb**
+(UN OCHA humanitarian jobs): request a free pre-approved `appname` via the form at https://apidoc.reliefweb.int/parameters#appname and put it
+into `config.json → reliefweb.appname`. Right after the first scan run
 `npm run check -- --careers` once: it prints which of the ~460 career-page slugs answer from your network (a wrong slug only logs `HTTP 404`).
 
 ### Running it by hand (any OS)
@@ -111,19 +113,19 @@ career pages in **`config.json`**. After editing rules run `npm run score -- --r
 | Remote OK | JSON API + tags (healthcare, medical, ux, content, copywriting, non-tech, ai, product, hr, education, teaching, design, data annotation) | 60 min |
 | Working Nomads | JSON search index per category (design, writing, management, healthcare, education, HR, consulting, marketing, legal) + public feed as fallback | 60 min |
 | Jobicy | JSON API, industry slugs (hr, management, copywriting, design-multimedia, web-app-design, business, supporting, marketing, healthcare) + tags, all with `geo=serbia` | 60 min |
-| Remotive | JSON API (free sample only) | 6 h |
+| Remotive | free JSON sample (rationed) + the site's search proxy (`remotive.queries`, newest first) + detail pages for descriptions | 6 h |
 | Arbeitnow | free JSON API, newest first (Europe-heavy) | 60 min |
 | The Muse | public JSON API, “Flexible / Remote”, entry + mid levels, 11 categories | 2 h |
-| Jobspresso | WP Job Manager RSS with keyword searches | 60 min |
+| Jobspresso | WP Job Manager RSS: unfiltered newest page (50) + keyword searches (title matches; the search feed sorts by relevance, not date) | 60 min |
 | aijobs.net → foorilla.com | htmx list fragments of `foorilla.com/hiring/jobs/?job_search=<title substring>` (header `HX-Request: true`; no RSS any more, API is paid) + details for unseen matching titles; company is masked for anonymous visitors | 60 min |
 | Hacker News “Who is hiring” | monthly thread via the Algolia API, remote postings only | 6 h |
 | JobRack | SSR HTML lists + details (Eastern Europe remote) | 60 min |
-| Wellfound | SSR `__NEXT_DATA__` role pages (ux-researcher, product-manager, prompt-engineer, content, instructional/narrative designer, coach…) | 6 h |
+| Wellfound | SSR `__NEXT_DATA__` role pages (ux-researcher, product-manager/owner, program-manager, content-strategist, copywriter, people-operations, recruiter, game-designer; unknown role slugs 303 → skipped) | 6 h |
 | Adzuna | official API with free keys (optional) | 2 h |
-| Workable global search | keyless search API over every public Workable employer (`jobs.workable.com/api/v1/jobs?query=…&workplace=remote&day_range=7`), 25 domain queries | 2 h |
-| hiring.cafe | unofficial multi-ATS aggregator API, remote filter, 29 domain queries (may be blocked from datacenter IPs; fine from a home PC) | 2 h |
+| Workable global search | keyless search API over every public Workable employer (`jobs.workable.com/api/v1/jobs?query=…&workplace=remote&day_range=7`), 25 domain queries (optional keyword-less `location=Serbia` pass via `workablesearch.locations`) | 2 h |
+| hiring.cafe | hiringcafe.com Next.js SSR search JSON (`/_next/data/<buildId>/index.json?searchState=…`), remote filter + Serbia/Europe/worldwide location filter, 29 domain queries, descriptions per fresh hit (may be blocked from datacenter IPs; fine from a home PC) | 2 h |
 | EURES | EU public employment services search API, 12 keyword sets + details | 3 h |
-| ReliefWeb | UN OCHA jobs API: MHPSS, staff well-being, social & behaviour change roles (many remote consultancies) | 3 h |
+| ReliefWeb | official UN OCHA jobs API v2 (optional – needs a free pre-approved `appname`): MHPSS, staff well-being, social & behaviour change roles (many remote consultancies) | 3 h |
 | 80,000 Hours | public Algolia index of the AI-safety / AI-governance / global-health job board (~900 roles) | 2 h |
 | **26 RSS / Atom boards** | one generic adapter (`rss.feeds` in config): NoDesk, EU Remote Jobs, Real Work From Anywhere, JobsCollider ×5, RemoteFirstJobs, Remote.co ×3, Empllo, Authentic Jobs, GameJobs.co, Games-Career, APA PsycCareers, jobs.ac.uk ×2, THE unijobs, BPS Jobs, CharityJob, Guardian Jobs, Remotive RSS, SkipTheDrive | 60 min |
 | **~460 company career pages** | public ATS APIs: **Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Recruitee, Personio, BambooHR, Workday, Teamtailor** – digital mental health, DTx, coaching & corporate well-being, AI labs & safety orgs, human-data / trust-and-safety vendors, conversational-AI & companion apps, people-science & research agencies, narrative game studios; list, verification status and how each slug was found: [docs/careers.md](docs/careers.md) | 2–3 h |
