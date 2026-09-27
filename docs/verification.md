@@ -92,6 +92,11 @@ corporate well-being lost "workplace support / employee relations / HR generalis
 and SME gigs) are behavioral-science work; and two caps: a card whose job family is not in the title cannot exceed 99 (`familyRules.noTitleMaxScore`), a card with no family at all
 (adjacent title / industry only) cannot exceed 74 (`adjacentOnlyMaxScore`) – the generic bonuses (remote, eligible, junior, full-time, degree) used to stack to 190 on a Medical Project Coordinator.
 
+Hard gates added on the owner's request after the first real pass (6 fixtures, 66/66): a **required professional licence / clinical registration** (`license.hardReject: true`;
+"preferred" stays a soft −10), a **required PhD / doctorate** (`education.doctorate`: PhD in the title, or a doctorate sentence with a requirement word and no
+"or Master's / preferred / equivalent experience") and **"Executive" anywhere in the title** (`seniority.executiveTitle`) now hide the card. Re-scoring the real
+database hid 16 of 289 cards (10 licence, 3 PhD, 3 Executive) – they sit in the Rejected tab marked `hiddenByRules` and come back automatically if the rules change.
+
 ## Full pass (`npm run scrape:force`, 27.09.2026 00:40–01:04, fresh scratch DB)
 
 **24 min 23 s** for all 31 sources, 0 errors, ~25 000 listings parsed → **288 cards** (148 excellent / 76 good / 64 possible); 7-day baseline.

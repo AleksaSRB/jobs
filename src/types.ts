@@ -212,7 +212,10 @@ export interface Rules {
     hardReject: boolean; requiredScore: number; preferredScore: number; unclearScore: number;
   };
   titleRegulated: string[];     // title alone implies a regulated clinical role (therapist, clinician, nurse…)
-  education: { relevant: string[]; relevantScore: number; unrelatedRequired: string[]; unrelatedScore: number };
+  education: {
+    relevant: string[]; relevantScore: number; unrelatedRequired: string[]; unrelatedScore: number;
+    doctorate?: { patterns: string[]; requiredContext: string[]; notRequired: string[]; score: number; hardReject: boolean; warning?: string }; // PhD in the title or required in the text -> hidden
+  };
   seniority: {
     juniorTitle: string[]; juniorTitleScore: number;
     juniorText: string[]; juniorTextScore: number;

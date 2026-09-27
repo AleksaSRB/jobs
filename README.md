@@ -10,14 +10,26 @@ Source-by-source notes: [docs/sources.md](docs/sources.md). What is done / what 
 
 Target roles (18 job families, see `rules.json`): behavioral science, digital health, digital therapeutics, UX research in health,
 health-tech product, AI safety / trust & safety / evaluation, conversation & prompt design, human-centered / responsible AI,
-human risk / cyberpsychology, mental-health & well-being coaching, counseling (flagged when a license is required), corporate well-being,
+human risk / cyberpsychology, mental-health & well-being coaching, counseling (hidden when a license is required), corporate well-being,
 evidence-based content / psychoeducation, AI persona design, narrative design, talent assessment, consumer psychology, organizational psychology.
 
 ---
 
-## Install on a Windows desktop (step by step)
+## Quick start on a new laptop (Windows 10/11 · 3 steps · ~5 min + a 25-min first scan)
 
-You need **Windows 10 or 11** and an internet connection. Everything else is handled by the installer.
+1. **Get the folder:** open https://github.com/AleksaSRB/jobs → green **Code** button → **Download ZIP** → unzip → move the folder (named `jobs-main`)
+   somewhere permanent, e.g. `C:\Users\<name>\Desktop\jobs`. (If Git is installed, `git clone https://github.com/AleksaSRB/jobs.git` instead – then `update.cmd` works later.)
+2. **Double-click `setup.cmd`** in that folder. If Windows SmartScreen shows "Windows protected your PC": **More info → Run anyway**.
+   The black window installs Node.js if it is missing (may ask you to confirm), registers two background tasks and runs the first scan (~25 minutes –
+   leave the window open until it says **Done** and the browser opens).
+3. **Bookmark http://localhost:3008.** That is the whole app. New jobs appear on their own every 15 minutes, newest first; nothing else to run – after a restart it starts by itself.
+
+Hidden automatically (hard filters): jobs that require a professional licence, a PhD/doctorate, or have "Executive" in the title, plus hybrid/on-site,
+US/UK-only, another-language, unpaid, sales and pure-engineering roles. Everything else is scored 0–200 and shown as a card with the reasons.
+
+Later: **`open.cmd`** if the page does not open · **`update.cmd`** to get a newer version (git installs only; ZIP installs: download again and copy your old `data` folder over) · **`uninstall.cmd`** removes the two tasks.
+
+## Install details
 
 1. **Get the folder.** Either
    - click the green **Code → Download ZIP** button on https://github.com/AleksaSRB/jobs, unzip it and move the folder somewhere permanent,
@@ -95,8 +107,9 @@ below `minScore` (50) it is hidden (logged in `data/filtered.log`).
 | fully remote / Serbia or Worldwide eligible / Europe (check) | +25 / +25 / +10 |
 | 0–2 years · 3–4 · 5–6 · 7+ years required | +20 · −10 · −40 · −50 |
 | senior/lead title · director/VP/head (hidden) | −45 · −60 |
-| license required · preferred (counselor/therapist roles) | −40 (+ red chip) · −10 |
+| license preferred (counselor/therapist roles) | −10 (+ chip) |
 | purely technical role (5+ stack terms, no psychology concepts) | −80 |
+| **professional license required · PhD/doctorate required · "Executive" in the title** (hard filters, `license.hardReject`, `education.doctorate`, `seniority.executiveTitle`) | hidden |
 | hybrid / on-site, US-only, other language mandatory, unpaid, commission-only, MLM | hidden |
 | psychology background wanted, sensitive users, early career, hires globally, Serbia mentioned | +5 … +15 |
 | job family found only in the description (not the title) · no family at all (adjacent title / industry only) | capped at 99 · capped at 74 |

@@ -25,6 +25,10 @@ const LIC_NOT = compile(LIC.notRequired, "license.notRequired");
 const LIC_TITLE = compile(RULES.titleRegulated, "titleRegulated");
 const EDU_REL = compile(RULES.education.relevant, "education.relevant");
 const EDU_UNREL = compile(RULES.education.unrelatedRequired, "education.unrelatedRequired");
+const DOC = RULES.education.doctorate;
+const DOC_PAT = compile(DOC?.patterns ?? [], "education.doctorate.patterns");
+const DOC_REQ = compile(DOC?.requiredContext ?? [], "education.doctorate.requiredContext");
+const DOC_NOT = compile(DOC?.notRequired ?? [], "education.doctorate.notRequired");
 const JUNIOR_TITLE = compile(S.juniorTitle, "seniority.juniorTitle");
 const JUNIOR_TEXT = compile(S.juniorText, "seniority.juniorText");
 const SENIOR_TITLE = compile(S.seniorTitle, "seniority.seniorTitle");
@@ -385,6 +389,20 @@ export function scoreJob(job: Job): Scoring {
   else {
     const un = firstMatch(EDU_UNREL, body);
     if (un) { add(RULES.education.unrelatedScore, `unrelated degree required ${quote(un[0])}`); warnings.push("Technical degree"); }
+  }
+
+  // ---- doctorate required (hard gate): "PhD" in the title, or a PhD/doctorate sentence with a requirement word and no "or Master's / preferred / equivalent experience"
+  if (DOC) {
+    let docHit = firstMatch(DOC_PAT, title)?.[0] ?? null;
+    if (docHit) docHit = `${docHit} (title)`;
+    else outerDoc: for (const re of DOC_PAT) {
+      for (const m of body.matchAll(new RegExp(re.source, "gi"))) {
+        const sentence = sentenceAround(body, m.index ?? 0);
+        if (DOC_NOT.some((r) => r.test(sentence))) continue;
+        if (DOC_REQ.some((r) => r.test(sentence))) { docHit = m[0]; break outerDoc; }
+      }
+    }
+    if (docHit) { add(DOC.score, `doctorate required ${quote(docHit)}`); warnings.push(DOC.warning ?? "PhD required"); if (DOC.hardReject) hardReject(`doctorate required: ${quote(docHit)}`); }
   }
 
   // ---- other language mandatory (English is normal)

@@ -36,7 +36,7 @@ const CASES: Array<[string, Job, Expect]> = [
   ["soc analyst", j("SOC Analyst", WW + "Monitor SIEM alerts, triage incidents, malware analysis, firewall rules, threat hunting, EDR."), { shown: false, reject: true }],
   // ---- J coaching, K counselor, L corporate well-being
   ["mental health coach part-time", j("Mental Health Coach", WW + "1-on-1 video coaching sessions on stress management, burnout and resilience for members. No clinical license required. ICF a plus.", { employment: ["part-time"] }), { min: 100, primary: "coaching", shown: true, license: "none" }],
-  ["counselor license required", j("Remote Counselor", WW + "Provide online counselling to clients via video. Must hold an active license (LPC, LMHC or equivalent) and 2 years of supervised practice."), { primary: "counselor", license: "required", warn: ["License required"], shown: true }],
+  ["counselor license required (hard gate)", j("Remote Counselor", WW + "Provide online counselling to clients via video. Must hold an active license (LPC, LMHC or equivalent) and 2 years of supervised practice."), { primary: "counselor", license: "required", warn: ["License required"], reject: true, shown: false }],
   ["corporate wellbeing", j("Employee Well-being Specialist", WW + "Run workplace mental health workshops, psychological safety and burnout prevention programs for distributed teams; employee engagement surveys."), { min: 100, primary: "corporate-wellbeing", shown: true }],
   // ---- M content, N persona, O narrative
   ["evidence-based content strategist", j("Content Strategist", WW + "Write evidence-based psychoeducation content, CBT worksheets and course modules for a mental health app; review the scientific literature with clinical psychologists."), { min: 100, primary: "content", shown: true }],
@@ -83,6 +83,13 @@ const CASES: Array<[string, Job, Expect]> = [
   ["hr generalist at a dialysis company is not organisational psychology", j("HR Generalist", "Fresenius Medical Care, dialysis services. Administer payroll, contracts, onboarding paperwork, HR records. Benefits: mental health days, coaching budget, wellness allowance. 2+ years of experience.", { locations: ["Serbia"], remote: "remote", locationVerified: true, employment: ["full-time"] }), { max: 99 }],
   ["bare psychology subfield title is psychology work", j("Developmental Psychology", WW + "Subject-matter expert for AI training data: review child development scenarios and rate model answers. PhD or Master's in psychology.", { remote: "remote" }), { primary: "behavioral-science", shown: true }],
   ["project support specialist is not a coach", j("Project Support Specialist", "Support clinical trial project managers with trackers, meeting minutes and vendor invoices. 2+ years of experience.", { locations: ["Serbia"], remote: "remote", locationVerified: true, employment: ["full-time"] }), { shown: false }],
+  // ---- hard gates (27.09.2026): licence required, doctorate required, "Executive" in the title
+  ["phd required is hidden", j("Behavioral Scientist", WW + "Design behavior change interventions and run experiments. Requirements: PhD in psychology or behavioral economics; 2+ years of applied research."), { reject: true, warn: ["PhD required"] }],
+  ["phd in the title is hidden", j("Developmental Psychology (PhD)", WW + "Subject-matter expert for AI training data: review child development scenarios and rate model answers."), { reject: true }],
+  ["phd or master's is fine", j("Behavioral Scientist", WW + "Design behavior change interventions and run experiments. PhD or Master's in psychology, behavioral economics or a related field."), { reject: false, shown: true }],
+  ["phd preferred is fine", j("Behavioral Scientist", WW + "Design behavior change interventions and run experiments. Master's degree required; PhD preferred. 2+ years of experience."), { reject: false, shown: true }],
+  ["executive in the title is hidden", j("HR Executive (Recruitment & General HR)", WW + "Recruitment, candidate experience, structured interviews, psychometric assessments. Psychology degree welcome."), { reject: true }],
+  ["executive assistant is hidden too", j("Executive Assistant to the CEO", WW + "Calendar, travel and well-being programs for a mental health startup."), { reject: true }],
 ];
 
 let fail = 0;

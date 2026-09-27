@@ -1616,7 +1616,7 @@
   ]
  },
  "license": {
-  "hardReject": false,
+  "hardReject": true,
   "requiredScore": -40,
   "preferredScore": -10,
   "unclearScore": 0,
@@ -1659,7 +1659,31 @@
   "unrelatedRequired": [
    "(degree|bachelor'?s?|master'?s?|\\bbs\\b|\\bbsc\\b|\\bms\\b|\\bmsc\\b|\\bphd\\b|doctorate) in (computer science|software engineering|electrical engineering|computer engineering|mathematics|physics|statistics|data science|machine learning|engineering|finance|accounting|law|medicine|nursing|pharmacy|chemistry|biology|biochemistry|mechanical|civil)[^.\\n]{0,30}(required|is required|must|mandatory|essential)",
    "(required|must have|must hold|mandatory)[^.\\n]{0,20}(degree|bachelor'?s?|master'?s?|\\bphd\\b) in (computer science|software engineering|electrical engineering|mathematics|physics|statistics|data science|machine learning|engineering|finance|accounting|law|medicine|nursing|pharmacy)"
-  ]
+  ],
+  "doctorate": {
+   "patterns": [
+    "\\bph\\.?\\s?d\\b",
+    "\\bdoctora(te|l)\\b",
+    "\\bdoctor of philosophy\\b",
+    "\\bpsy\\.?d\\b",
+    "\\bdphil\\b",
+    "\\bpost-?doc(toral)?\\b"
+   ],
+   "requiredContext": [
+    "\\brequired?\\b|\\brequirements?\\b|\\bmust\\b|\\bneed(s|ed)?\\b|\\bessential\\b|\\bmandatory\\b|\\bminimum\\b|\\bat least\\b|\\bhold(s|ing)?\\b|\\bcompleted\\b|\\bqualifications?:|what you('ll)? (need|bring)|who you are|about you|you have|you bring|you are a|we expect|\\bexpected\\b|\\blevel\\b|\\bwith a\\b|\\bhave a\\b"
+   ],
+   "notRequired": [
+    "\\bor\\b (a |an )?(master|msc|\\bms\\b|\\bma\\b|m\\.a\\.|m\\.s\\.|equivalent|relevant|bachelor|comparable|advanced degree)",
+    "master'?s?( degree)? or",
+    "\\b(preferred|a plus|plus|bonus|nice[- ]to[- ]have|ideally|desirable|advantage|welcome|not required|not necessary|not mandatory|helpful|beneficial|an asset|appreciated|strongly preferred|highly desirable|good to have|would be|optional)\\b",
+    "in progress|working toward|pursuing",
+    "phd (students?|candidates?|interns?|programs?)|(students?|candidates?|interns?|fellows?) \\(?phd",
+    "or (equivalent|similar|comparable) (experience|background|expertise)|equivalent (practical )?experience"
+   ],
+   "score": -100,
+   "hardReject": true,
+   "warning": "PhD required"
+  }
  },
  "seniority": {
   "juniorTitleScore": 15,
@@ -1734,7 +1758,8 @@
    "\\bfounder\\b",
    "\\bpresident\\b",
    "\\bgeneral manager\\b",
-   "\\bpractice lead\\b"
+   "\\bpractice lead\\b",
+   "\\bexecutive\\b"
   ],
   "years": {
    "zeroToTwoScore": 20,

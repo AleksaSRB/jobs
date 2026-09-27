@@ -29,7 +29,9 @@ roles applicable from Serbia, with a semantic (not title-only) matcher and **as 
 - [x] 12 dead RSS feeds disabled with evidence, Remotive feed URL fixed → 14 live feeds
 - [x] `http.ts`: 429/403 on a plain GET (TLS-fingerprint bot detection, LinkedIn) retried through curl.exe; `ats.ts`: wrong slugs no longer trip the circuit breaker
 - [x] Matcher tuned from real listings (12 new fixtures, 57/57): GeoLock/“Anywhere in US” eligibility, AMER + missing countries, paid volunteer time, executive-title false positives, engineering manager / curriculum developer, generic perk words, non-English ads, US-employer boilerplate
-- [ ] Still open: `setup.cmd` on the target PC (registers the tasks – run when the owner confirms); optional keys Adzuna (`adzuna.appId/appKey`) and ReliefWeb (`reliefweb.appname`, free approval form); ntfy topic; decide `license.hardReject` / `remote.rejectHybrid` after a week of real cards.
+- [x] `setup.cmd` run on the owner's PC (27.09.2026 01:29, first pass 24.5 min, 256 cards); default sort = newest first
+- [x] Hard gates decided after the first real pass: licence required, PhD/doctorate required, "Executive" in the title → hidden (`remote.rejectHybrid` stays `true`)
+- [ ] Still open: optional keys Adzuna (`adzuna.appId/appKey`) and ReliefWeb (`reliefweb.appname`, free approval form); ntfy topic; install on the second laptop (README quick start).
 
 ## Batch 3 — more sources (ideas, in priority order)
 
